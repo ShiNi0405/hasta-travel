@@ -1,0 +1,257 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet"/>
+<title>HASTA TRAVEL - Select Vehicle</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-action-color: #EC5B2C;
+      --accent-heading-color: #cb3434;
+      --background-color: #FFFFFF;
+      --card-background-color: #F8F8FA;
+      --standard-text-color: #2D3748;
+      --border-color: #e5e7eb;
+    }
+    body {
+      font-family: 'Inter', "Noto Sans", sans-serif;
+      background-color: var(--background-color);
+      color: var(--standard-text-color);
+    }
+    .nav-link {
+      @apply flex items-center gap-2 text-[var(--standard-text-color)] hover:text-[var(--primary-action-color)] text-sm font-medium leading-normal transition-colors px-3 py-2 rounded-md;
+    }
+    .nav-link.active {
+      @apply text-[var(--primary-action-color)] font-semibold relative;
+    }
+    .nav-link .material-icons,
+    .nav-link .material-icons-outlined {
+      @apply text-lg;
+    }
+    .dropdown-item {
+      @apply block px-4 py-2 text-sm text-[var(--standard-text-color)] hover:bg-gray-100 hover:text-[var(--primary-action-color)] w-full text-left;
+    }
+  </style>
+</head>
+<body class="bg-[var(--background-color)]">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="sticky top-0 z-40 bg-white shadow-sm">
+<div class="w-full flex items-center justify-between whitespace-nowrap px-4 sm:px-6 lg:px-8 py-3">
+  <div class="flex items-center gap-3 text-[var(--dark-color)]">
+  <img src="logo.jpeg" alt="Hasta Travel Logo" class="h-8 w-auto object-contain" />
+</div>
+<nav class="hidden md:flex items-center gap-6 desktop-nav main-nav">
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Home</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Book a Car</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">My Bookings</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Make Payment</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Sign Contract</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2 nav-link-active relative" href="#">
+                Outstanding Payments
+                <span class="absolute top-0 right-0 -mt-1 -mr-1 flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--danger-color)] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--danger-color)]"></span>
+</span>
+</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Feedback</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="relative p-2 rounded-full hover:bg-slate-100 text-slate-600">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-1 right-1 flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--danger-color)] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--danger-color)]"></span>
+</span>
+</button>
+<button class="flex items-center gap-2 p-1 rounded-full hover:bg-slate-100">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAs1qZBjIN75m4lBbN292fwVBdefdxH4ai5zp3w_ZC6AMmhCYumUOpSEnraRUslpUz46tZdSviDro42eEi4k8DGTvPFtEMBlpgWfeE1qawQEyfKA7FA3bQGKrCIPH1BfBYWxSIB55EGQ1OQW6Bag9MLE53Gixm8309yflpmtUR3NZdR4x06B4Xh37w_nPPN73urxnQQDZLDbZqB7O0XMKBRvP79_6_g-hrm5GMHZSik8Mez_2U4fCKyvwh7gRGGGXc5_ynu40h72LBG");'></div>
+<span class="material-icons-outlined text-slate-600 hidden sm:inline">expand_more</span>
+</button>
+<button class="md:hidden p-2 rounded-md hover:bg-slate-100 text-slate-600 mobile-nav-toggle" id="mobileMenuButton">
+<span class="material-icons-outlined">menu</span>
+</button>
+</div>
+</div>
+<div class="hidden md:hidden bg-white shadow-lg py-2 z-50" id="mobileMenu">
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Home</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Book a Car</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">My Bookings</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Make Payment</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Sign Contract</a>
+<a class="block px-6 py-3 text-[var(--primary-color)] font-semibold" href="#">Outstanding Payments</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Feedback</a>
+</div>
+</header>
+<div class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden hidden transition-opacity duration-300 opacity-0" id="mobileMenuOverlay"></div>
+<div class="fixed top-0 right-0 h-full w-4/5 max-w-xs bg-[var(--background-color)] shadow-xl p-6 flex flex-col z-50 transform translate-x-full transition-transform duration-300 lg:hidden" id="mobileMenu">
+<button class="self-end mb-6 text-[var(--standard-text-color)] hover:text-[var(--primary-action-color)]" onclick="toggleMobileMenu()">
+<span class="material-icons text-2xl">close</span>
+</button>
+<nav class="flex flex-col gap-3">
+<a class="nav-link text-base" href="#">Home</a>
+<a class="nav-link text-base" href="#">Customer Profile</a>
+<a class="nav-link text-base active" href="#">Book a Car</a>
+<a class="nav-link text-base" href="#">My Bookings</a>
+<a class="nav-link text-base" href="#">Payment</a>
+<a class="nav-link text-base" href="#">Sign Contract</a>
+<a class="nav-link text-base" href="#">Notifications &amp; Alerts</a>
+<a class="nav-link text-base" href="#">Submit Feedback</a>
+<a class="nav-link text-base" href="#">Outstanding Payments/Summons</a>
+<hr class="my-2 border-gray-200"/>
+<a class="nav-link text-base" href="#">Logout</a>
+</nav>
+</div>
+<main class="w-full px-4 sm:px-6 lg:px-10 py-8">
+<div class="max-w-7xl mx-auto">
+<h1 class="text-3xl font-bold text-[var(--accent-heading-color)] mb-8 text-center md:text-left">Select a vehicle group</h1>
+<div class="mb-8 overflow-x-auto pb-2 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10">
+<div class="flex space-x-3 whitespace-nowrap" id="filterTabsContainer">
+<button class="filter-tab active-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-[var(--primary-action-color)] text-white" data-filter="all">All</button>
+<button class="filter-tab px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-gray-200 text-[var(--standard-text-color)] hover:bg-gray-300" data-filter="Sedan">Sedan</button>
+<button class="filter-tab px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-gray-200 text-[var(--standard-text-color)] hover:bg-gray-300" data-filter="SUV">SUV</button>
+<button class="filter-tab px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-gray-200 text-[var(--standard-text-color)] hover:bg-gray-300" data-filter="Van">Van</button>
+<button class="filter-tab px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-gray-200 text-[var(--standard-text-color)] hover:bg-gray-300" data-filter="Luxury">Luxury</button>
+<button class="filter-tab px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 bg-gray-200 text-[var(--standard-text-color)] hover:bg-gray-300" data-filter="Convertible">Convertible</button>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="vehicleGrid">
+<div class="bg-[var(--card-background-color)] rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col" data-vehicle-type="Sedan">
+<img alt="Toyota Camry" class="w-full h-48 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCP4w3kBvSOcl1qVB8yWKoeESE07oyaldMnVGqRLLn8yD5vGXVBtMGivgEAxzFHvRUmBSRbvXMmL6rtuBMoxPzzROVpbLI86kUYh5HyJOyHcdceBr5uG8RUXpza-y5uA-VADLcHRAhSCTM_Ykp5CQn6E0EYRuxE9mqZYo8lfWvKuT93xDZJHvnIM76JsqX2xtRiAMpFcDoNLZ9NUlyk8CG9n_jBTqwwyO5de-Klg9FS5sl7zCB_rjyefq6ZBebeRsGSNOrMPgvquA"/>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="text-xl font-semibold text-[var(--accent-heading-color)] mb-1">Toyota Camry</h3>
+<p class="text-sm text-[var(--standard-text-color)] mb-1">Sedan</p>
+<p class="text-xs text-gray-500 mb-3">4 Doors | 5 Seats | Automatic</p>
+<div class="mt-auto">
+<p class="text-lg font-bold text-[var(--accent-heading-color)] mb-3">RM 150 <span class="text-sm font-normal text-gray-500">/ day</span></p>
+<a class="block w-full text-center bg-[var(--primary-action-color)] text-white py-2.5 px-4 rounded-md text-sm font-medium hover:opacity-90 transition-opacity" href="/book-car/1">View Details</a>
+</div>
+</div>
+</div>
+<div class="bg-[var(--card-background-color)] rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col" data-vehicle-type="SUV">
+<img alt="Honda CR-V" class="w-full h-48 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh088AaaTPwGgTFotTgqCdJbkI3o5vvStHI-k6pZ4wziRvTynzlqdpafOXgv4xHSZEm9YWV2eCz7oULu69cm9Y0gITmUp61QNY0teTPasBYr3uBPvafjWQ9-qt2QNj-eSzlCdo5Fx5Mttg1iUoL0-bJp88Gu61ybkVJiQI4T7dcD9teV2RLwJNcw7naItwIZS6QuwUpwbdxF6r645s1YSpb8_nC7wv7Pc_f1l2gyVCOwX2KfbcKMVhfsAMzxiLiZHxLaR_yHGjOw"/>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="text-xl font-semibold text-[var(--accent-heading-color)] mb-1">Honda CR-V</h3>
+<p class="text-sm text-[var(--standard-text-color)] mb-1">SUV</p>
+<p class="text-xs text-gray-500 mb-3">4 Doors | 5 Seats | Automatic</p>
+<div class="mt-auto">
+<p class="text-lg font-bold text-[var(--accent-heading-color)] mb-3">RM 220 <span class="text-sm font-normal text-gray-500">/ day</span></p>
+<a class="block w-full text-center bg-[var(--primary-action-color)] text-white py-2.5 px-4 rounded-md text-sm font-medium hover:opacity-90 transition-opacity" href="/book-car/2">View Details</a>
+</div>
+</div>
+</div>
+<div class="bg-[var(--card-background-color)] rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col" data-vehicle-type="Van">
+<img alt="Toyota Hiace" class="w-full h-48 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkzv_cVoY8_AuTVzuYIjvQULqi2_M813X4rybzQNxcwTXnbA7ez6ZaABcnQizdEj67tvELVohN6--rGPe_mSLxzAeiwfC9th91l1pYZMXjZoLlWm5gIxDUS6KoEiRg2Fh00Oiecqu0g-g1db3mUQA9idfAZaK8nLaKKP4JPrh_Kb6J01VgOFsc3ji7NXYnLGALJErt6YSFytHtoKlis9t9x5_A_7CYekR1S8fa5xKsi8jlF-JmfYHFYR1D1yWKyXn2zFTRuxqHag"/>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="text-xl font-semibold text-[var(--accent-heading-color)] mb-1">Toyota Hiace</h3>
+<p class="text-sm text-[var(--standard-text-color)] mb-1">Van</p>
+<p class="text-xs text-gray-500 mb-3">3 Doors | 10 Seats | Manual</p>
+<div class="mt-auto">
+<p class="text-lg font-bold text-[var(--accent-heading-color)] mb-3">RM 300 <span class="text-sm font-normal text-gray-500">/ day</span></p>
+<a class="block w-full text-center bg-[var(--primary-action-color)] text-white py-2.5 px-4 rounded-md text-sm font-medium hover:opacity-90 transition-opacity" href="/book-car/3">View Details</a>
+</div>
+</div>
+</div>
+<div class="bg-[var(--card-background-color)] rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col" data-vehicle-type="Luxury">
+<img alt="Mercedes-Benz C-Class" class="w-full h-48 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO-CSJ9lBcWtQ7qeQUyITizfYTUZIXL4oLw_huqmhGFM7zrE6i8TjM-35UUHpbwNnOqbEU2CXBcrUognXGCTYT32b19qUrbYDgdsWyg_YjWNX15F8NBe8-NYzGz9ak66WilQ-QoqoHD0o5eshGdLVbOCv1A4tny4L5LbrOhor-Iib-h-lZh7I_5HLxgQOHyT_4hdiREh4LljlL7mD-_gPOJcCVtyhDFoOv5NIqOFOMyCPEgaAs16H4-gTBKlrv3LR8rG6ysJL_KA"/>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="text-xl font-semibold text-[var(--accent-heading-color)] mb-1">Mercedes-Benz C-Class</h3>
+<p class="text-sm text-[var(--standard-text-color)] mb-1">Luxury</p>
+<p class="text-xs text-gray-500 mb-3">4 Doors | 5 Seats | Automatic</p>
+<div class="mt-auto">
+<p class="text-lg font-bold text-[var(--accent-heading-color)] mb-3">RM 450 <span class="text-sm font-normal text-gray-500">/ day</span></p>
+<a class="block w-full text-center bg-[var(--primary-action-color)] text-white py-2.5 px-4 rounded-md text-sm font-medium hover:opacity-90 transition-opacity" href="/book-car/4">View Details</a>
+</div>
+</div>
+</div>
+<div class="bg-[var(--card-background-color)] rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col" data-vehicle-type="SUV">
+<img alt="Range Rover Evoque" class="w-full h-48 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqx0LvUD_O-MVsYkO6Ee009llEuiaANiOmVZUbHfgxU4FTf04_wjYSVjY5mxofe1rqRLBxFHJ_71OBZooD21P5EmiT0GD9m2SN5_kN-pVVHi3OQODVsfY6ztJlQgvwb2zLcUjlyJpxYc2fp2kwcfUxwWlKQ-K3qjEnRNe23f5DA7wReZ4snt6uoP_rkMWph1xp6LKm8lqvSRjlw_6-6Y_8DRoAgimAstml4_5W7UBvQjcmW8nM_dX_zg_HvCjJ83-rRtGgNTQ8ug"/>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="text-xl font-semibold text-[var(--accent-heading-color)] mb-1">Range Rover Evoque</h3>
+<p class="text-sm text-[var(--standard-text-color)] mb-1">SUV</p>
+<p class="text-xs text-gray-500 mb-3">4 Doors | 5 Seats | Automatic</p>
+<div class="mt-auto">
+<p class="text-lg font-bold text-[var(--accent-heading-color)] mb-3">RM 550 <span class="text-sm font-normal text-gray-500">/ day</span></p>
+<a class="block w-full text-center bg-[var(--primary-action-color)] text-white py-2.5 px-4 rounded-md text-sm font-medium hover:opacity-90 transition-opacity" href="/book-car/5">View Details</a>
+</div>
+</div>
+</div>
+<div class="bg-[var(--card-background-color)] rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-col" data-vehicle-type="Convertible">
+<img alt="Mazda MX-5" class="w-full h-48 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG5ZYHRjjXg7rrWlkt0gOzO3UTSf2U8obMWH0mDoPFQMZOrlF8Twu5Fcre18K7i6lQo00Pq0rJFi77ayORc70wG-naTYqSrfZibtjyJZ-qbmb6SIPK5XFbvF4FNs9Q8nYuGGAahU7a7Xgnf43kjEK9nFwA4mzfbCMdcFcdGLA9rC_IguVOCeQsiRBXKSkFeYa6v7jQB4mq1qvCNjhdeVHNCq-gmLyZO-Y086egbfPnW8K7y5Ap1_fX88N6ykm3myJcF30HR_9Opw"/>
+<div class="p-5 flex flex-col flex-grow">
+<h3 class="text-xl font-semibold text-[var(--accent-heading-color)] mb-1">Mazda MX-5</h3>
+<p class="text-sm text-[var(--standard-text-color)] mb-1">Convertible</p>
+<p class="text-xs text-gray-500 mb-3">2 Doors | 2 Seats | Automatic</p>
+<div class="mt-auto">
+<p class="text-lg font-bold text-[var(--accent-heading-color)] mb-3">RM 350 <span class="text-sm font-normal text-gray-500">/ day</span></p>
+<a class="block w-full text-center bg-[var(--primary-action-color)] text-white py-2.5 px-4 rounded-md text-sm font-medium hover:opacity-90 transition-opacity" href="/book-car/6">View Details</a>
+</div>
+</div>
+</div>
+</div>
+<p class="hidden text-center text-gray-500 text-lg mt-12" id="noResultsMessage">No vehicles found for this filter.</p>
+</div>
+</main>
+</div>
+</div>
+<script>
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileMenuOverlay');
+      menu.classList.toggle('translate-x-full');
+      if (overlay.classList.contains('hidden')) {
+        overlay.classList.remove('hidden');
+        setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+      } else {
+        overlay.classList.add('opacity-0');
+        setTimeout(() => overlay.classList.add('hidden'), 300);
+      }
+    }
+    function toggleAccountDropdown() {
+      const dropdown = document.getElementById('accountDropdown');
+      dropdown.classList.toggle('hidden');
+    }
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const dropdownContainer = document.getElementById('accountDropdownContainer');
+      const accountDropdown = document.getElementById('accountDropdown');
+      if (!dropdownContainer.contains(event.target) && !accountDropdown.classList.contains('hidden')) {
+        accountDropdown.classList.add('hidden');
+      }
+    });
+    // Filter functionality
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const vehicleGrid = document.getElementById('vehicleGrid');
+    const vehicleCards = Array.from(vehicleGrid.children);
+    const noResultsMessage = document.getElementById('noResultsMessage');
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        filterTabs.forEach(t => {
+          t.classList.remove('active-filter', 'bg-[var(--primary-action-color)]', 'text-white');
+          t.classList.add('bg-gray-200', 'text-[var(--standard-text-color)]', 'hover:bg-gray-300');
+        });
+        tab.classList.add('active-filter', 'bg-[var(--primary-action-color)]', 'text-white');
+        tab.classList.remove('bg-gray-200', 'text-[var(--standard-text-color)]', 'hover:bg-gray-300');
+        const filterValue = tab.dataset.filter;
+        let visibleCount = 0;
+        vehicleCards.forEach(card => {
+          if (filterValue === 'all' || card.dataset.vehicleType === filterValue) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        if (visibleCount === 0) {
+          noResultsMessage.classList.remove('hidden');
+        } else {
+          noResultsMessage.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+
+</body></html>
+</body></html>

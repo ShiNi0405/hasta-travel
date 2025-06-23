@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Peterbold%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>Car Rental - Vehicle Details</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    @font-face {
+      font-family: 'Peterbold';
+      src: url('https://example.com/peterbold-ordinary.woff2') format('woff2'),url('https://example.com/peterbold-ordinary.woff') format('woff');font-weight: normal;
+      font-style: normal;
+    }
+    :root {
+      --primary-color: #EC5B2C;
+      --secondary-color: #cb3434;
+      --text-color: #1f2937;
+      --border-color: #e5e7eb;
+      --background-color: #FFFFFF;
+    }
+    body {
+      font-family: 'Peterbold', "Space Grotesk", "Noto Sans", sans-serif;
+    }
+    .active-nav {
+      color: var(--primary-color) !important;
+      font-weight: 700;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 4px;
+    }
+    .thumbnail-selected {
+      border: 2px solid var(--primary-color);
+    }
+    .section-title {
+      color: var(--secondary-color);
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .car-title {
+      color: var(--secondary-color);
+      font-weight: 700;
+      font-size: 2.25rem;
+    }
+    .car-price {
+      color: var(--secondary-color);
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+    .rent-button {
+      background-color: var(--primary-color);
+      color: var(--background-color);
+      font-weight: 700;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: background-color 0.3s ease;
+    }
+    .rent-button:hover {
+      background-color: #d44f26;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-color);
+      font-size: 1rem;
+    }
+    .feature-icon {
+      color: var(--primary-color);
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+    .spec-label {
+      color: #6b7280;
+    }
+    .spec-value {
+      color: var(--text-color);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body class="bg-[var(--background-color)]">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] bg-[var(--background-color)] px-6 py-4 md:px-10">
+<div class="flex items-center gap-3">
+<svg class="h-8 w-8 text-[var(--primary-color)]" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+<h1 class="text-[var(--text-color)] text-xl font-bold">Hasta Travel</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[var(--text-color)] hover:text-[var(--primary-color)] text-base font-medium" href="#">Home</a>
+<a class="text-[var(--text-color)] hover:text-[var(--primary-color)] text-base font-medium active-nav" href="#">Book a Car</a>
+<a class="text-[var(--text-color)] hover:text-[var(--primary-color)] text-base font-medium" href="#">My Bookings</a>
+<a class="text-[var(--text-color)] hover:text-[var(--primary-color)] text-base font-medium" href="#">Notifications</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex min-w-[100px] items-center justify-center overflow-hidden rounded-md h-10 px-4 bg-slate-100 hover:bg-slate-200 text-[var(--text-color)] text-base font-medium">
+          My Account
+        </button>
+<button class="md:hidden text-[var(--text-color)]">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+</header>
+<main class="flex-1 px-4 py-8 md:px-10 lg:px-20 xl:px-40">
+<div class="container mx-auto">
+<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
+<div class="flex flex-col gap-4">
+<div class="aspect-w-16 aspect-h-10 overflow-hidden rounded-lg shadow-lg">
+<img alt="Main car image" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwk7fRT0fzZOObIogBBjvZUFwRNd4x0SJZKgMOSYc2uV_qlloY2HaDTWaKZJZ-_fgS1CzgU0XPQuFtUc7tYc39WbcvXW4nGJn5Ph5hc0y3tLe3P03kusxUqbrDscSeSeqbJaoFLYRu88c6b0-cp4Tj97kQUeVuShbg4H_WgjD57G7SMtropyqx9w7HrwH5YNmBGGo1AtlJcCUElS9NObuXb2buhHQe7a4nRs6jgBK6l8JV-ertvLCBMPDZS0K9Xit7vWZBDQc59JYz"/>
+</div>
+<div class="grid grid-cols-3 gap-3 md:grid-cols-4">
+<div class="aspect-square overflow-hidden rounded-md cursor-pointer thumbnail-selected">
+<img alt="Car thumbnail 1" class="h-full w-full object-cover hover:opacity-80 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwk7fRT0fzZOObIogBBjvZUFwRNd4x0SJZKgMOSYc2uV_qlloY2HaDTWaKZJZ-_fgS1CzgU0XPQuFtUc7tYc39WbcvXW4nGJn5Ph5hc0y3tLe3P03kusxUqbrDscSeSeqbJaoFLYRu88c6b0-cp4Tj97kQUeVuShbg4H_WgjD57G7SMtropyqx9w7HrwH5YNmBGGo1AtlJcCUElS9NObuXb2buhHQe7a4nRs6jgBK6l8JV-ertvLCBMPDZS0K9Xit7vWZBDQc59JYz"/>
+</div>
+<div class="aspect-square overflow-hidden rounded-md cursor-pointer border-2 border-transparent hover:border-[var(--primary-color)] transition-colors">
+<img alt="Car thumbnail 2" class="h-full w-full object-cover hover:opacity-80 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkdxeHuk8uj2jYuC1wOs0BNRzf6CLqv562X30fDlP0DwLAHZ1MVI07Rj3rlqYxI4LYDCowI8rIlyKyS5N5N4L6gws8c5VEBojBz6MnTJjiWh_NjYKiPZvfLnG1OMdZNqhqiGE5tLJvElK8GoL43v_dJUiZ079pRjuzTzwrAo0hbMw3i16-S7CLykF1cfxTuixQClDu2jPrHAwSpE-jzW9eRGku8BU8g1yl2aMvVupvSHWqY5B0Al5HPC8HyT_jyifAg6RGj0vl7nMX"/>
+</div>
+<div class="aspect-square overflow-hidden rounded-md cursor-pointer border-2 border-transparent hover:border-[var(--primary-color)] transition-colors">
+<img alt="Car thumbnail 3" class="h-full w-full object-cover hover:opacity-80 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvIqefKLOePm-25B_MuWwYLHY-VenPdmX7oWSkvRoHhsF1SY0TzeQ34snT88wqQCZ0_5hqXRq1-iGUOUtADiUY_4JxEV1yXgtn-BB2hcY9ZZDo2W6rQLcZQ6DTIXvxrrOHfZcbXEPydSh1S0gOeiAs1v2lOtZSdamhRL8PFBjUuOgA0KUezD7FhLAu0KSUJo11LI-5Kx3-f8E-UMbytpkMfwNtEUJkqYZXkK_gJpVludUUiQX3j9Rp0NmFRRcUDUFEf1jVCoTHUk8C"/>
+</div>
+<div class="aspect-square overflow-hidden rounded-md cursor-pointer border-2 border-transparent hover:border-[var(--primary-color)] transition-colors">
+<img alt="Car thumbnail 4" class="h-full w-full object-cover hover:opacity-80 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBym2bxgfriys7r7MiDBfkheb8f53Z7GeZ3sxR0v6n_ZL_HbIVrqtN1NwuRW0gJeWUPUy13ZG34-hHmWGlTTGCrjXZQF3ned-TS3z-iTya_mVn2yHVRo3q7HTb60m2yIrQE_KMT4_-eO-P3ZJWcG7IhFOECuz0hMSCmtmCc8fbp6XeoUxMGm3lhRkRkq2UfQV4toy_JsQOM-R8Xjeh30w2PkLy1Kt1ym5swiUSLISrna84ue2X91QqGB8-6zbMFCIzGl0Q_UuP3fdp4"/>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<div>
+<h2 class="car-title mb-1">Volkswagen Golf</h2>
+<p class="car-price">$45 / day</p>
+</div>
+<div>
+<h3 class="section-title">Technical Specification</h3>
+<div class="space-y-3 border-t border-[var(--border-color)] pt-4">
+<div class="grid grid-cols-2 gap-2">
+<p class="spec-label">Doors</p>
+<p class="spec-value">5</p>
+</div>
+<div class="grid grid-cols-2 gap-2 border-t border-[var(--border-color)] pt-3">
+<p class="spec-label">Passengers</p>
+<p class="spec-value">5</p>
+</div>
+<div class="grid grid-cols-2 gap-2 border-t border-[var(--border-color)] pt-3">
+<p class="spec-label">Transmission</p>
+<p class="spec-value">Automatic</p>
+</div>
+<div class="grid grid-cols-2 gap-2 border-t border-[var(--border-color)] pt-3">
+<p class="spec-label">Engine</p>
+<p class="spec-value">1.5L</p>
+</div>
+<div class="grid grid-cols-2 gap-2 border-t border-[var(--border-color)] pt-3">
+<p class="spec-label">Fuel type</p>
+<p class="spec-value">Petrol</p>
+</div>
+<div class="grid grid-cols-2 gap-2 border-t border-[var(--border-color)] pt-3">
+<p class="spec-label">Air conditioning</p>
+<p class="spec-value">Yes</p>
+</div>
+</div>
+</div>
+<div>
+<h3 class="section-title">Car Equipment</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 pt-2">
+<div class="feature-item">
+<svg class="feature-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" fill-rule="evenodd"></path>
+</svg>
+<span>ABS</span>
+</div>
+<div class="feature-item">
+<svg class="feature-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" fill-rule="evenodd"></path>
+</svg>
+<span>ESP</span>
+</div>
+<div class="feature-item">
+<svg class="feature-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" fill-rule="evenodd"></path>
+</svg>
+<span>Airbags</span>
+</div>
+<div class="feature-item">
+<svg class="feature-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" fill-rule="evenodd"></path>
+</svg>
+<span>Central locking</span>
+</div>
+<div class="feature-item">
+<svg class="feature-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" fill-rule="evenodd"></path>
+</svg>
+<span>Power windows</span>
+</div>
+<div class="feature-item">
+<svg class="feature-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" fill-rule="evenodd"></path>
+</svg>
+<span>Radio</span>
+</div>
+</div>
+</div>
+<button class="rent-button w-full mt-4">
+              Rent a car
+            </button>
+</div>
+</div>
+<div class="mt-12 md:mt-16">
+<div class="flex items-center justify-between mb-6">
+<h2 class="section-title !mb-0">Other cars</h2>
+<a class="text-[var(--primary-color)] hover:underline font-medium text-base" href="#">View All</a>
+</div>
+<div class="flex overflow-x-auto space-x-4 pb-4 [-ms-scrollbar-style:none] [scrollbar-width:none] [&amp;::-webkit-scrollbar]:hidden">
+<div class="flex-none w-64 md:w-72">
+<div class="bg-[var(--background-color)] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+<div class="aspect-w-16 aspect-h-9">
+<img alt="Mercedes-Benz C-Class" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy2M_PGMH6CpQt_wj2tkLoHGuGaqTyHhn0NG2BMozSeMGq_MLmu7tiTuaIJ4qz7xYihbxtpuGvjexfKVsIYcLFbKBMFhc4B8F90S-v-JqZCBy5-qkPil0F61LLDLe8vg87FIhwoN0sKUP7q2pIEtWJStgBmsNYdoUWkCWQhYjC_COW32i87Vjmq3a-Gum3_tUqsx1-yCgebWjDiK_fleCoczlY2E9lnMssgUXG8MKdOueOrqfqePr7ULNxv0ZxMOmtm7BXM0ebBYo-"/>
+</div>
+<div class="p-4">
+<h3 class="text-[var(--text-color)] text-lg font-semibold">Mercedes-Benz C-Class</h3>
+<p class="text-gray-600 text-sm">$55 / day</p>
+</div>
+</div>
+</div>
+<div class="flex-none w-64 md:w-72">
+<div class="bg-[var(--background-color)] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+<div class="aspect-w-16 aspect-h-9">
+<img alt="BMW 3 Series" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsjMgKcXUm5lRHoI8isJJvltRXQsolXAlGI88xaFTgCQFA56ynX9VgweN0JdZkF8ODRKiypoV4C3X6vp8CqfYRqU1PCaL_2iBjKKVHULNrqa4BjWpNRs29spBix_TxJoEVLBKYLsaEnUEM7OX_grKQs1VFx9jCyHkR1O1lKQemqLUbsGFngocUYUPwPoxph1L6276yQdjHp-UHOREUIZEvfNflxphacksYv8ynqUw5B0lhVJM_tu2dToIIJhUQPiDxDM2rqijKJEw7"/>
+</div>
+<div class="p-4">
+<h3 class="text-[var(--text-color)] text-lg font-semibold">BMW 3 Series</h3>
+<p class="text-gray-600 text-sm">$50 / day</p>
+</div>
+</div>
+</div>
+<div class="flex-none w-64 md:w-72">
+<div class="bg-[var(--background-color)] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+<div class="aspect-w-16 aspect-h-9">
+<img alt="Audi A4" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqFWhmrhcwRjY5WdOBKUeGPxJeUEvo-4zCA6i5ahH9Dq4loQH6BVnJNq82Wwint6sjXqt0YAdDHvFs7kLTpJwPWpFWwDhE0m-gbPV11qckNXcE3o3CDL3HATqoSOkFo-P60hqtwcsccOp_BISJMy5U3razA4nfypLcWZwZ7YZ2J2F7Fp8UdwrJFxhikha5xn97kxuTMuI3_6Z6BfSc8CVddd-puncoCejfyvJOaA_T6-hlUPYSQCb2W37LpbLt5SYD8DtbYB1mWti8"/>
+</div>
+<div class="p-4">
+<h3 class="text-[var(--text-color)] text-lg font-semibold">Audi A4</h3>
+<p class="text-gray-600 text-sm">$48 / day</p>
+</div>
+</div>
+</div>
+<div class="flex-none w-64 md:w-72">
+<div class="bg-[var(--background-color)] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+<div class="aspect-w-16 aspect-h-9">
+<img alt="Toyota Camry" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNzB9zsXYJTguqUWarxN7hIkWhbfYpgq8eITzoRkzMp-xaqD4zpU_Ua6hG3VoRMXaXZ29kbR_OmjWY4HNQJ1sVm5zTj7F7I9XwCXaF47ECIahHAfgkGIuZmBTtO2KUSAjbRbxHQunk4Kc058btOgBS_8xcy_OADTvPJEv120Ca8c6SRrGi8XhRgzOusKu4KIRNeYcnESv2ISY6av11mzKEdBv4f_nShu1CRcn_hz2B_Fp9GrzMIhCrXFUr3YrAmHvn-VvV48s8D2-1"/>
+</div>
+<div class="p-4">
+<h3 class="text-[var(--text-color)] text-lg font-semibold">Toyota Camry</h3>
+<p class="text-gray-600 text-sm">$42 / day</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

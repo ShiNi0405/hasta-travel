@@ -1,0 +1,251 @@
+<html><head>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>HASTA TRAVEL - Customer Registration</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<meta charset="utf-8"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #ec5b2c;
+      --primary-color-text: #ffffff;
+      --secondary-color: #ffffff;
+      --text-color: #1e293b;
+      --label-color: #334155;
+      --placeholder-color: #94a3b8;
+      --border-color: #cbd5e1;
+      --input-focus-border: #ec5b2c;
+      --error-color: #ef4444;
+      --success-color: #22c55e;
+    }
+    body {
+      font-family: 'Inter', 'Noto Sans', sans-serif;
+      background-color: var(--secondary-color);
+    }
+    .form-input {
+      border-color: var(--border-color);
+      color: var(--text-color);
+      border-radius: 0.375rem;transition: all 0.15s ease-in-out;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);}
+    .form-input:focus {
+      border-color: var(--input-focus-border);
+      box-shadow: 0 0 0 2px rgba(236, 91, 44, 0.3);outline: none;
+    }
+    .form-input::placeholder {
+      color: var(--placeholder-color);
+    }
+    .form-label {
+      color: var(--label-color);
+      font-weight: 500;
+    }
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: var(--primary-color-text);
+      font-weight: 600;border-radius: 0.375rem;
+      padding-top: 0.75rem;padding-bottom: 0.75rem;
+      transition: background-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary:hover {
+      background-color: #d64f27;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    }
+    .select-arrow {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+      background-position: right 0.75rem center;
+      background-repeat: no-repeat;
+      background-size: 1.25em 1.25em;
+      padding-right: 2.5rem;
+    }
+    .card {
+        background-color: var(--secondary-color);
+        border-radius: 0.75rem;box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);}
+  </style>
+</head>
+<body class="bg-[var(--secondary-color)]">
+<div class="relative flex size-full min-h-screen flex-col items-center justify-center group/design-root overflow-x-hidden py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[var(--primary-color)] via-[#fd7e55] to-[#ff9c7a]">
+<div class="layout-container flex h-full grow flex-col w-full max-w-xl">
+<main class="flex flex-1 flex-col items-center justify-center">
+<div class="w-full space-y-8">
+<div class="text-center">
+<img alt="HASTA TRAVEL Logo" class="mx-auto h-20 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyPMv61dMU32xVAxOBk8YEJUT0HdY25_SEalnIYmfl8CZcKnQnkD7g3mt9D3GBsEftDJr9u3ceiOCJsfOwgFWVz2PX1dJjfr_tG2JVUWYvVIPN8nHmpb_J6mIDY9WNWyYEOx0CIrZGpkXstPA4SX-p_XEVdDDnQad6hHuPLs5IVCyKfmBOY997-PSN4fdxUOhtFipo7Sz8HpNM6Kk4uH2Fhe9EaWxCsPbro73yKRgY8U-ZqhYWMJ_TG0NZlyPXkKJQnM5Ni9OFKA"/>
+<h2 class="mt-6 text-center text-4xl font-bold tracking-tight text-[var(--primary-color-text)]">
+              UTM Student Registration
+            </h2>
+<p class="mt-2 text-center text-md text-white/90">
+              Create your HASTA TRAVEL account.
+            </p>
+</div>
+<div class="card p-8 sm:p-10">
+<form class="space-y-6">
+<div>
+<label class="form-label block text-sm leading-6" for="full-name">Full Name</label>
+<div class="mt-2">
+<input class="form-input block w-full py-3 px-4 sm:text-sm sm:leading-6" id="full-name" name="full-name" placeholder="Enter your full name" required="" type="text"/>
+</div>
+</div>
+<div>
+<label class="form-label block text-sm leading-6" for="utm-email">UTM Email</label>
+<div class="mt-2">
+<input class="form-input block w-full py-3 px-4 sm:text-sm sm:leading-6" id="utm-email" name="utm-email" pattern=".+@utm\.my" placeholder="e.g., student@utm.my" required="" title="Email must end with @utm.my" type="email"/>
+</div>
+</div>
+<div>
+<label class="form-label block text-sm leading-6" for="phone-number">Phone Number</label>
+<div class="mt-2">
+<input class="form-input block w-full py-3 px-4 sm:text-sm sm:leading-6" id="phone-number" name="phone-number" placeholder="Enter your phone number" required="" type="tel"/>
+</div>
+</div>
+<div>
+<label class="form-label block text-sm leading-6" for="address">Address</label>
+<div class="mt-2">
+<textarea class="form-input block w-full py-3 px-4 sm:text-sm sm:leading-6 resize-none" id="address" name="address" placeholder="Enter your address" required="" rows="3"></textarea>
+</div>
+</div>
+<div>
+<label class="form-label block text-sm leading-6" for="faculty">Faculty</label>
+<div class="mt-2">
+<select class="form-input select-arrow block w-full py-3 px-4 appearance-none sm:text-sm sm:leading-6" id="faculty" name="faculty" required="">
+<option disabled="" selected="" value="">Select your faculty</option>
+<option value="engineering">Faculty of Engineering</option>
+<option value="science">Faculty of Science</option>
+<option value="management">Faculty of Management</option>
+<option value="education">Faculty of Education</option>
+<option value="built_environment">Faculty of Built Environment and Surveying</option>
+<option value="social_sciences_humanities">Faculty of Social Sciences and Humanities</option>
+<option value="razak_faculty_technology_informatics">Razak Faculty of Technology and Informatics</option>
+<option value="azman_hashim_international_business_school">Azman Hashim International Business School</option>
+<option value="malaysia_japan_international_institute_technology">Malaysia-Japan International Institute of Technology</option>
+</select>
+</div>
+</div>
+<div class="space-y-2">
+<label class="form-label block text-sm leading-6" for="matric-card-upload-section">Matric Card</label>
+<div class="mt-2 flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 px-6 py-8 text-center hover:border-[var(--primary-color)] transition-colors duration-150 ease-in-out bg-slate-50" id="matric-card-upload-section">
+<svg aria-hidden="true" class="mx-auto h-10 w-10 text-slate-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.338 0 4.5 4.5 0 01-1.41 8.775H6.75z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<p class="mt-2 text-sm font-medium text-slate-700">
+<label class="relative cursor-pointer font-semibold text-[var(--primary-color)] hover:text-d64f27 focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--primary-color)] focus-within:ring-offset-2 focus-within:ring-offset-slate-50" for="matric-card-upload">
+<span>Upload your Matric Card</span>
+<input accept=".png,.jpg,.jpeg,.pdf" class="sr-only" id="matric-card-upload" name="matric-card-upload" required="" type="file"/>
+</label>
+</p>
+<p class="mt-1 text-xs text-slate-500">PNG, JPG, PDF up to 5MB</p>
+<p class="mt-2 text-xs text-slate-600" id="file-name-display"></p>
+<p class="mt-1 text-xs text-[var(--error-color)] hidden" id="file-error-display"></p>
+</div>
+</div>
+<div>
+<button class="btn-primary flex w-full justify-center py-3 px-4 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-color)]" type="submit">
+                  Register
+                </button>
+</div>
+</form>
+</div>
+<div class="hidden card p-6 text-center bg-green-50" id="submission-message" role="alert">
+<svg aria-hidden="true" class="mx-auto h-16 w-16 text-green-500" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+<path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<h3 class="mt-4 text-2xl font-semibold text-green-800">Registration Submitted!</h3>
+<p class="mt-2 text-md text-green-700">
+              Awaiting staff approval. You will be notified via email once your account is approved.
+            </p>
+</div>
+</div>
+</main>
+</div>
+</div>
+<script>
+    const form = document.querySelector('form');
+    const submissionMessage = document.getElementById('submission-message');
+    const matricUploadInput = document.getElementById('matric-card-upload');
+    const fileNameDisplay = document.getElementById('file-name-display');
+    const fileErrorDisplay = document.getElementById('file-error-display');
+    const formCard = document.querySelector('.card:not(#submission-message)');
+    if (form) {
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const emailInput = document.getElementById('utm-email');
+        let isValid = true;
+        // Clear previous errors
+        fileErrorDisplay.classList.add('hidden');
+        fileErrorDisplay.textContent = '';
+        const emailErrorSibling = emailInput.nextElementSibling;
+        if(emailErrorSibling && emailErrorSibling.classList.contains('error-message')) {
+            emailErrorSibling.remove();
+        }
+        emailInput.classList.remove('border-[var(--error-color)]','focus:border-[var(--error-color)]', 'focus:ring-[var(--error-color)]/30');
+        if (emailInput && !emailInput.value.endsWith('@utm.my')) {
+          isValid = false;
+          emailInput.classList.add('border-[var(--error-color)]','focus:border-[var(--error-color)]', 'focus:ring-[var(--error-color)]/30');
+          const errorMsg = document.createElement('p');
+          errorMsg.className = 'mt-1 text-xs text-[var(--error-color)] error-message';
+          errorMsg.textContent = 'Please enter a valid UTM email address (ending with @utm.my).';
+          emailInput.parentNode.appendChild(errorMsg);
+          emailInput.focus();
+        }
+        if (matricUploadInput && matricUploadInput.files.length === 0) {
+          isValid = false;
+          fileErrorDisplay.textContent = 'Matric Card is required.';
+          fileErrorDisplay.classList.remove('hidden');
+          matricUploadInput.focus();
+        } else if (matricUploadInput && matricUploadInput.files.length > 0) {
+          const file = matricUploadInput.files[0];
+          const allowedTypes = ['image/png', 'image/jpeg', 'application/pdf'];
+          const maxSizeMB = 5;
+          if (!allowedTypes.includes(file.type)) {
+            isValid = false;
+            fileErrorDisplay.textContent = 'Invalid file type. Please upload a PNG, JPG, or PDF.';
+            fileErrorDisplay.classList.remove('hidden');
+            matricUploadInput.value = '';
+            fileNameDisplay.textContent = '';
+          } else if (file.size > maxSizeMB * 1024 * 1024) {
+            isValid = false;
+            fileErrorDisplay.textContent = `File is too large. Maximum size is ${maxSizeMB}MB.`;
+            fileErrorDisplay.classList.remove('hidden');
+            matricUploadInput.value = '';
+            fileNameDisplay.textContent = '';
+          }
+        }
+        if (isValid) {
+          // Simulate successful submission
+          if (formCard) formCard.classList.add('hidden');
+          if (submissionMessage) submissionMessage.classList.remove('hidden');
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }
+      });
+    }
+    if (matricUploadInput && fileNameDisplay && fileErrorDisplay) {
+      matricUploadInput.addEventListener('change', function() {
+        fileErrorDisplay.classList.add('hidden');
+        fileErrorDisplay.textContent = '';
+        fileNameDisplay.textContent = '';
+        if (this.files && this.files.length > 0) {
+          const file = this.files[0];
+          fileNameDisplay.textContent = `Selected file: ${file.name}`;
+          const allowedTypes = ['image/png', 'image/jpeg', 'application/pdf'];
+          const maxSizeMB = 5;
+          if (!allowedTypes.includes(file.type)) {
+            fileErrorDisplay.textContent = 'Invalid file type. Please upload a PNG, JPG, or PDF.';
+            fileErrorDisplay.classList.remove('hidden');
+            this.value = ''; // Clear the input
+            fileNameDisplay.textContent = '';
+            return;
+          }
+          if (file.size > maxSizeMB * 1024 * 1024) {
+            fileErrorDisplay.textContent = `File is too large. Maximum size is ${maxSizeMB}MB.`;
+            fileErrorDisplay.classList.remove('hidden');
+            this.value = ''; // Clear the input
+            fileNameDisplay.textContent = '';
+            return;
+          }
+        }
+      });
+    }
+  </script>
+
+</body></html>

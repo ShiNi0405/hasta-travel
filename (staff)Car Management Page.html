@@ -1,0 +1,769 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet"/>
+<title>AutoZen Car Management</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #1284e7;
+        --primary-color-hover: #0d6bc5;
+        --secondary-color: #f0f2f4;
+        --secondary-color-hover: #e5e8eb;
+        --text-primary: #111518;
+        --text-secondary: #617789;
+        --border-color: #dbe1e6;
+        --status-available-bg: #e6f7f0;--status-available-text: #1f8452;--status-available-icon: #34d399;--status-booked-bg: #fee2e2;--status-booked-text: #dc2626;--status-booked-icon: #ef4444;--status-maintenance-bg: #fffbeb;--status-maintenance-text: #f59e0b;--status-maintenance-icon: #f59e0b;--calendar-available: #c8e6c9;--calendar-booked: #ffcdd2;--calendar-manually-blocked: #fff9c4;--calendar-selected: #bbdefb;--calendar-past: #e0e0e0;}
+      .status-available {
+        background-color: var(--status-available-bg);
+        color: var(--status-available-text);
+      }
+      .status-available-icon { color: var(--status-available-icon); }
+      .status-booked {background-color: var(--status-booked-bg);
+        color: var(--status-booked-text);
+      }
+      .status-booked-icon { color: var(--status-booked-icon); }
+      .status-maintenance {background-color: var(--status-maintenance-bg);
+        color: var(--status-maintenance-text);
+      }
+      .status-maintenance-icon { color: var(--status-maintenance-icon); }
+      .table th {
+        @apply px-6 py-3 text-left text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider;
+      }
+      .table td {
+        @apply px-6 py-4 whitespace-nowrap text-sm text-[var(--text-primary)];
+      }
+      .table tbody tr:nth-child(even) {
+        background-color: var(--secondary-color);
+      }
+      .filter-button {
+        @apply flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-md bg-[var(--secondary-color)] px-4 text-[var(--text-primary)] text-sm font-medium leading-normal hover:bg-[var(--secondary-color-hover)] transition-colors;
+      }
+      .filter-button.active {
+        @apply bg-[var(--primary-color)] text-white hover:bg-[var(--primary-color-hover)];
+      }
+      .filter-button .material-icons {
+         font-size: 20px;
+      }
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1px;
+        background-color: var(--border-color);
+        border: 1px solid var(--border-color);
+        border-radius: 0.375rem;}
+      .calendar-day {
+        @apply p-2 text-center text-sm cursor-pointer bg-white hover:bg-gray-100;
+      }
+      .calendar-day.selected {
+        @apply bg-[var(--primary-color)] text-white hover:bg-[var(--primary-color-hover)];
+      }
+      .calendar-day.has-events {
+        @apply font-bold;
+      }
+      .calendar-day.disabled {
+        @apply text-gray-400 cursor-not-allowed bg-gray-50;
+      }
+    </style>
+</head>
+<body class="bg-gray-50" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] bg-white px-6 py-4 shadow-sm">
+<div class="flex items-center gap-3 text-[var(--primary-color)]">
+<div class="size-7">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"></path>
+</svg>
+</div>
+<h2 class="text-[var(--text-primary)] text-xl font-bold leading-tight tracking-[-0.015em]">AutoZen</h2>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors" href="#">Bookings</a>
+<a class="text-[var(--primary-color)] text-sm font-semibold leading-normal" href="#">Cars</a>
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors" href="#">Customers</a>
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors" href="#">Reports</a>
+</nav>
+<button aria-label="Notifications" class="flex items-center justify-center rounded-full h-10 w-10 bg-[var(--secondary-color)] text-[var(--text-secondary)] hover:bg-[var(--secondary-color-hover)] hover:text-[var(--primary-color)] transition-colors">
+<span class="material-icons text-xl">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[var(--primary-color)]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAH5M4J1Q_T5wWKdkMXiC5BgkiL7kEXmNoKEMcNNwHy3d9cWf54U7wAb8feLL7EnrhWsoH_sKa9uSIR61bScRoGBjtUREs3ATGr_r2X4-4BDIAV2iVUL3CCKMkUkto7_9nFDSa7Lrmx531HIJLeZyNzRk0c-YJyw8_iyrr1btbLygPfbXvFaaMa3vtpd5rf0sziJCewqhbd3gAetifT2W4ORFULsPN_JPYZApuXrnZqBZbWM5yX5wVVCO-DhW80kJzoa7YZL5EI_w");'></div>
+</div>
+</header>
+<main class="px-4 sm:px-6 lg:px-8 flex-1 py-8">
+<div class="layout-content-container flex flex-col max-w-7xl mx-auto">
+<div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+<h1 class="text-[var(--text-primary)] text-2xl md:text-3xl font-bold">Car Management</h1>
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center gap-2 rounded-lg h-10 px-5 bg-[var(--primary-color)] text-white text-sm font-medium hover:bg-[var(--primary-color-hover)] transition-colors shadow-sm" onclick="openAddEditModal('Add New Car')">
+<span class="material-icons text-lg">add_circle_outline</span>
+<span class="truncate">Add New Car</span>
+</button>
+<div class="relative">
+<input class="h-10 pl-10 pr-4 border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] text-sm w-full sm:w-auto" placeholder="Search Cars..." type="text"/>
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-secondary)]">search</span>
+</div>
+</div>
+</div>
+<div class="mb-6 p-4 bg-white rounded-lg shadow">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<h3 class="text-lg font-medium text-[var(--text-primary)]">Filters</h3>
+<button class="filter-button md:hidden">
+<span class="material-icons">filter_list</span> Filters
+    </button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-3 md:mt-0">
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="status-filter">Status</label>
+<select class="w-full h-10 border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] text-sm" id="status-filter" name="status-filter">
+<option>All Statuses</option>
+<option>Available</option>
+<option>Manually Blocked</option>
+<option>Booked</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="brand-filter">Brand</label>
+<select class="w-full h-10 border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] text-sm" id="brand-filter" name="brand-filter">
+<option>All Brands</option>
+<option>Toyota</option>
+<option>Honda</option>
+<option>Ford</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="ownership-filter">Ownership</label>
+<select class="w-full h-10 border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] text-sm" id="ownership-filter" name="ownership-filter">
+<option>All</option>
+<option>Owned</option>
+<option>Investor</option>
+<option>Leased</option>
+</select>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow overflow-hidden @container">
+<div class="overflow-x-auto">
+<table class="min-w-full divide-y divide-[var(--border-color)] table">
+<thead class="bg-gray-50">
+<tr>
+<th class="table-column-plate">Plate</th>
+<th class="table-column-image">Image</th>
+<th class="table-column-brand">Brand</th>
+<th class="table-column-type">Type</th>
+<th class="table-column-color">Color</th>
+<th class="table-column-seats">Seats</th>
+<th class="table-column-ownership">Ownership</th>
+<th class="table-column-status">Status</th>
+<th class="relative px-6 py-3"><span class="sr-only">Actions</span></th>
+</tr>
+</thead>
+<tbody class="bg-white divide-y divide-[var(--border-color)]">
+<tr>
+<td class="table-column-plate font-medium">JYA 7583</td>
+<td class="table-column-image"><img alt="Car Image" class="h-10 w-16 object-cover rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKq0nwdDlOlY9czl4d-mTGoefuEYJmyW57p29nTppfnAspgJypT37JH8-Va49KqK9_KHOzDfl9cOT6gqe35zmHpnnmZI95H-cWYpwLnq--AMJ7zKSAaUBXCM7Z2RDDJeM_FQwlCQr3DvYxbu_4kdr6l7zlhlvzjU2WNrIieUb30msXSaE4HvbUA_s4DP9UD2nKQ3FY9QeOT2KiaTRZnU8S0AF_Kj-hMx6m_sJXEpz89oOKCErYxMhK9I6Ts968v0wK5PioEM483A"/></td>
+<td class="table-column-brand">Honda</td>
+<td class="table-column-type">SUV</td>
+<td class="table-column-color">Red</td>
+<td class="table-column-seats">5</td>
+<td class="table-column-ownership">Investor</td>
+<td class="table-column-status">
+<span class="px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full status-available">
+<span class="material-icons text-base mr-1.5 status-available-icon">fiber_manual_record</span>Available
+</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-[var(--primary-color)] hover:text-[var(--primary-color-hover)] p-1" onclick="openAddEditModal('Edit Car JYA 7583')" title="Edit"><span class="material-icons text-xl">edit</span></button>
+<button class="text-[var(--primary-color)] hover:text-[var(--primary-color-hover)] p-1 ml-2" onclick="openCalendarModal('JYA 7583')" title="View Availability"><span class="material-icons text-xl">calendar_today</span></button>
+<button class="text-red-600 hover:text-red-800 p-1 ml-2" title="Delete"><span class="material-icons text-xl">delete</span></button>
+</td>
+</tr>
+<tr>
+<td class="table-column-plate font-medium">JYA 7583</td>
+<td class="table-column-image"><img alt="Car Image" class="h-10 w-16 object-cover rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtztOqNtB6I9hHyqdQAKJDysp6Z7B4c2kFbmf0C9fDKIFePV39nUV1e3JSS7OMtBozZy65zSt1HBwQgCXHO6yME2cIa644L3DiqfMFOUpQzPa6W94o4S8ftWhONnwYyDSTHTnMnm3XAtOWxsUGvCiWkiRgbrUy1ZOxhCB_dQ0Dt4pq0ntcD62L2w7HnshdyA6WG4ksllj3phgn5XtTAf9wskEQIeLrYapOyhFXvrroTk6APef2Ruri6M_NwuFkeCRwf5kaoBlnvA"/></td>
+<td class="table-column-brand">Toyota</td>
+<td class="table-column-type">Sedan</td>
+<td class="table-column-color">Blue</td>
+<td class="table-column-seats">5</td>
+<td class="table-column-ownership">Owned</td>
+<td class="table-column-status">
+<span class="px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full status-maintenance"> {}
+<span class="material-icons text-base mr-1.5 status-maintenance-icon">fiber_manual_record</span>Manually Blocked
+</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-[var(--primary-color)] hover:text-[var(--primary-color-hover)] p-1" onclick="openAddEditModal('Edit Car JYA 7583')" title="Edit"><span class="material-icons text-xl">edit</span></button>
+<button class="text-[var(--primary-color)] hover:text-[var(--primary-color-hover)] p-1 ml-2" onclick="openCalendarModal('JYA 7583')" title="View Availability"><span class="material-icons text-xl">calendar_today</span></button>
+<button class="text-red-600 hover:text-red-800 p-1 ml-2" title="Delete"><span class="material-icons text-xl">delete</span></button>
+</td>
+</tr>
+<tr>
+<td class="table-column-plate font-medium">JYA 7583</td>
+<td class="table-column-image"><img alt="Car Image" class="h-10 w-16 object-cover rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs9SHhXIT0yy5kpi9vtZxinvHf2vZIOotFb7q5HJB2l9iRGjsM0mjbmZaJSCWkpLKwwidgRzCk_rTFDFZgaK1C3a-T6OzLKFPJSjJL5B5I4qxfqqtHcDyoAL8oP0xHFZIpvQNy4GvBDGYJ_x9I_lzBM7lkKX1naTG7yE54jwAMOdWLAHWUlPt1_Ta84441VCLGUXiN2acJQRSw-ttgsB7JAn1VJO3wwf2hfOSHz-tW_IHz1toZL80gdc-XYnvTv8JnyDnv8nxArA"/></td>
+<td class="table-column-brand">Ford</td>
+<td class="table-column-type">Truck</td>
+<td class="table-column-color">Black</td>
+<td class="table-column-seats">2</td>
+<td class="table-column-ownership">Leased</td>
+<td class="table-column-status">
+<span class="px-3 py-1 inline-flex items-center text-xs leading-5 font-semibold rounded-full status-booked"> {}
+<span class="material-icons text-base mr-1.5 status-booked-icon">fiber_manual_record</span>Booked
+</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+<button class="text-[var(--primary-color)] hover:text-[var(--primary-color-hover)] p-1" onclick="openAddEditModal('Edit Car JYA 7583')" title="Edit"><span class="material-icons text-xl">edit</span></button>
+<button class="text-[var(--primary-color)] hover:text-[var(--primary-color-hover)] p-1 ml-2" onclick="openCalendarModal('JYA 7583')" title="View Availability"><span class="material-icons text-xl">calendar_today</span></button>
+<button class="text-red-600 hover:text-red-800 p-1 ml-2" title="Delete"><span class="material-icons text-xl">delete</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<style>
+                  @media (max-width: 1024px) {.table thead { display: none; }
+                    .table tbody, .table tr, .table td { display: block; width: 100%; }
+                    .table tr {
+                      margin-bottom: 1rem;
+                      border: 1px solid var(--border-color);
+                      border-radius: 0.5rem;
+                      overflow: hidden;
+                      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+                    }
+                    .table td {
+                      text-align: right;
+                      padding-left: 50%;
+                      position: relative;
+                      border-bottom: 1px solid var(--border-color);
+                    }
+                    .table td:last-child { border-bottom: none; }
+                    .table td::before {
+                      content: attr(data-label);
+                      position: absolute;
+                      left: 0;
+                      width: 45%;padding-left: 1rem;font-weight: 500;
+                      text-align: left;
+                      white-space: nowrap;
+                      color: var(--text-secondary);
+                      font-size: 0.875rem;}
+                    .table-column-plate::before { content: "Plate"; }
+                    .table-column-image::before { content: "Image"; }
+                    .table-column-brand::before { content: "Brand"; }
+                    .table-column-type::before { content: "Type"; }
+                    .table-column-color::before { content: "Color"; }
+                    .table-column-seats::before { content: "Seats"; }
+                    .table-column-ownership::before { content: "Ownership"; }
+                    .table-column-status::before { content: "Status"; }
+                    .table td:last-child::before { content: "Actions"; }
+                    .table td:last-child {display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        padding-top: 0.75rem;
+                        padding-bottom: 0.75rem;
+                    }
+                  }@media (max-width: 767px) {
+                    .md\:grid-cols-3 > div:not(:first-child), .lg\:grid-cols-4 > div:not(:first-child) {
+                        display: none;}
+                    .md\:grid-cols-3.filters-expanded > div, .lg\:grid-cols-4.filters-expanded > div {
+                        display: block;}
+                   }
+              </style>
+</div>
+</div>
+</main>
+</div>
+<div aria-labelledby="modal-title" aria-modal="true" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50" id="addEditCarModal" role="dialog">
+<div class="relative top-1/4 md:top-10 mx-auto p-5 border w-full max-w-lg md:max-w-2xl shadow-lg rounded-md bg-white @container">
+<div class="flex justify-between items-center pb-3 border-b mb-5">
+<h3 class="text-xl leading-6 font-medium text-[var(--text-primary)]" id="addEditModalTitle">Add New Car</h3>
+<button class="text-[var(--text-secondary)] hover:text-[var(--text-primary)]" onclick="closeModal('addEditCarModal')" type="button">
+<span class="material-icons">close</span>
+</button>
+</div>
+<form class="space-y-4 px-1 @[lg]:px-0">
+<div class="grid grid-cols-1 @[sm]:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-left text-[var(--text-secondary)]" for="car-plate">Plate Number</label>
+<input class="mt-1 block w-full border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] sm:text-sm h-10 px-3" id="car-plate" name="car-plate" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-left text-[var(--text-secondary)]" for="car-brand">Brand</label>
+<input class="mt-1 block w-full border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] sm:text-sm h-10 px-3" id="car-brand" name="car-brand" required="" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 @[sm]:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-left text-[var(--text-secondary)]" for="car-type">Type</label>
+<input class="mt-1 block w-full border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] sm:text-sm h-10 px-3" id="car-type" name="car-type" required="" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-left text-[var(--text-secondary)]" for="car-color">Color</label>
+<input class="mt-1 block w-full border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] sm:text-sm h-10 px-3" id="car-color" name="car-color" required="" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 @[sm]:grid-cols-2 gap-4">
+<div>
+<label class="block text-sm font-medium text-left text-[var(--text-secondary)]" for="car-seats">Seat Count</label>
+<input class="mt-1 block w-full border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] sm:text-sm h-10 px-3" id="car-seats" min="1" name="car-seats" required="" type="number"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-left text-[var(--text-secondary)]" for="car-ownership">Ownership</label>
+<select class="mt-1 block w-full border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] sm:text-sm h-10 px-3" id="car-ownership" name="car-ownership" required="">
+<option>Owned</option>
+<option>Investor</option>
+<option>Leased</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-sm font-medium text-left text-[var(--text-secondary)]" for="car-image">Car Image</label>
+<input class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[var(--primary-color)] file:text-white hover:file:bg-[var(--primary-color-hover)]" id="car-image" name="car-image" type="file"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-left text-[var(--text-secondary)]" for="car-initial-status">Initial Status</label>
+<select class="mt-1 block w-full border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] sm:text-sm h-10 px-3" id="car-initial-status" name="car-initial-status" required="">
+<option>Available</option>
+<option>Manually Blocked</option>
+<option>Maintenance</option>
+</select>
+</div>
+<div class="items-center gap-4 pt-4 border-t flex justify-end mt-6">
+<button class="h-10 px-5 text-[var(--text-secondary)] bg-white hover:bg-gray-100 border border-[var(--border-color)] rounded-md text-sm font-medium transition-colors" onclick="closeModal('addEditCarModal')" type="button">
+                  Cancel
+                </button>
+<button class="h-10 px-5 text-white bg-[var(--primary-color)] hover:bg-[var(--primary-color-hover)] rounded-md text-sm font-medium transition-colors" type="submit">
+                  Save Car
+                </button>
+</div>
+</form>
+</div>
+</div>
+<div aria-labelledby="calendar-modal-title" aria-modal="true" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50" id="calendarModal" role="dialog">
+<div class="relative top-10 mx-auto p-5 border w-full max-w-3xl shadow-lg rounded-md bg-white @container">
+<div class="flex justify-between items-center pb-3 border-b mb-4">
+<h3 class="text-xl leading-6 font-medium text-[var(--text-primary)]" id="calendarModalTitle">Availability for JYA 7583</h3>
+<button class="text-[var(--text-secondary)] hover:text-[var(--text-primary)]" onclick="closeModal('calendarModal')" type="button">
+<span class="material-icons">close</span>
+</button>
+</div>
+<div class="flex flex-col @[lg]:flex-row gap-4">
+<div class="@[lg]:w-1/3">
+<div class="flex items-center justify-between mb-2">
+<button class="p-2 rounded-full hover:bg-gray-100 text-[var(--text-secondary)]" id="prevMonthBtn"><span class="material-icons">chevron_left</span></button>
+<h4 class="text-lg font-medium text-[var(--text-primary)]" id="currentMonthYear">June 2025</h4>
+<button class="p-2 rounded-full hover:bg-gray-100 text-[var(--text-secondary)]" id="nextMonthBtn"><span class="material-icons">chevron_right</span></button>
+</div>
+<div class="grid grid-cols-7 text-center text-xs text-[var(--text-secondary)] mb-1">
+<div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+</div>
+<div class="calendar-grid" id="calendarDaysGrid">
+<div class="calendar-day">1</div>
+<div class="calendar-day">2</div>
+<div class="calendar-day">3</div>
+<div class="calendar-day">4</div>
+<div class="calendar-day">5</div>
+<div class="calendar-day">6</div>
+<div class="calendar-day">7</div>
+<div class="calendar-day">8</div>
+<div class="calendar-day">9</div>
+<div class="calendar-day">10</div>
+<div class="calendar-day">11</div>
+<div class="calendar-day">12</div>
+<div class="calendar-day">13</div>
+<div class="calendar-day">14</div>
+<div class="calendar-day">15</div>
+<div class="calendar-day">16</div>
+<div class="calendar-day">17</div>
+<div class="calendar-day">18</div>
+<div class="calendar-day">19</div>
+<div class="calendar-day">20</div>
+<div class="calendar-day">21</div>
+<div class="calendar-day">22</div>
+<div class="calendar-day selected">23</div>
+<div class="calendar-day has-events">24</div>
+<div class="calendar-day">25</div>
+<div class="calendar-day">26</div>
+<div class="calendar-day">27</div>
+<div class="calendar-day">28</div>
+<div class="calendar-day">29</div>
+<div class="calendar-day">30</div>
+<div class="calendar-day disabled">1</div>
+</div>
+</div>
+<div class="@[lg]:w-2/3 @[lg]:pl-4 @[lg]:border-l border-[var(--border-color)]">
+<div class="flex items-center justify-between mb-2">
+<h4 class="text-lg font-medium text-[var(--text-primary)]" id="selectedDateTitle">June 23, 2025</h4>
+<input class="border-[var(--border-color)] rounded-md shadow-sm focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] text-sm h-9 px-2 py-1 w-auto text-xs" id="hourlyDatePicker" type="date" value="2025-06-23"/>
+</div>
+<div class="max-h-[40vh] @[md]:max-h-[calc(60vh-120px)] overflow-y-auto select-none pr-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 touch-pan-y" id="hourlyGridContainer">
+<div class="grid grid-cols-[auto_1fr] gap-x-2">
+<div class="text-xs text-right text-[var(--text-secondary)] pt-[calc(0.75rem_-_1px)]">
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">00:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">01:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">02:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">03:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">04:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">05:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">06:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">07:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent opacity-50">08:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">09:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">10:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">11:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">12:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">13:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">14:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">15:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">16:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">17:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">18:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">19:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">20:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">21:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">22:00</div>
+<div class="h-8 flex items-center justify-end pr-2 border-r border-transparent">23:00</div>
+</div>
+<div class="relative" id="timeSlotsContainer">
+<div class="absolute inset-0 grid grid-rows-24">
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8 border-b border-dashed border-gray-200"></div>
+<div class="h-8"></div>
+</div>
+<div class="relative z-10">
+<div class="h-8 flex items-center justify-center text-xs font-medium text-red-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-booked);" title="Booked by Customer X (00:00 - 02:00)">Booked</div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-red-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-booked);"></div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-green-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-available);">Available</div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-yellow-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-manually-blocked);" title="Blocked by Staff (03:00 - 04:00)">Blocked</div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-green-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-available);">Available</div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-green-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-available);">Available</div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-green-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-available);">Available</div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-green-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-available);">Available</div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-gray-700 rounded my-px mx-1 cursor-not-allowed" style="background-color: var(--calendar-past);">Past</div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-blue-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-selected);">Selected</div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-blue-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-selected);"></div>
+<div class="h-8 flex items-center justify-center text-xs font-medium text-blue-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity" style="background-color: var(--calendar-selected);"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t px-1 @[md]:sticky @[md]:bottom-0 @[md]:bg-white @[md]:py-4 @[max-md]:fixed @[max-md]:bottom-0 @[max-md]:left-0 @[max-md]:right-0 @[max-md]:bg-white @[max-md]:p-4 @[max-md]:shadow-[-2px_0px_10px_rgba(0,0,0,0.1)]">
+<div class="flex flex-col @[sm]:flex-row items-center justify-between gap-3">
+<div class="@[sm]:flex-grow @[max-sm]:w-full">
+<p class="text-sm font-medium text-[var(--text-primary)]" id="bookingPriceInfo">Selected: 09:00 - 12:00 (3 hours)</p>
+<p class="text-xs text-[var(--text-secondary)]">Estimated Price: $XX.XX (Role: Customer)</p>
+</div>
+<div class="flex gap-2 @[max-sm]:w-full @[max-sm]:flex-col">
+<button class="h-10 px-4 text-white bg-[var(--primary-color)] hover:bg-[var(--primary-color-hover)] rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-1.5 @[max-sm]:w-full">
+<span class="material-icons text-lg">event_available</span> Submit Booking
+          </button>
+<button class="h-10 px-4 text-white bg-yellow-500 hover:bg-yellow-600 rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-1.5 @[max-sm]:w-full">
+<span class="material-icons text-lg">block</span> Block Time
+          </button>
+<button class="h-10 px-4 text-[var(--text-secondary)] bg-gray-200 hover:bg-gray-300 rounded-md text-sm font-medium transition-colors flex items-center justify-center gap-1.5 @[max-sm]:w-full">
+<span class="material-icons text-lg">event_busy</span> Unblock Time
+          </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            const modalElement = document.getElementById(modalId);
+            const modalContent = modalElement.querySelector('.relative');
+             if (window.innerWidth < 768) {
+                modalContent.classList.add('w-full', 'h-full', 'top-0', 'rounded-none', 'max-h-screen', 'overflow-y-auto');
+                modalContent.classList.remove('max-w-lg', 'md:max-w-2xl', 'max-w-3xl', 'top-1/4', 'md:top-10', 'rounded-md');
+            } else {
+                modalContent.classList.remove('w-full', 'h-full', 'top-0', 'rounded-none', 'max-h-screen', 'overflow-y-auto');
+                modalContent.classList.add('top-1/4', 'md:top-10', 'rounded-md');
+                if (modalId === 'addEditCarModal') modalContent.classList.add('max-w-lg', 'md:max-w-2xl');
+                if (modalId === 'calendarModal') modalContent.classList.add('max-w-3xl');
+            }
+             if (modalId === 'calendarModal') {
+                initializeCalendar(); // Call to setup the new calendar
+            }
+        }
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+        function openAddEditModal(title) {
+            document.getElementById('addEditModalTitle').textContent = title;
+            openModal('addEditCarModal');
+        }
+        function openCalendarModal(plateNumber) {
+            document.getElementById('calendarModalTitle').textContent = `Availability for ${plateNumber}`;
+            openModal('calendarModal');
+        }
+        function setupTableCardView() {
+            document.querySelectorAll('.table td').forEach(td => {
+                const thClass = Array.from(td.classList).find(cls => cls.startsWith('table-column-'));
+                if (thClass) {
+                    const headerText = document.querySelector(`.table th.${thClass}`)?.textContent;
+                    if (headerText) {
+                        td.setAttribute('data-label', headerText);
+                    }
+                }
+            });
+        }
+        setupTableCardView();
+        const filterToggleButton = document.querySelector('.filter-button.md\\:hidden');
+        const filterContainer = document.querySelector('.mb-6.p-4.bg-white .grid');
+        if (filterToggleButton && filterContainer) {
+            filterToggleButton.addEventListener('click', () => {
+                filterContainer.classList.toggle('filters-expanded');
+                const filterItems = filterContainer.querySelectorAll('div');
+                filterItems.forEach((item, index) => {
+                    if (index > 0) { // Keep first filter always visible
+                        item.style.display = filterContainer.classList.contains('filters-expanded') ? 'block' : 'none';
+                    }
+                });
+                filterToggleButton.classList.toggle('active');
+            });
+            // Initial state for mobile
+            if (window.innerWidth < 768) {
+                 const filterItems = filterContainer.querySelectorAll('div');
+                 filterItems.forEach((item, index) => {
+                    if (index > 0) item.style.display = 'none';
+                 });
+            }
+        }
+        window.addEventListener('resize', () => {
+             if (filterContainer && window.innerWidth >= 768) { // Desktop
+                const filterItems = filterContainer.querySelectorAll('div');
+                filterItems.forEach(item => item.style.display = 'block');
+                if(filterToggleButton) filterToggleButton.classList.remove('active');
+                filterContainer.classList.remove('filters-expanded');
+             } else if (filterContainer && window.innerWidth < 768 && !filterContainer.classList.contains('filters-expanded')) { // Mobile, filters collapsed
+                const filterItems = filterContainer.querySelectorAll('div');
+                 filterItems.forEach((item, index) => {
+                    if (index > 0) item.style.display = 'none';
+                 });
+             }
+        });
+        // New Calendar Functionality
+        let currentDate = new Date(2025, 5, 23); // June 23, 2025
+        let selectedDate = new Date(2025, 5, 23);
+        let isDragging = false;
+        let dragStartHour = -1;
+        let dragEndHour = -1;
+        function initializeCalendar() {
+            renderCalendarDays();
+            renderHourlyGrid();
+            updateSelectedDateTitle();
+            document.getElementById('prevMonthBtn').addEventListener('click', () => changeMonth(-1));
+            document.getElementById('nextMonthBtn').addEventListener('click', () => changeMonth(1));
+            document.getElementById('hourlyDatePicker').addEventListener('change', handleDateInputChange);
+            const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+            timeSlotsContainer.addEventListener('mousedown', handleMouseDown);
+            timeSlotsContainer.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp); // Listen on document for mouseup outside container
+            timeSlotsContainer.addEventListener('touchstart', handleTouchStart, {passive: false});
+            timeSlotsContainer.addEventListener('touchmove', handleTouchMove, {passive: false});
+            timeSlotsContainer.addEventListener('touchend', handleTouchEnd);
+        }
+        function renderCalendarDays() {
+            const calendarDaysGrid = document.getElementById('calendarDaysGrid');
+            const currentMonthYearEl = document.getElementById('currentMonthYear');
+            calendarDaysGrid.innerHTML = '';
+            currentMonthYearEl.textContent = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day disabled';
+                calendarDaysGrid.appendChild(emptyCell);
+            }
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = 'calendar-day';
+                dayCell.textContent = day;
+                if (day === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) {
+                    dayCell.classList.add('selected');
+                }
+                // Example: mark day 24 as having events
+                if (day === 24 && month === 5 && year === 2025) { // June is month 5
+                   dayCell.classList.add('has-events');
+                }
+                dayCell.addEventListener('click', () => {
+                    selectedDate = new Date(year, month, day);
+                    renderCalendarDays(); // Re-render to update selection
+                    updateSelectedDateTitle();
+                    renderHourlyGrid();
+                });
+                calendarDaysGrid.appendChild(dayCell);
+            }
+        }
+        function updateSelectedDateTitle() {
+            document.getElementById('selectedDateTitle').textContent = selectedDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            document.getElementById('hourlyDatePicker').valueAsDate = selectedDate;
+        }
+        function changeMonth(offset) {
+            currentDate.setMonth(currentDate.getMonth() + offset);
+            renderCalendarDays();
+        }
+        function handleDateInputChange(event) {
+            selectedDate = new Date(event.target.value + 'T00:00:00'); // Ensure it's local time
+            currentDate = new Date(selectedDate); // Sync calendar view month
+            renderCalendarDays();
+            updateSelectedDateTitle();
+            renderHourlyGrid();
+        }
+        function renderHourlyGrid() {
+            const timeSlotsContainerInner = document.getElementById('timeSlotsContainer').querySelector('.relative.z-10');
+            timeSlotsContainerInner.innerHTML = ''; // Clear previous slots
+            // Mock data for demonstration
+            const events = {
+                '00:00': { type: 'booked', duration: 2, title: 'Booked by Customer X (00:00 - 02:00)' },
+                '03:00': { type: 'manually-blocked', duration: 1, title: 'Blocked by Staff (03:00 - 04:00)' },
+                '08:00': { type: 'past', duration: 1, title: 'Past'},
+                '09:00': { type: 'selected', duration: 3, title: 'Selected 09:00-12:00' }
+            };
+            for (let hour = 0; hour < 24; hour++) {
+                const timeStr = `${String(hour).padStart(2, '0')}:00`;
+                let slotDiv;
+                if (events[timeStr]) {
+                    const event = events[timeStr];
+                    slotDiv = document.createElement('div');
+                    slotDiv.className = `h-8 flex items-center justify-center text-xs font-medium rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity`;
+                    slotDiv.style.backgroundColor = `var(--calendar-${event.type})`;
+                    slotDiv.style.height = `${event.duration * 2}rem`; // 2rem per hour (h-8)
+                    slotDiv.textContent = event.type.charAt(0).toUpperCase() + event.type.slice(1).replace('-',' ');
+                    if (event.title) slotDiv.title = event.title;
+                    if(event.type === 'booked') slotDiv.classList.add('text-red-700');
+                    else if(event.type === 'manually-blocked') slotDiv.classList.add('text-yellow-700');
+                    else if(event.type === 'selected') slotDiv.classList.add('text-blue-700');
+                    else if(event.type === 'past') {
+                        slotDiv.classList.add('text-gray-700', 'cursor-not-allowed');
+                    } else { // available
+                         slotDiv.classList.add('text-green-700');
+                    }
+                    timeSlotsContainerInner.appendChild(slotDiv);
+                    hour += event.duration - 1; // Skip hours covered by this event block
+                } else {
+                    slotDiv = document.createElement('div');
+                    slotDiv.className = 'h-8 flex items-center justify-center text-xs font-medium text-green-700 rounded my-px mx-1 cursor-pointer hover:opacity-80 transition-opacity';
+                    slotDiv.style.backgroundColor = 'var(--calendar-available)';
+                    slotDiv.textContent = 'Available';
+                    timeSlotsContainerInner.appendChild(slotDiv);
+                }
+                slotDiv.dataset.hour = hour;
+            }
+             // Re-apply selection highlighting if needed based on dragStartHour/dragEndHour
+             highlightSelection();
+        }
+        function getHourFromY(y) {
+            const containerRect = document.getElementById('timeSlotsContainer').getBoundingClientRect();
+            const relativeY = y - containerRect.top;
+            const hourHeight = containerRect.height / 24;
+            return Math.min(23, Math.max(0, Math.floor(relativeY / hourHeight)));
+        }
+        function handleMouseDown(event) {
+            if (event.button !== 0) return; // Only left click
+            isDragging = true;
+            dragStartHour = getHourFromY(event.clientY);
+            dragEndHour = dragStartHour;
+            highlightSelection();
+            event.preventDefault(); // Prevent text selection
+        }
+        function handleMouseMove(event) {
+            if (!isDragging) return;
+            dragEndHour = getHourFromY(event.clientY);
+            highlightSelection();
+        }
+        function handleMouseUp() {
+            if (!isDragging) return;
+            isDragging = false;
+            // Finalize selection, e.g., update booking info
+            updateBookingInfo();
+        }
+        function handleTouchStart(event) {
+            isDragging = true;
+            const touch = event.touches[0];
+            dragStartHour = getHourFromY(touch.clientY);
+            dragEndHour = dragStartHour;
+            highlightSelection();
+            event.preventDefault();
+        }
+        function handleTouchMove(event) {
+            if (!isDragging) return;
+            const touch = event.touches[0];
+            dragEndHour = getHourFromY(touch.clientY);
+            highlightSelection();
+            event.preventDefault();
+        }
+        function handleTouchEnd() {
+            if (!isDragging) return;
+            isDragging = false;
+            updateBookingInfo();
+        }
+        function highlightSelection() {
+            const slots = document.getElementById('timeSlotsContainer').querySelectorAll('.relative.z-10 > div');
+            const start = Math.min(dragStartHour, dragEndHour);
+            const end = Math.max(dragStartHour, dragEndHour);
+            slots.forEach((slot, index) => {
+                const hour = parseInt(slot.dataset.hour || index); // Fallback to index if dataset.hour not set on all
+                // Check if slot is part of an existing multi-hour block
+                let isPartOfBlock = false;
+                if (slot.style.height && parseFloat(slot.style.height) > 2) { // 2rem is single hour
+                   const blockDuration = parseFloat(slot.style.height) / 2;
+                   const blockStartHour = parseInt(slot.dataset.hour);
+                   if (hour >= blockStartHour && hour < blockStartHour + blockDuration) {
+                       isPartOfBlock = true;
+                   }
+                }
+                if (hour >= start && hour <= end && !isPartOfBlock && slot.style.backgroundColor !== 'var(--calendar-past)' && slot.style.backgroundColor !== 'var(--calendar-booked)' && slot.style.backgroundColor !== 'var(--calendar-manually-blocked)') {
+                     slot.style.backgroundColor = 'var(--calendar-selected)';
+                     slot.classList.remove('text-green-700');
+                     slot.classList.add('text-blue-700');
+                     slot.textContent = 'Selected';
+                } else if (!isPartOfBlock && slot.style.backgroundColor !== 'var(--calendar-past)' && slot.style.backgroundColor !== 'var(--calendar-booked)' && slot.style.backgroundColor !== 'var(--calendar-manually-blocked)') { // Only reset available slots
+                    slot.style.backgroundColor = 'var(--calendar-available)';
+                    slot.classList.remove('text-blue-700');
+                    slot.classList.add('text-green-700');
+                    slot.textContent = 'Available';
+                }
+            });
+        }
+        function updateBookingInfo() {
+            if (dragStartHour === -1 || dragEndHour === -1) return;
+            const startHour = Math.min(dragStartHour, dragEndHour);
+            const endHour = Math.max(dragStartHour, dragEndHour);
+            const duration = endHour - startHour + 1;
+            const startTimeStr = `${String(startHour).padStart(2, '0')}:00`;
+            const endTimeStr = `${String(endHour + 1).padStart(2, '0')}:00`;
+            document.getElementById('bookingPriceInfo').textContent = `Selected: ${startTimeStr} - ${endTimeStr} (${duration} hour${duration > 1 ? 's' : ''})`;
+            // Reset drag hours for next selection
+            // dragStartHour = -1; dragEndHour = -1; // Keep them if you want to show current selection
+        }
+      </script>
+</div>
+</div></body></html>

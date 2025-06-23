@@ -1,0 +1,128 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<title>HASTA TRAVEL - Feedback</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #ec5b2c;
+            --secondary-color: #1E293B;
+            --accent-color: #ec5b2c;--neutral-color: #F1F2F4;
+            --text-primary: #121516;
+            --text-secondary: #6A7681;
+            --border-color: #DDE1E3;
+        }
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+        .star-rating label {
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+            color: #D1D5DB;}
+        .star-rating input[type="radio"]:checked~label,
+        .star-rating input[type="radio"]:checked+label {
+            color: var(--accent-color);
+        }
+        .star-rating:hover label {
+             color: #D1D5DB;}
+        .star-rating label:hover,
+        .star-rating label:hover~label {
+            color: var(--accent-color);
+        }
+        .star-rating input[type="radio"]:checked ~ label:hover,
+        .star-rating input[type="radio"]:checked ~ label:hover ~ label {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-[var(--text-primary)]" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] bg-white px-6 md:px-10 py-4 shadow-sm">
+<div class="flex items-center gap-3 text-[var(--primary-color)]">
+<div class="size-8">
+<svg class="w-full h-full" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 6.75V15m6-6v8.25m.503-6.498 4.498-4.498A4.5 4.5 0 0 0 13.502 3.002Z" stroke-linecap="round" stroke-linejoin="round"></path>
+<path d="M4.5 7.5A4.5 4.5 0 0 1 9 3h9.252M4.5 7.5v11.25A2.25 2.25 0 0 0 6.75 21h10.5M4.5 7.5H2.25m0 0A2.25 2.25 0 0 1 4.5 5.25v0A2.25 2.25 0 0 1 6.75 7.5v0m0 0H9m12.75-1.5V21m-13.5-8.25h1.5m10.5-1.5H15M13.5 15H9" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h1 class="text-2xl font-bold leading-tight tracking-[-0.015em]">HASTA TRAVEL</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-sm font-medium leading-normal text-[var(--text-primary)] hover:text-[var(--primary-color)] transition-colors" href="#">Home</a>
+<a class="text-sm font-medium leading-normal text-[var(--text-primary)] hover:text-[var(--primary-color)] transition-colors" href="#">My Bookings</a>
+<a class="text-sm font-medium leading-normal text-[var(--primary-color)] font-semibold" href="#">Feedback</a>
+<a class="text-sm font-medium leading-normal text-[var(--text-primary)] hover:text-[var(--primary-color)] transition-colors" href="#">Support</a>
+</nav>
+<div class="flex items-center gap-4">
+<button aria-label="Notifications" class="flex items-center justify-center rounded-full h-10 w-10 hover:bg-slate-100 text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors">
+<span class="material-icons text-2xl">notifications_none</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-gray-200" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCRa_W47G_JssjtJoXNm7n9MiWIwVFz_bFr5Us3UFQQZ49W45cAkQSydIJbrRTalNdvPirM6jUdL1DW8J6S94t-4TwycSlNWvlEMjkwuQE1Vbejoa_WWIFsnuaJFfexR3PKI6tgfpIS_3uCeRNfaun69GK8FGyVp81x4T4_qpnbWd62pCJxgb0oaczkHalDaR8NZQSbTXADGGi39XRy8qhACzUR_Idtm_TiR0PqBc0Avd4KlwGYSOsyIJu7rhBnTnMbh9_9f_iQOw");'></div>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-10 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-xl space-y-8">
+<div class="bg-white shadow-lg rounded-lg p-6 sm:p-10">
+<section class="mb-8">
+<h2 class="text-2xl font-semibold leading-tight tracking-tight text-[var(--secondary-color)] mb-6">Booking Summary</h2>
+<div class="space-y-4">
+<div class="flex justify-between items-center border-b border-[var(--border-color)] pb-3">
+<p class="text-sm font-medium text-[var(--text-secondary)]">Car</p>
+<p class="text-sm text-[var(--text-primary)] font-medium">Toyota Vios (WXP1234)</p>
+</div>
+<div class="flex justify-between items-center border-b border-[var(--border-color)] pb-3">
+<p class="text-sm font-medium text-[var(--text-secondary)]">Booking ID</p>
+<p class="text-sm text-[var(--text-primary)] font-medium">BKG103</p>
+</div>
+<div class="flex justify-between items-center border-b border-[var(--border-color)] pb-3">
+<p class="text-sm font-medium text-[var(--text-secondary)]">Rental Dates</p>
+<p class="text-sm text-[var(--text-primary)] font-medium">10 – 12 June 2025</p>
+</div>
+<div class="flex justify-between items-center">
+<p class="text-sm font-medium text-[var(--text-secondary)]">Status</p>
+<p class="text-sm text-green-600 font-semibold flex items-center">
+<span class="material-icons text-lg mr-1">check_circle</span> Returned
+                                    </p>
+</div>
+</div>
+</section>
+<form class="space-y-8">
+<section>
+<h3 class="text-xl font-semibold leading-tight tracking-tight text-[var(--secondary-color)] mb-3">Rate Your Experience</h3>
+<div class="star-rating flex items-center space-x-1 text-4xl">
+<input id="star5" name="rating" type="radio" value="5"/><label for="star5" title="5 stars">★</label>
+<input id="star4" name="rating" type="radio" value="4"/><label for="star4" title="4 stars">★</label>
+<input checked="" id="star3" name="rating" type="radio" value="3"/><label for="star3" title="3 stars">★</label>
+<input id="star2" name="rating" type="radio" value="2"/><label for="star2" title="2 stars">★</label>
+<input id="star1" name="rating" type="radio" value="1"/><label for="star1" title="1 star">★</label>
+</div>
+</section>
+<section>
+<h3 class="text-xl font-semibold leading-tight tracking-tight text-[var(--secondary-color)] mb-3">Tell Us More</h3>
+<div>
+<label class="sr-only" for="comment">Your comment</label>
+<textarea class="form-textarea block w-full rounded-md border-[var(--border-color)] shadow-sm focus:border-[var(--primary-color)] focus:ring-1 focus:ring-[var(--primary-color)] sm:text-sm placeholder:text-gray-400 p-3 min-h-[120px] resize-y" id="comment" name="comment" placeholder="The car was clean and pickup was smooth..." rows="4"></textarea>
+</div>
+</section>
+<div class="pt-2">
+<button class="flex w-full items-center justify-center rounded-md bg-[var(--primary-color)] px-5 py-3 text-base font-semibold text-white shadow-sm hover:bg-opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-color)] transition-colors gap-2" type="submit">
+<span class="material-icons text-xl">check_circle_outline</span>
+                                    Submit Feedback
+                                </button>
+<p class="mt-4 text-xs text-center text-[var(--text-secondary)]">Feedback is final and cannot be edited after submission.</p>
+</div>
+</form>
+</div>
+</div>
+</main>
+<footer class="bg-white border-t border-[var(--border-color)] py-8 text-center">
+<p class="text-sm text-[var(--text-secondary)]">© 2024 HASTA TRAVEL. All rights reserved.</p>
+</footer>
+</div>
+</div>
+
+</body></html>

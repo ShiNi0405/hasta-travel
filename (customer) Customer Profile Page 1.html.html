@@ -1,0 +1,195 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<title>Customer Profile - DriveOn</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #3b82f6;--secondary-color: #1f2937;--accent-color: #6b7280;--background-color: #f9fafb;--border-color: #e5e7eb;--card-background: #ffffff;
+      --pending-badge-bg: #fef3c7;
+      --pending-badge-text: #d97706;
+      --verified-badge-bg: #d1fae5;
+      --verified-badge-text: #059669;
+      --rejected-badge-bg: #fee2e2;
+      --rejected-badge-text: #dc2626;
+    }
+    body {
+      font-family: Inter, "Noto Sans", sans-serif;
+    }
+    .status-badge {
+      @apply px-2.5 py-0.5 text-xs font-medium rounded-full inline-flex items-center;
+    }
+    .status-badge.pending {
+      @apply bg-[var(--pending-badge-bg)] text-[var(--pending-badge-text)];
+    }
+    .status-badge.verified {
+      @apply bg-[var(--verified-badge-bg)] text-[var(--verified-badge-text)];
+    }
+    .status-badge.rejected {
+      @apply bg-[var(--rejected-badge-bg)] text-[var(--rejected-badge-text)];
+    }
+    .form-input {
+      @apply block w-full rounded-md border-0 py-2.5 px-3 text-[var(--secondary-color)] shadow-sm ring-1 ring-inset ring-[var(--border-color)] placeholder:text-[var(--accent-color)] focus:ring-2 focus:ring-inset focus:ring-[var(--primary-color)] sm:text-sm sm:leading-6 transition-all duration-150 ease-in-out;
+    }
+    .btn-primary {
+      @apply bg-[var(--primary-color)] text-white hover:bg-opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-color)];
+    }
+    .btn-secondary {
+      @apply bg-[var(--card-background)] text-[var(--secondary-color)] hover:bg-gray-50 ring-1 ring-inset ring-[var(--border-color)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-300;
+    }
+    .file-input-wrapper {
+      @apply relative w-full h-40 bg-gray-50 rounded-lg border-2 border-dashed border-[var(--border-color)] flex flex-col items-center justify-center text-center cursor-pointer hover:border-[var(--primary-color)] transition-colors duration-200;
+    }
+    .file-input-preview {
+       @apply absolute inset-0 w-full h-full object-contain rounded-lg p-1 opacity-70 group-hover:opacity-100 transition-opacity;
+    }
+  </style>
+</head>
+<body class="bg-[var(--background-color)] text-[var(--secondary-color)]">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[var(--border-color)] px-4 sm:px-6 lg:px-10 py-3">
+<div class="flex items-center gap-2 sm:gap-3 text-[var(--secondary-color)]">
+<div class="size-7 sm:size-8 text-[var(--primary-color)]">
+<svg class="size-full" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M18.922 2.078a2.25 2.25 0 0 0-2.205 0l-9.375 5.25a2.25 2.25 0 0 0-1.155 1.965v6.167a2.25 2.25 0 0 0 1.155 1.965l9.375 5.25a2.25 2.25 0 0 0 2.205 0l9.375-5.25a2.25 2.25 0 0 0 1.155-1.965V9.293a2.25 2.25 0 0 0-1.155-1.965l-9.375-5.25ZM8.25 10.06V15.5l5.25 2.932v-5.442L8.25 10.06Zm6.75 8.372-5.25-2.932V9.568l5.25 2.932v5.94Zm0-7.125L9.75 8.373l5.25-2.933 5.25 2.933-5.25 2.933Z"></path>
+</svg>
+</div>
+<h2 class="text-[var(--secondary-color)] text-lg sm:text-xl font-bold leading-tight tracking-tight">DriveOn</h2>
+</div>
+<nav class="hidden lg:flex items-center gap-5">
+<a class="text-[var(--secondary-color)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors" href="#">Bookings</a>
+<a class="text-[var(--secondary-color)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors" href="#">Rentals</a>
+<a class="text-[var(--secondary-color)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors" href="#">Vehicles</a>
+<a class="text-[var(--primary-color)] text-sm font-semibold leading-normal" href="#">Customers</a>
+<a class="text-[var(--secondary-color)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors" href="#">Reports</a>
+</nav>
+<div class="flex items-center gap-2 sm:gap-3">
+<button class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+<span class="material-icons text-[var(--accent-color)]">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 sm:size-9 border border-[var(--border-color)]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDDVYXMZ9vj-jT_r4x2r_6wLejP6KfRV262fVeDnX3JUwHAVbbP6hFKEGfqOwGnUscBm1b-7xnErnYDdYwwOl3aCdmr6gW7TRZBJ7AUHhp_lGdm-qK3QOlNDfTZJX2wPm3-52YxFfwaXfTrVUB24fTFAQL-a5NgLyV8FrxgTVDjD_412KEAfdlwR4WfYv7t25ReAVDK8yLq_KDJ4IRwl4904-1pHoUGYEvhjmOhfzMmLriDdTGGViQJbVOIoJufQKaHQdVfphrmew");'></div>
+<button class="lg:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
+<span class="material-icons text-[var(--accent-color)]">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-4 py-6 lg:px-8 lg:py-10">
+<div class="max-w-7xl mx-auto">
+<div class="mb-6 sm:mb-8">
+<h1 class="text-[var(--secondary-color)] text-2xl sm:text-3xl font-bold leading-tight">Customer Profile</h1>
+<p class="text-[var(--accent-color)] text-sm mt-1">View and manage your personal details and required documents.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+<div class="lg:col-span-2 bg-[var(--card-background)] p-6 sm:p-8 rounded-xl shadow-lg">
+<h2 class="text-xl font-semibold text-[var(--secondary-color)] mb-6">Personal Information</h2>
+<form class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
+<div>
+<label class="block text-sm font-medium text-[var(--secondary-color)] mb-1.5" for="fullName">Full Name</label>
+<input class="form-input" id="fullName" placeholder="e.g. John Doe" type="text" value="Ahmad Farhan"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--secondary-color)] mb-1.5" for="phoneNumber">Phone Number</label>
+<input class="form-input" id="phoneNumber" placeholder="e.g. +60 12-345 6789" type="tel" value="+60 12-345 6789"/>
+</div>
+<div class="sm:col-span-2">
+<label class="block text-sm font-medium text-[var(--secondary-color)] mb-1.5" for="address">Address</label>
+<input class="form-input" id="address" placeholder="Enter your full address" type="text" value="123, Jalan Universiti, 59200 Kuala Lumpur"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--secondary-color)] mb-1.5" for="faculty">Faculty / Department</label>
+<input class="form-input" id="faculty" placeholder="e.g. Faculty of Engineering" type="text" value="Faculty of Computer Science &amp; IT"/>
+</div>
+<div class="sm:col-span-2 flex justify-end mt-4">
+<button class="btn-primary flex items-center justify-center rounded-md h-10 px-5 text-sm font-semibold shadow-sm" type="submit">
+<span class="material-icons text-lg mr-1.5">save</span>
+                    Save Changes
+                  </button>
+</div>
+</form>
+</div>
+<div class="lg:col-span-1 space-y-6">
+<h2 class="text-xl font-semibold text-[var(--secondary-color)] px-1">Documents</h2>
+<div class="bg-[var(--card-background)] p-5 rounded-xl shadow-lg">
+<div class="flex items-center justify-between mb-3">
+<div>
+<h3 class="text-[var(--secondary-color)] text-base font-semibold">Identification Card (IC)</h3>
+<p class="text-[var(--accent-color)] text-xs mt-0.5">NRIC or Passport</p>
+</div>
+<span class="status-badge pending">Pending</span>
+</div>
+<div class="file-input-wrapper group mb-3">
+<img alt="IC Preview" class="file-input-preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ4ZEifNK0xKXRphV_gqkkC6s-wHImbsN8GAHu-vAx73H3PyjWj6Gb35oM3CUL4KH6PuQxBPP-AQmC-GmGKRYmYV2bpQsdb6FUHwa16qMyo18ayCqPuu7cfRLBiMJqcqvEn9N5AFp94zabPG3n073xd9uRAs2nHrSs6Nhk_FZIovcVa8uAS_-4_YUoW22alhCr37fiYOgLF5S-7XRbNCwsFPfHA-QY3sOMCJn6gCszJSKjoUmQAqgbR8JZsMfM6bQdb9HtNO3UnQ"/>
+<div class="flex flex-col items-center justify-center text-[var(--accent-color)]">
+<span class="material-icons text-3xl opacity-50 group-hover:opacity-100 group-hover:text-[var(--primary-color)] transition-all">cloud_upload</span>
+<p class="text-xs mt-1">Click to upload or drag &amp; drop</p>
+</div>
+<input accept="image/*,.pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" id="ic-upload" type="file"/>
+</div>
+<button class="btn-secondary w-full flex items-center justify-center rounded-md h-9 text-sm font-medium shadow-sm" onclick="document.getElementById('ic-upload').click()">
+<span class="material-icons text-base mr-1.5">file_upload</span>
+                  Re-upload IC
+                </button>
+</div>
+<div class="bg-[var(--card-background)] p-5 rounded-xl shadow-lg">
+<div class="flex items-center justify-between mb-3">
+<div>
+<h3 class="text-[var(--secondary-color)] text-base font-semibold">Matriculation Card</h3>
+<p class="text-[var(--accent-color)] text-xs mt-0.5">Student/Staff ID Card</p>
+</div>
+<span class="status-badge verified">Verified</span>
+</div>
+<div class="file-input-wrapper group mb-3">
+<img alt="Matric Card Preview" class="file-input-preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUI65RYV9R3w9gBLj1CjXLPFKaNj348lVhdMxlpvKyEpZrEcPt9MTegEKdAymoqfW_fdCv5WlKgqBV4vJUhG2Ik0RQbGVnagMl3AGEfQ7Ip2Rhy6yEHxXgH4_Ht9eak__Of54E66qXAz4hPVVI_TiqxznD02pH5RSvkTbtn2Efn8z5isah8Hemn_NRZs9Z-eVFYmG13Z1m-i_nhINKBNHtfujALj55f_4eCpIVx2Cl9zwyenLnSBg37PwkRJkNuCKpr29TLS7lpQ"/>
+<div class="flex flex-col items-center justify-center text-[var(--accent-color)]">
+<span class="material-icons text-3xl opacity-50 group-hover:opacity-100 group-hover:text-[var(--primary-color)] transition-all">cloud_upload</span>
+<p class="text-xs mt-1">Click to upload or drag &amp; drop</p>
+</div>
+<input accept="image/*,.pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" id="matric-upload" type="file"/>
+</div>
+<button class="btn-secondary w-full flex items-center justify-center rounded-md h-9 text-sm font-medium shadow-sm" onclick="document.getElementById('matric-upload').click()">
+<span class="material-icons text-base mr-1.5">file_upload</span>
+                  Upload New Matric Card
+                </button>
+</div>
+<div class="bg-[var(--card-background)] p-5 rounded-xl shadow-lg">
+<div class="flex items-center justify-between mb-3">
+<div>
+<h3 class="text-[var(--secondary-color)] text-base font-semibold">Driver's License</h3>
+<p class="text-[var(--accent-color)] text-xs mt-0.5">Valid driving license</p>
+</div>
+<span class="status-badge rejected">Rejected</span>
+</div>
+<div class="file-input-wrapper group !border-red-400 hover:!border-red-600 mb-3">
+<img alt="Driver's License Preview" class="file-input-preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUIPmy0XxeWY1hT2sZwneSM5vkb1iPNlrElMi72hYe3OQdCjZKadeJDDnr2iCoTJGnrvH9bb68dfDP4LfRSBA6WOhegISoVTQo8VkFDw_K4XQErhxe3QZ_jbWr7uBH40vcBIV4dX5om_4LwDs4QiOcmGEne8unf4XZt_VFtSdAg50uj-ufCakpP6SDq9h9KMoAroZxVUBrjz2dRYJo2hE0NRt8XSVO9vRP52VT8k0nPdUYvlI-2GGqPlWbegeIRHtNCgdDv93e9g"/>
+<div class="flex flex-col items-center justify-center text-red-500">
+<span class="material-icons text-3xl opacity-70 group-hover:opacity-100 group-hover:text-red-600 transition-all">cloud_upload</span>
+<p class="text-xs mt-1">Click to upload or drag &amp; drop</p>
+</div>
+<input accept="image/*,.pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" id="license-upload" type="file"/>
+</div>
+<button class="btn-secondary w-full flex items-center justify-center rounded-md h-9 text-sm font-medium shadow-sm !border-red-400 hover:!bg-red-50 !text-red-600 focus-visible:!outline-red-400" onclick="document.getElementById('license-upload').click()">
+<span class="material-icons text-base mr-1.5">file_upload</span>
+                  Re-upload License
+                </button>
+<p class="text-xs text-red-600 mt-2 flex items-start">
+<span class="material-icons text-sm mr-1 mt-0.5">error_outline</span>
+<span>Reason: Document unclear. Please upload a clearer copy.</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="px-4 py-6 lg:px-8 border-t border-[var(--border-color)] mt-10">
+<p class="text-center text-xs text-[var(--accent-color)]">
+          © 2024 DriveOn Car Rental. All rights reserved.
+        </p>
+</footer>
+</div>
+</div>
+
+</body></html>

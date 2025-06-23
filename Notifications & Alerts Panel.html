@@ -1,0 +1,203 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet"/>
+<title>HASTA TRAVEL Notifications</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #ec5b2c;
+      --secondary-color: #fdeae4;--text-primary: #1f2937;--text-secondary: #6b7680;
+      --accent-red: #ef4444;
+      --accent-green: #22c55e;--accent-orange: #f97316;--border-color: #e5e7eb;}
+    .material-icons {
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: 'liga';
+    }
+    .btn-primary {
+      @apply bg-[var(--primary-color)] text-white hover:bg-opacity-90;
+    }
+    .btn-secondary {
+      @apply bg-[var(--secondary-color)] text-[var(--primary-color)] hover:bg-opacity-80;
+    }
+    .btn-outline-primary {
+        @apply border border-[var(--primary-color)] text-[var(--primary-color)] hover:bg-[var(--secondary-color)];
+    }
+    .tab-active {
+        @apply border-b-[3px] border-b-[var(--primary-color)] text-[var(--primary-color)] font-semibold;
+    }
+    .tab-inactive {
+        @apply border-b-[3px] border-b-transparent text-[var(--text-secondary)] hover:text-[var(--primary-color)] hover:border-b-[var(--primary-color)] font-medium;
+    }
+    .icon-primary {
+        @apply text-[var(--primary-color)];
+    }
+    .icon-warning {
+        @apply text-[var(--accent-orange)];
+    }
+    .icon-success {
+        @apply text-[var(--accent-green)];
+    }
+     .icon-danger {
+        @apply text-[var(--accent-red)];
+    }.no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }.no-scrollbar {
+        -ms-overflow-style: none;scrollbar-width: none;}
+  </style>
+</head>
+<body class="bg-gray-50" style='font-family: Inter, "Noto Sans", sans-serif;'>
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] px-4 sm:px-6 py-3 bg-white shadow-sm">
+<div class="flex items-center gap-2 text-[var(--text-primary)]">
+<div class="size-8 text-[var(--primary-color)]">
+<svg class="size-full" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11C5.84 5 5.28 5.42 5.08 6.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5s1.5.67 1.5 1.5s-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"></path>
+</svg>
+</div>
+<h2 class="text-[var(--primary-color)] text-xl font-bold tracking-tight">HASTA TRAVEL</h2>
+</div>
+<div class="flex items-center gap-2 sm:gap-4">
+<nav class="hidden sm:flex items-center gap-4">
+<a class="text-[var(--text-secondary)] text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">Book</a>
+<a class="text-[var(--text-secondary)] text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">My Bookings</a>
+<a class="text-[var(--text-secondary)] text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">Support</a>
+</nav>
+<button aria-label="Notifications" class="flex items-center justify-center rounded-full h-9 w-9 bg-gray-100 hover:bg-gray-200 text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors">
+<span class="material-icons text-xl">notifications_active</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border border-gray-200" style='background-image: url("https://lh3.googleusercontent.com/a/ACg8ocK_C06L7G90Y6tgK5E_1YwXb_RkRz0R2QPK4oT9dZsP2g=s96-c");'></div>
+<button aria-label="Menu" class="sm:hidden flex items-center justify-center rounded-full h-9 w-9 bg-gray-100 hover:bg-gray-200 text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors">
+<span class="material-icons text-xl">menu</span>
+</button>
+</div>
+</header>
+<main class="px-4 sm:px-6 md:px-10 flex flex-1 justify-center py-6 sm:py-8">
+<div class="layout-content-container flex flex-col max-w-2xl w-full">
+<div class="flex flex-wrap justify-between items-center gap-4 mb-4 sm:mb-6">
+<h1 class="text-[var(--text-primary)] text-2xl sm:text-3xl font-bold tracking-tight">Notifications</h1>
+</div>
+<div class="mb-4 sm:mb-6 overflow-x-auto no-scrollbar">
+<div class="flex border-b border-[var(--border-color)] whitespace-nowrap min-w-max">
+<a class="flex flex-col items-center justify-center px-4 py-3 sm:px-5 sm:pb-3 sm:pt-4 transition-colors tab-active" href="#">
+<p class="text-sm">All</p>
+</a>
+<a class="flex flex-col items-center justify-center px-4 py-3 sm:px-5 sm:pb-3 sm:pt-4 transition-colors tab-inactive" href="#">
+<p class="text-sm">Booking</p>
+</a>
+<a class="flex flex-col items-center justify-center px-4 py-3 sm:px-5 sm:pb-3 sm:pt-4 transition-colors tab-inactive" href="#">
+<p class="text-sm">Documents</p>
+</a>
+<a class="flex flex-col items-center justify-center px-4 py-3 sm:px-5 sm:pb-3 sm:pt-4 transition-colors tab-inactive" href="#">
+<p class="text-sm">Payment</p>
+</a>
+<a class="flex flex-col items-center justify-center px-4 py-3 sm:px-5 sm:pb-3 sm:pt-4 transition-colors tab-inactive" href="#">
+<p class="text-sm">Return Due</p>
+</a>
+</div>
+</div>
+<div class="space-y-3 sm:space-y-4">
+<div class="bg-white p-4 sm:p-5 rounded-lg shadow-sm border border-[var(--border-color)] hover:shadow-md transition-shadow duration-300 cursor-pointer">
+<div class="flex items-start gap-3 sm:gap-4">
+<div class="flex-shrink-0 icon-primary mt-0.5 sm:mt-1">
+<span class="material-icons text-2xl">notifications</span>
+</div>
+<div class="flex-grow">
+<p class="text-[var(--text-primary)] font-medium text-sm sm:text-base">Your booking (WXP1234) is approved. Pick up at 9:00 AM.</p>
+<p class="text-[var(--text-secondary)] text-xs sm:text-sm mt-1">🕒 June 24, 2025 – Tap to view Booking Details</p>
+</div>
+<span class="material-icons text-gray-400 hover:text-[var(--primary-color)] text-xl self-center">chevron_right</span>
+</div>
+</div>
+<div class="bg-white p-4 sm:p-5 rounded-lg shadow-sm border border-[var(--border-color)] hover:shadow-md transition-shadow duration-300 cursor-pointer">
+<div class="flex items-start gap-3 sm:gap-4">
+<div class="flex-shrink-0 icon-warning mt-0.5 sm:mt-1">
+<span class="material-icons text-2xl">warning_amber</span>
+</div>
+<div class="flex-grow">
+<p class="text-[var(--text-primary)] font-medium text-sm sm:text-base">⚠️ IC Document is pending verification.</p>
+<p class="text-[var(--text-secondary)] text-xs sm:text-sm mt-1">🕒 June 23, 2025 – Reupload required</p>
+<button class="mt-2 sm:mt-3 btn-outline-primary text-xs font-semibold py-1.5 px-3 rounded-md w-full sm:w-auto">
+                    Upload Document
+                  </button>
+</div>
+<span class="material-icons text-gray-400 hover:text-[var(--primary-color)] text-xl self-center">chevron_right</span>
+</div>
+</div>
+<div class="bg-white p-4 sm:p-5 rounded-lg shadow-sm border border-[var(--border-color)] hover:shadow-md transition-shadow duration-300 cursor-pointer">
+<div class="flex items-start gap-3 sm:gap-4">
+<div class="flex-shrink-0 icon-primary mt-0.5 sm:mt-1">
+<span class="material-icons text-2xl">description</span>
+</div>
+<div class="flex-grow">
+<p class="text-[var(--text-primary)] font-medium text-sm sm:text-base">📄 Reminder: You need to sign the rental agreement.</p>
+<p class="text-[var(--text-secondary)] text-xs sm:text-sm mt-1">🕒 June 22, 2025</p>
+<button class="mt-2 sm:mt-3 btn-primary text-xs font-semibold py-2 px-4 rounded-md w-full sm:w-auto">
+                    Sign Now
+                  </button>
+</div>
+<span class="material-icons text-gray-400 hover:text-[var(--primary-color)] text-xl self-center">chevron_right</span>
+</div>
+</div>
+<div class="bg-white p-4 sm:p-5 rounded-lg shadow-sm border border-[var(--border-color)] hover:shadow-md transition-shadow duration-300 cursor-pointer">
+<div class="flex items-start gap-3 sm:gap-4">
+<div class="flex-shrink-0 icon-warning mt-0.5 sm:mt-1">
+<span class="material-icons text-2xl">alarm</span>
+</div>
+<div class="flex-grow">
+<p class="text-[var(--text-primary)] font-medium text-sm sm:text-base">⏰ Your car (WXP1234) is due for return by:</p>
+<p class="text-[var(--text-secondary)] text-xs sm:text-sm mt-1">
+<span class="font-semibold text-[var(--text-primary)]">📍 Date:</span> June 25, 2025, 5:00 PM<br/>
+<span class="font-semibold text-[var(--text-primary)]">📍 Location:</span> UTM Skudai Gate A
+                  </p>
+<button class="mt-2 sm:mt-3 btn-secondary text-xs font-semibold py-2 px-4 rounded-md w-full sm:w-auto">
+                    🔁 View Return Instructions
+                  </button>
+</div>
+<span class="material-icons text-gray-400 hover:text-[var(--primary-color)] text-xl self-center">chevron_right</span>
+</div>
+</div>
+<div class="bg-red-50 p-4 sm:p-5 rounded-lg shadow-sm border border-[var(--accent-red)] hover:shadow-md transition-shadow duration-300 cursor-pointer">
+<div class="flex items-start gap-3 sm:gap-4">
+<div class="flex-shrink-0 icon-danger mt-0.5 sm:mt-1">
+<span class="material-icons text-2xl">error</span>
+</div>
+<div class="flex-grow">
+<p class="text-[var(--accent-red)] font-semibold text-sm sm:text-base">❗ You are late returning your car (ABC7890).</p>
+<p class="text-red-700/90 text-xs sm:text-sm mt-1">
+<span class="font-semibold">Return Date:</span> June 20, 2025, 3:00 PM<br/>
+<span class="font-semibold">Return Location:</span> City Center Branch
+                  </p>
+<button class="mt-2 sm:mt-3 bg-red-100 text-[var(--accent-red)] hover:bg-red-200 text-xs font-semibold py-2 px-4 rounded-md w-full sm:w-auto">
+                    Contact Support
+                  </button>
+</div>
+<span class="material-icons text-red-400 hover:text-[var(--accent-red)] text-xl self-center">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="text-center py-6 border-t border-[var(--border-color)] bg-white">
+<p class="text-sm text-[var(--text-secondary)]">© 2024 HASTA TRAVEL. All rights reserved.</p>
+</footer>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HASTA TRAVEL - Login</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B600%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B600%3B700%3B900" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #ec5b2c;
+      --secondary-color: #60758a;--text-primary: #111418;
+      --text-secondary: #60758a;
+      --background-primary: #ffffff;
+      --border-color: #dbe0e6;
+    }
+    body {
+      font-family: 'Inter', "Noto Sans", sans-serif;
+      background-color: #f9fafb;}
+  </style>
+</head>
+<body class="bg-slate-50">
+<div class="relative flex size-full min-h-screen flex-col items-center justify-center group/design-root overflow-x-hidden p-4">
+<div class="bg-[var(--background-primary)] shadow-xl rounded-xl w-full max-w-md p-6 md:p-10">
+<div class="flex flex-col items-center mb-8">
+<img alt="HASTA TRAVEL Logo" class="h-16 w-auto mb-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDItgVupeKBHVju0FA0eiBrQ43-rBJ8KdxqZhnBqRk6G5rRYXDC2KP4iFvNKwvCQLsOmKIRltYHE9sRiZhheSX7AP72pnjPuQk8C20DSlSksLiwO0VFeMjNqomUxFSsiwKH00icCgZKhzEyLCX3elU2ocH7CwtqoP3uYO-S7z_GDYC_ISlDU1Ayc1ltu5tF41x37lNoO0SIYWSgaOum3bQ4lA20jDa_CocCYruc3H0c0I5Y88aOVXzMV4XVAh0rSnVc_qe8snjLkQ"/>
+<h1 class="text-[var(--text-primary)] text-2xl font-bold text-center">Welcome to HASTA TRAVEL</h1>
+<p class="text-[var(--text-secondary)] text-sm text-center">Securely login to your account</p>
+</div>
+<form class="space-y-6">
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-1.5" for="utm-email">UTM Email</label>
+<input class="form-input block w-full rounded-lg border-[var(--border-color)] shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] h-12 p-3 text-sm placeholder:text-gray-400" id="utm-email" pattern=".+@utm\.my$" placeholder="yourname@utm.my" required="" title="Please enter a valid UTM email address (e.g., yourname@utm.my)" type="email"/>
+<p class="mt-1.5 text-xs text-gray-500">Only @utm.my addresses are accepted.</p>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-primary)] mb-1.5" for="password">Password</label>
+<input class="form-input block w-full rounded-lg border-[var(--border-color)] shadow-sm focus:border-[var(--primary-color)] focus:ring-[var(--primary-color)] h-12 p-3 text-sm placeholder:text-gray-400" id="password" placeholder="Enter your password" required="" type="password"/>
+</div>
+<button class="flex w-full items-center justify-center rounded-lg bg-[var(--primary-color)] hover:bg-opacity-90 text-white h-12 px-4 text-sm font-semibold shadow-sm transition-colors duration-150" type="submit">
+          Login
+        </button>
+</form>
+<div class="mt-6 text-center text-sm">
+<a class="font-medium text-[var(--primary-color)] hover:text-opacity-80" href="#">Forgot password?</a>
+</div>
+<div class="mt-3 text-center text-sm">
+<span class="text-[var(--text-secondary)]">Don't have an account? </span>
+<a class="font-medium text-[var(--primary-color)] hover:text-opacity-80" href="#">Register</a>
+</div>
+</div>
+</div>
+<script>
+    // Basic email validation on blur
+    const emailInput = document.getElementById('utm-email');
+    if (emailInput) {
+      emailInput.addEventListener('blur', function() {
+        if (this.value && !this.checkValidity()) {
+          // You can add more specific error handling here if needed
+          console.log("Email format is invalid or not a @utm.my address.");
+        }
+      });
+    }
+  </script>
+
+</body></html>

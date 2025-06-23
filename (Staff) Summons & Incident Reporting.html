@@ -1,0 +1,259 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Poppins:wght@400;500;600;700&amp;family=Nunito:wght@400;500;600;700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<title>Hasta Travel - Log Incident</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #ec5b2c;
+      --secondary-color: #f4f2f0;
+      --text-primary: #181311;
+      --text-secondary: #886e63;
+      --border-color: #e5dfdc;
+    }
+    body {
+      font-family: 'Nunito', 'Poppins', sans-serif;
+    }
+    .btn-primary {
+      @apply bg-[var(--primary-color)] text-white;
+    }
+    .btn-secondary {
+      @apply bg-[var(--secondary-color)] text-[var(--text-primary)];
+    }
+    .nav-link-active {
+      @apply text-[var(--primary-color)] font-bold border-b-2 border-[var(--primary-color)];
+    }
+    .form-input,
+    .form-select,
+    .form-textarea {
+      @apply block w-full rounded-lg border-[var(--border-color)] focus:border-[var(--primary-color)] focus:ring focus:ring-[var(--primary-color)] focus:ring-opacity-50 transition-colors duration-200;
+    }
+    .form-label {
+      @apply text-[var(--text-primary)] text-sm font-semibold mb-1;
+    }
+    .toast {
+      @apply fixed top-5 right-5 bg-green-500 text-white p-4 rounded-lg shadow-md transition-transform duration-300 ease-out;
+      transform: translateX(100%);
+    }
+    .toast.show {
+      transform: translateX(0);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-[var(--text-primary)]">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="bg-white shadow-sm sticky top-0 z-50">
+<div class="container mx-auto px-6 lg:px-10">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-3">
+<svg class="text-[var(--primary-color)] h-8 w-8" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" fill="currentColor"></path>
+</svg>
+<h1 class="text-xl font-bold text-[var(--text-primary)]">Hasta Travel</h1>
+</div>
+<nav class="hidden md:flex items-center gap-x-4 lg:gap-x-6">
+<a class="text-sm font-medium text-gray-600 hover:text-[var(--primary-color)] transition-colors duration-200 px-2 py-1" href="#">Dashboard</a>
+<a class="text-sm font-medium text-gray-600 hover:text-[var(--primary-color)] transition-colors duration-200 px-2 py-1" href="#">Manage Cars</a>
+<a class="text-sm font-medium text-gray-600 hover:text-[var(--primary-color)] transition-colors duration-200 px-2 py-1" href="#">Manage Bookings</a>
+<a class="text-sm font-medium text-gray-600 hover:text-[var(--primary-color)] transition-colors duration-200 px-2 py-1" href="#">Pickup &amp; Return</a>
+<a class="nav-link-active text-sm font-medium hover:text-[var(--primary-color)] transition-colors duration-200 px-2 py-1 pb-[calc(0.25rem-2px)]" href="#">Summons/Accidents</a>
+<a class="text-sm font-medium text-gray-600 hover:text-[var(--primary-color)] transition-colors duration-200 px-2 py-1 relative" href="#">
+                Notifications
+                <span class="absolute -top-1 -right-1 flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--primary-color)] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--primary-color)]"></span>
+</span>
+</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-[var(--primary-color)]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAlAavEOJh3nkbF9cvb6vWeAsXP3BE15kd6-cANa8C96hPWXS5zyyVZ3NXMvrQM6W6L7-Ki8y67nOMCIYevHva4Mmj_TZPY4Uznn6-T4MJoDWHfxcXT_ZOx09SKIZFfbprhybBxbI3vw8pp4pSpOE7OxL9vh-q-aG6ii7LZlwn-ATMJ1tJxVSSQN6cwW4KXrEeD68I8CrkTrPPS8O59885Pvs1DRi3L6pSh9fOMVs_s9ia4vrM3bTXrapAajZMFa4BZu48gjiOfSQ");'></div>
+<button class="md:hidden text-gray-600 hover:text-[var(--primary-color)]">
+<span class="material-icons-outlined">menu</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="max-w-3xl mx-auto bg-white p-6 sm:p-8 rounded-xl shadow-lg">
+<h2 class="text-3xl font-bold text-[var(--text-primary)] mb-6 flex items-center">
+<span class="text-4xl mr-3">🚨</span> Log Summons / Accident
+          </h2>
+<div class="bg-orange-50 border border-orange-200 rounded-lg p-6 mb-8 space-y-3">
+<h3 class="text-lg font-semibold text-[var(--primary-color)] mb-2">Booking Details</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm">
+<div><strong class="text-gray-700">Booking ID:</strong> <span class="text-gray-600">BKG45678</span></div>
+<div><strong class="text-gray-700">Customer:</strong> <span class="text-gray-600">Nurul Aini</span></div>
+<div><strong class="text-gray-700">Car:</strong> <span class="text-gray-600">Perodua Bezza (Plate: VAX1234)</span></div>
+<div><strong class="text-gray-700">Rental Dates:</strong> <span class="text-gray-600">June 15 – June 18, 2025</span></div>
+</div>
+</div>
+<form class="space-y-6" id="incidentForm">
+<div>
+<label class="form-label flex items-center" for="incidentType">📌 Incident Type:</label>
+<select class="form-select h-12 px-4" id="incidentType" name="incidentType" required="">
+<option value="">-- Select --</option>
+<option value="summons">Summons</option>
+<option value="accident">Accident</option>
+<option value="unauthorized_usage">Unauthorized Usage</option>
+<option value="late_return">Late Return</option>
+</select>
+</div>
+<div>
+<label class="form-label flex items-center" for="incidentDate">📅 Date of Incident:</label>
+<input class="form-input h-12 px-4" id="incidentDate" name="incidentDate" placeholder="YYYY-MM-DD" required="" type="date"/>
+</div>
+<div>
+<label class="form-label flex items-center" for="description">📝 Description:</label>
+<textarea class="form-textarea p-4" id="description" name="description" placeholder="Provide a detailed description of the incident..." required="" rows="4"></textarea>
+</div>
+<div>
+<label class="form-label flex items-center mb-2">📸 Upload Evidence (image/PDF):</label>
+<div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-[var(--border-color)] border-dashed rounded-md hover:border-[var(--primary-color)] transition-colors duration-200" id="dropzone">
+<div class="space-y-1 text-center">
+<svg aria-hidden="true" class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 48 48">
+<path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<div class="flex text-sm text-gray-600">
+<label class="relative cursor-pointer bg-white rounded-md font-medium text-[var(--primary-color)] hover:text-orange-700 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-[var(--primary-color)]" for="file-upload">
+<span>Upload a file</span>
+<input accept="image/*,application/pdf" class="sr-only" id="file-upload" multiple="" name="file-upload" type="file"/>
+</label>
+<p class="pl-1">or drag and drop</p>
+</div>
+<p class="text-xs text-gray-500">You may upload photos of damage, police reports, or summons screenshots.</p>
+<p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB; PDF up to 5MB</p>
+</div>
+</div>
+<div class="mt-4 space-y-2" id="file-preview-container"></div>
+</div>
+<div class="pt-4 flex flex-col sm:flex-row sm:justify-start sm:gap-4 space-y-3 sm:space-y-0 sticky bottom-0 bg-white py-4 -mx-6 px-6 sm:static sm:py-0 sm:-mx-0 sm:px-0 sm:bg-transparent">
+<button class="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 rounded-lg font-semibold text-base shadow-md hover:bg-orange-700 transition-colors duration-200" type="submit">
+<span class="material-icons-outlined">rocket_launch</span>
+                Submit Incident
+              </button>
+<button class="btn-secondary w-full sm:w-auto flex items-center justify-center gap-2 h-12 px-6 rounded-lg font-semibold text-base border border-gray-300 hover:bg-gray-200 transition-colors duration-200" id="clearFormButton" type="reset">
+<span class="material-icons-outlined">refresh</span>
+                Clear Form
+              </button>
+</div>
+</form>
+</div>
+</main>
+<footer class="bg-gray-100 py-6 text-center text-sm text-gray-500 border-t border-[var(--border-color)]">
+        © 2024 Hasta Travel. All rights reserved.
+      </footer>
+</div>
+</div>
+<div class="toast" id="toast-notification">✔️ Incident submitted for Booking BKG45678.</div>
+<script>
+    const fileUpload = document.getElementById('file-upload');
+    const filePreviewContainer = document.getElementById('file-preview-container');
+    const dropzone = document.getElementById('dropzone');
+    const incidentForm = document.getElementById('incidentForm');
+    const clearFormButton = document.getElementById('clearFormButton');
+    let filesToUpload = []; // To manage files
+    function displayFilePreview(file) {
+      const filePreview = document.createElement('div');
+      filePreview.className = 'flex items-center justify-between p-2 border border-gray-200 rounded-md text-sm bg-gray-50';
+      const fileInfoDiv = document.createElement('div');
+      fileInfoDiv.className = 'flex items-center space-x-2 overflow-hidden';
+      if (file.type.startsWith('image/')) {
+        const img = document.createElement('img');
+        img.src = URL.createObjectURL(file);
+        img.className = 'h-8 w-8 object-cover rounded';
+        img.onload = () => URL.revokeObjectURL(img.src); // Free memory
+        fileInfoDiv.appendChild(img);
+      } else {
+        const icon = document.createElement('span');
+        icon.className = 'material-icons-outlined text-gray-500';
+        icon.textContent = 'insert_drive_file';
+        fileInfoDiv.appendChild(icon);
+      }
+      const fileName = document.createElement('span');
+      fileName.textContent = file.name;
+      fileName.className = 'text-gray-700 truncate';
+      fileInfoDiv.appendChild(fileName);
+      const fileSize = document.createElement('span');
+      fileSize.textContent = (file.size / 1024).toFixed(1) + ' KB';
+      fileSize.className = 'text-gray-500 ml-2 flex-shrink-0';
+      const removeButton = document.createElement('button');
+      removeButton.innerHTML = '&times;';
+      removeButton.className = 'text-red-500 hover:text-red-700 font-bold text-lg ml-2';
+      removeButton.type = 'button';
+      removeButton.onclick = () => {
+        filesToUpload = filesToUpload.filter(f => f !== file);
+        filePreview.remove();
+        updateFileInput();
+      };
+      filePreview.appendChild(fileInfoDiv);
+      filePreview.appendChild(fileSize);
+      filePreview.appendChild(removeButton);
+      filePreviewContainer.appendChild(filePreview);
+    }
+    function handleFiles(newFiles) {
+      for (const file of newFiles) {
+        filesToUpload.push(file);
+        displayFilePreview(file);
+      }
+      updateFileInput();
+    }
+    function updateFileInput() {
+        // Create a new DataTransfer object to hold the current files
+        const dataTransfer = new DataTransfer();
+        filesToUpload.forEach(file => dataTransfer.items.add(file));
+        // Assign the new FileList to the file input
+        fileUpload.files = dataTransfer.files;
+    }
+    fileUpload.addEventListener('change', function(event) {
+      handleFiles(event.target.files);
+    });
+    dropzone.addEventListener('dragover', (event) => {
+      event.preventDefault();
+      dropzone.classList.add('border-[var(--primary-color)]', 'bg-orange-50');
+    });
+    dropzone.addEventListener('dragleave', () => {
+      dropzone.classList.remove('border-[var(--primary-color)]', 'bg-orange-50');
+    });
+    dropzone.addEventListener('drop', (event) => {
+      event.preventDefault();
+      dropzone.classList.remove('border-[var(--primary-color)]', 'bg-orange-50');
+      if (event.dataTransfer.files.length) {
+        handleFiles(event.dataTransfer.files);
+      }
+    });
+    function showToast() {
+      const toast = document.getElementById('toast-notification');
+      if (toast) {
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
+      }
+    }
+    incidentForm.addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent actual submission for demo
+      // In a real app, you would collect form data and send it here.
+      // For example:
+      // const formData = new FormData(incidentForm);
+      // filesToUpload.forEach(file => formData.append('evidenceFiles[]', file));
+      // console.log('Form submitted with data:', Object.fromEntries(formData.entries()));
+      showToast();
+      incidentForm.reset(); // Reset the form fields
+      filePreviewContainer.innerHTML = ''; // Clear previews
+      filesToUpload = []; // Clear stored files
+      fileUpload.value = ''; // Clear the file input
+    });
+    clearFormButton.addEventListener('click', () => {
+      incidentForm.reset(); // Native form reset will clear inputs
+      filePreviewContainer.innerHTML = '';
+      filesToUpload = [];
+      fileUpload.value = ''; // Explicitly clear file input for good measure
+    });
+  </script>
+
+</body></html>

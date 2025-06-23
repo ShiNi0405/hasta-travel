@@ -1,0 +1,288 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B600%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #ec5b2c;
+      --status-awaiting-bg: #FFF3E0;
+      --status-awaiting-text: #FB8C00;
+      --status-approved-bg: #E8F5E9;
+      --status-approved-text: #4CAF50;
+      --status-pickedup-bg: #E3F2FD;
+      --status-pickedup-text: #2196F3;
+      --status-returned-bg: #F5F5F5;
+      --status-returned-text: #757575;
+    }
+    .nav-link.active {
+      color: var(--primary-color) !important;
+      font-weight: 700;
+      border-bottom: 2px solid var(--primary-color);
+    }
+    .status-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .status-tag:hover {
+      opacity: 0.8;
+    }
+    .status-tag.active-filter {
+      box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary-color);
+    }
+    .btn {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .btn:hover {
+      background-color: #d45027;
+    }
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-color);
+      border: 1px solid var(--primary-color);
+      padding: 0.5rem 0.75rem;border-radius: 9999px;
+      font-weight: 600;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;}
+    .btn-outline:hover {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    .btn-feedback {
+      background-color: #607D8B;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .btn-feedback:hover {
+      background-color: #546E7A;
+    }
+  </style>
+<title>Hasta Travel - My Bookings</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="bg-gray-50" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-gray-200 bg-white px-6 md:px-10 py-3">
+<div class="flex items-center gap-3 text-slate-800">
+<svg class="h-8 w-8 text-[var(--primary-color)]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19.5811 12.0002L11.9995 19.5817L4.41797 12.0002L11.9995 4.41865L19.5811 12.0002ZM10.9995 10.0002H13.0008L11.9995 8.58594L10.9995 10.0002Z"></path>
+<path d="M19.9995 2H17.7574L11.9995 7.75781L6.24164 2H3.99951C3.44723 2 2.99951 2.44772 2.99951 3V6.24265L9.75736 13.0005H2.99951V15.0005H9.75736L2.99951 21.7583V23.0005H5.75736L11.9995 16.7578L18.2416 23.0005H20.9995V21.7578L14.2416 15.0005H20.9995V13.0005H14.2416L20.9995 6.24265V3C20.9995 2.44772 20.5518 2 19.9995 2Z" fill="currentColor"></path>
+</svg>
+<h1 class="text-slate-800 text-xl font-bold leading-tight tracking-[-0.015em]">Hasta Travel</h1>
+</div>
+<nav class="hidden md:flex items-center gap-2 lg:gap-4">
+<a class="nav-link text-gray-600 hover:text-[var(--primary-color)] text-sm font-medium leading-normal px-3 py-2" href="/dashboard">Home</a>
+<a class="nav-link text-gray-600 hover:text-[var(--primary-color)] text-sm font-medium leading-normal px-3 py-2" href="/book">Book a Car</a>
+<a class="nav-link active text-sm font-medium leading-normal px-3 py-2" href="/my-bookings">My Bookings</a>
+<a class="nav-link text-gray-600 hover:text-[var(--primary-color)] text-sm font-medium leading-normal px-3 py-2" href="/payment">Upload Payment</a>
+<a class="nav-link text-gray-600 hover:text-[var(--primary-color)] text-sm font-medium leading-normal px-3 py-2" href="/sign-contract">Sign Agreement</a>
+<a class="nav-link text-gray-600 hover:text-[var(--primary-color)] text-sm font-medium leading-normal px-3 py-2" href="/outstanding">Outstanding Payments</a>
+<a class="nav-link text-gray-600 hover:text-[var(--primary-color)] text-sm font-medium leading-normal px-3 py-2" href="/feedback">Feedback</a>
+<a class="nav-link text-gray-600 hover:text-[var(--primary-color)] text-sm font-medium leading-normal px-3 py-2" href="/notifications">Notifications</a>
+</nav>
+<div class="flex items-center gap-3">
+<a class="flex items-center gap-2 group" href="/profile">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-transparent group-hover:border-[var(--primary-color)] transition-all" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCaEyIyjy_NF55nWcr5Q3XSn6Yg8pVne4J2oqv-Y-aGoicE1-nRlS9UoH83VzL9js74IxvK9M3DWUFreJJzs4VQPvjq7KN3ujRzTgtMrrBsBtZiPelo_EIrLIIL7DvXp5f_bF3caiIjWRF_-Ff1XCnZM9moVot7RyGtRVnjmpwHPvcAL0qSi9VQZyQhH65iuueAB5WeZYAK-7E-6h-L1-DLXdfPhNFxHMRkij-U0QOEzJXkHoVc8GyfBFWBCvewT5scRBOPMt9Rkg");'></div>
+<span class="text-sm font-medium text-gray-700 group-hover:text-[var(--primary-color)] hidden sm:inline">John Doe</span>
+</a>
+<button class="md:hidden p-2 rounded-md hover:bg-gray-100">
+<span class="material-icons-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-4 sm:px-6 lg:px-10 py-8">
+<div class="max-w-5xl mx-auto">
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+<h2 class="text-slate-800 text-2xl sm:text-3xl font-bold leading-tight">My Bookings</h2>
+<div class="relative sm:w-64">
+<span class="material-icons-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] transition-all text-sm" placeholder="Search bookings..." type="text"/>
+</div>
+</div>
+<div class="mb-6">
+<p class="text-sm font-medium text-gray-600 mb-2">Filter by Status:</p>
+<div class="flex flex-wrap gap-2">
+<button class="status-tag active-filter" style="background-color: var(--status-awaiting-bg); color: var(--status-awaiting-text);">
+<span class="mr-1.5">🟠</span> Awaiting Approval
+              </button>
+<button class="status-tag" style="background-color: var(--status-approved-bg); color: var(--status-approved-text);">
+<span class="mr-1.5">🟢</span> Approved
+              </button>
+<button class="status-tag" style="background-color: var(--status-pickedup-bg); color: var(--status-pickedup-text);">
+<span class="mr-1.5">🔵</span> Picked Up
+              </button>
+<button class="status-tag" style="background-color: var(--status-returned-bg); color: var(--status-returned-text);">
+<span class="mr-1.5">🔘</span> Returned
+              </button>
+</div>
+</div>
+<div class="space-y-6">
+<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+<div class="p-5 md:p-6">
+<div class="flex flex-col md:flex-row md:items-start gap-4">
+<img alt="Car Image" class="w-full md:w-48 h-36 md:h-auto object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCH9wxw8Jy0e2DsDJWp4YwyxqVuoYmrOl3bbfqhfMVoJNXJlYK2051dUFGBmAkjMIaIpGcMiEoxL2cnJDwYKV3KJVt_T84IO-AGwoiD8S0HUMEwo3fDB6OazFDJuCOkjUYVb4abtP7ZNPHBpbOI3Qr64rkQWq8d9xcmr08ae_JctvqqqtY0RYAq8t5uDw821fjGMOyGpGAcoswrBNcWA6sgjRH5gINUg-TzlB923aLdsS4eEfDiBSWfQ8zV-LVhIQIruZNHC63R9A"/>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h3 class="text-xl font-semibold text-slate-800">🚗 Toyota Vios</h3>
+<span class="status-tag text-xs" style="background-color: var(--status-awaiting-bg); color: var(--status-awaiting-text);">🟠 Awaiting Approval</span>
+</div>
+<p class="text-sm text-gray-500 mb-3"><strong>Booking ID:</strong> BKG00001</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700 mb-4">
+<p><strong class="font-medium text-gray-600">Rental Dates:</strong> June 10 – June 12, 2025</p>
+<p><strong class="font-medium text-gray-600">Pickup:</strong> UTM Skudai</p>
+<p><strong class="font-medium text-gray-600">Return:</strong> UTM Skudai</p>
+<p><strong class="font-medium text-gray-600">Total:</strong> RM 250</p>
+</div>
+<p class="text-sm text-gray-500 italic">No actions available for bookings awaiting approval.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+<div class="p-5 md:p-6">
+<div class="flex flex-col md:flex-row md:items-start gap-4">
+<img alt="Car Image" class="w-full md:w-48 h-36 md:h-auto object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcPGdpRSo4qRelWojH8sVp9baKEKeo4nq55dgk3HnFqOVzeklkMOqbTVQojkn5zHkVgglXseUCq8exx7lo-7kNdDQ5t8QAYqRr2suvKboIwiys8GPnzTQ3HGsHrUdfAjO96FJxMv3Oj4_klhrpUopTETT3GFaKNMFTzIg9XuRyKEKL2FJMwszEbZecTtMzsL138Y2M3xHB0B72J2N7LFwVrYCipoMoIiXq8n2KzWc85OdzLLybYApmuKN1cMAWEWE95fHh28XT0w"/>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h3 class="text-xl font-semibold text-slate-800">🚗 Perodua Myvi</h3>
+<span class="status-tag text-xs" style="background-color: var(--status-approved-bg); color: var(--status-approved-text);">🟢 Approved</span>
+</div>
+<p class="text-sm text-gray-500 mb-3"><strong>Booking ID:</strong> BKG12345</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700 mb-4">
+<p><strong class="font-medium text-gray-600">Rental Dates:</strong> June 10 – June 12, 2025</p>
+<p><strong class="font-medium text-gray-600">Pickup:</strong> UTM Skudai</p>
+<p><strong class="font-medium text-gray-600">Return:</strong> UTM Skudai</p>
+<p><strong class="font-medium text-gray-600">Total:</strong> RM 250</p>
+</div>
+<div class="flex flex-wrap gap-3 mt-4">
+<a class="btn" href="/upload-receipt/BKG12345">
+<span class="material-icons-outlined text-base">cloud_upload</span> Upload Payment
+                      </a>
+<a class="btn-outline" href="/sign-contract/BKG12345">
+<span class="material-icons-outlined text-base">edit_document</span> Sign
+                      </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+<div class="p-5 md:p-6">
+<div class="flex flex-col md:flex-row md:items-start gap-4">
+<img alt="Car Image" class="w-full md:w-48 h-36 md:h-auto object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXAeIYDHmppe6M4XnCB8FFo-HNUHwNKAysaAktIHQjyGYgooldgZuc05QRO5ICOJnjyQ4ugtQrPgdxbqi_pDwKDeetdkXQnqMJOdbNaQ-ZWici7Rv4gNXP5xea7zWYzbV-5dOjADf1vYR-M-YqzZ1zY-Qw0wLDoE08kKGOCC9_SitwjeqfCVNUT5FBGRMB_dVvhv0Eky1bDaFzG3sNFBPeXh2JteIIq3eHO0TfhblLJdboInJZpKftH6OUQg0bnPmQojxmD-5L-Q"/>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h3 class="text-xl font-semibold text-slate-800">🚗 Honda City</h3>
+<span class="status-tag text-xs" style="background-color: var(--status-pickedup-bg); color: var(--status-pickedup-text);">🔵 Picked Up</span>
+</div>
+<p class="text-sm text-gray-500 mb-3"><strong>Booking ID:</strong> BKG67890</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700 mb-4">
+<p><strong class="font-medium text-gray-600">Rental Dates:</strong> July 1 – July 5, 2025</p>
+<p><strong class="font-medium text-gray-600">Pickup:</strong> Senai Airport</p>
+<p><strong class="font-medium text-gray-600">Return:</strong> Senai Airport</p>
+<p><strong class="font-medium text-gray-600">Total:</strong> RM 450</p>
+</div>
+<p class="text-sm text-gray-500 italic">Car currently picked up. View details only.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-lg overflow-hidden transition-shadow hover:shadow-xl">
+<div class="p-5 md:p-6">
+<div class="flex flex-col md:flex-row md:items-start gap-4">
+<img alt="Car Image" class="w-full md:w-48 h-36 md:h-auto object-cover rounded-lg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvtP5FsefjAgPchmUMkpZ4V7ssWL8mo_1gqrzRTPqFauAJ22IYpzqYR3MBTaU5kJKdnR08i53D_ANtOYIxkr9CB4L6-OurdV3h52rqLOPsRdmIK1jRf9Fn2VDGXnfwz2B-B_YhBkqFI0voEdSKFH0LBhOGWsgPuZtCr5wNXqR8NMIP0e8LKzXiX4O7XOaYH9X94g5tQRr92lZQ8-8ZnQWIEG6valSnvH_VWuOYVwhBdUr8E52qE26ADXylbisMR1EnaYY7oMrgqg"/>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<h3 class="text-xl font-semibold text-slate-800">🚗 Proton X50</h3>
+<span class="status-tag text-xs" style="background-color: var(--status-returned-bg); color: var(--status-returned-text);">🔘 Returned</span>
+</div>
+<p class="text-sm text-gray-500 mb-3"><strong>Booking ID:</strong> BKG12399</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700 mb-4">
+<p><strong class="font-medium text-gray-600">Rental Dates:</strong> May 5 – May 7, 2025</p>
+<p><strong class="font-medium text-gray-600">Pickup:</strong> JB Sentral</p>
+<p><strong class="font-medium text-gray-600">Return:</strong> JB Sentral</p>
+<p><strong class="font-medium text-gray-600">Total:</strong> RM 180</p>
+</div>
+<div class="flex flex-wrap gap-3 mt-4">
+<a class="btn-feedback" href="/feedback/BKG12399">
+<span class="material-icons-outlined text-base">rate_review</span> Submit Feedback
+                      </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-10 flex justify-center items-center space-x-2">
+<button class="p-2 rounded-md hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed" disabled="">
+<span class="material-icons-outlined text-gray-600">chevron_left</span>
+</button>
+<button class="px-4 py-2 text-sm font-medium rounded-md bg-[var(--primary-color)] text-white">1</button>
+<button class="px-4 py-2 text-sm font-medium rounded-md hover:bg-gray-200 text-gray-700">2</button>
+<button class="px-4 py-2 text-sm font-medium rounded-md hover:bg-gray-200 text-gray-700">3</button>
+<span class="text-gray-500">...</span>
+<button class="px-4 py-2 text-sm font-medium rounded-md hover:bg-gray-200 text-gray-700">10</button>
+<button class="p-2 rounded-md hover:bg-gray-200">
+<span class="material-icons-outlined text-gray-600">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<footer class="bg-white border-t border-gray-200 mt-auto">
+<div class="max-w-7xl mx-auto px-6 py-8 md:flex md:items-center md:justify-between lg:px-8">
+<div class="flex justify-center space-x-6 md:order-2">
+<a class="text-gray-400 hover:text-gray-500" href="#">
+<span class="sr-only">Facebook</span>
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+<path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
+</svg>
+</a>
+<a class="text-gray-400 hover:text-gray-500" href="#">
+<span class="sr-only">Instagram</span>
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+<path clip-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.255 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.023.047 1.351.058 3.807.058h.468c2.456 0 2.784-.011 3.807-.058.975-.045 1.504-.207 1.857-.344.467-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882-.344-1.857.047-1.023.058-1.351.058-3.807v-.468c0-2.456-.011-2.784-.058-3.807-.045-.975-.207-1.504-.344-1.857a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 11-2.4 0 1.2 1.2 0 012.4 0z" fill-rule="evenodd"></path>
+</svg>
+</a>
+<a class="text-gray-400 hover:text-gray-500" href="#">
+<span class="sr-only">Twitter</span>
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+<path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
+</svg>
+</a>
+</div>
+<div class="mt-8 md:mt-0 md:order-1">
+<p class="text-center text-xs leading-5 text-gray-500">© 2024 Hasta Travel Inc. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</div>
+</div>
+
+</body></html>

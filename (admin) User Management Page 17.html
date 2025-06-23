@@ -1,0 +1,339 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #1383eb;
+        --secondary-color: #f0f2f4;
+        --text-primary: #111518;
+        --text-secondary: #617689;
+        --border-color: #dbe1e6;
+      }
+      body {
+        font-family: "Inter", "Noto Sans", sans-serif;
+      }
+      .status-pending {
+        background-color: #fffbeb;color: #b45309;border: 1px solid #fef3c7;}
+      .status-approved {
+        background-color: #f0fdf4;color: #166534;border: 1px solid #dcfce7;}
+      .status-rejected {
+        background-color: #fef2f2;color: #991b1b;border: 1px solid #fee2e2;}
+    </style>
+</head>
+<body class="bg-white text-[var(--text-primary)]">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[var(--border-color)] px-6 sm:px-10 py-4">
+<div class="flex items-center gap-3 sm:gap-4 text-[var(--text-primary)]">
+<div class="size-6 sm:size-8 text-[var(--primary-color)]">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-[var(--text-primary)] text-xl sm:text-2xl font-bold leading-tight tracking-[-0.015em]">DriveOn</h2>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4 sm:gap-6">
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors" href="#">Bookings</a>
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors" href="#">Vehicles</a>
+<a class="text-[var(--primary-color)] text-sm font-semibold leading-normal" href="#">Users</a>
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)] text-sm font-medium leading-normal transition-colors" href="#">Reports</a>
+</nav>
+<button aria-label="Notifications" class="flex cursor-pointer items-center justify-center rounded-full size-10 bg-[var(--secondary-color)] text-[var(--text-primary)] hover:bg-gray-200 transition-colors">
+<div class="text-[var(--text-primary)]" data-icon="Bell" data-size="24px" data-weight="regular">
+<svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg">
+<path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
+</svg>
+</div>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-[var(--border-color)]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxGuLxeKQL6tywKfxjF7C8hWcREYRjulAKVcCs3OD3kf1mmey-qRp2cgnDaJD4NKvqRiGB1T5CiS2pUd0Tew6quXXQYfnVE8kFYDm_tcOHXX9LQLYiSdXqALHyMWCu1KeYMVS_jwsFh3GmvQX1qcJ-0YWWig7T_m_X8Sd3n7FFi9wh0fRxZksVHtsOriX3cv1-xvFcGv7gqIO0oiK6wQed_aopUC9T8hLNJ-N4wIAKHxAiYhTCQXSyzVxEv89ZxBUb6BNTws_dmg");'></div>
+<button aria-label="Menu" class="lg:hidden flex cursor-pointer items-center justify-center rounded-md size-10 bg-transparent text-[var(--text-primary)] hover:bg-gray-100 transition-colors">
+<svg fill="currentColor" height="24px" viewBox="0 0 256 256" width="24px" xmlns="http://www.w3.org/2000/svg"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,88H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path></svg>
+</button>
+</div>
+</header>
+<main class="flex flex-1 flex-col lg:flex-row px-4 sm:px-6 py-5 gap-6 @container/main">
+<div class="flex-1 @container/tablecontainer">
+<div class="flex flex-col sm:flex-row sm:flex-wrap justify-between items-start sm:items-center gap-4 p-4 mb-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-[var(--text-primary)] text-2xl sm:text-3xl font-bold leading-tight">User Registrations</h1>
+<p class="text-[var(--text-secondary)] text-sm font-normal leading-normal">Manage new user registrations and their approval status.</p>
+</div>
+</div>
+<div class="overflow-x-auto rounded-lg border border-[var(--border-color)] bg-white shadow-sm">
+<table class="w-full min-w-[800px] @[768px]/tablecontainer:min-w-full">
+<thead class="bg-gray-50">
+<tr>
+<th class="px-4 py-3 text-left text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">Name</th>
+<th class="px-4 py-3 text-left text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">Email</th>
+<th class="px-4 py-3 text-left text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">Role</th>
+<th class="px-4 py-3 text-left text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">Faculty</th>
+<th class="px-4 py-3 text-left text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">Status</th>
+<th class="px-4 py-3 text-left text-xs font-medium text-[var(--text-secondary)] uppercase tracking-wider">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[var(--border-color)]">
+<tr class="hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="false">
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-[var(--text-primary)]">Ethan Carter</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">ethan.c@graduate.utm.my</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Student</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Engineering</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-pending">Pending</span>
+</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-2">
+<button class="text-green-600 hover:text-green-800 font-semibold">Approve</button>
+<button class="text-red-600 hover:text-red-800 font-semibold">Reject</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="true">
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-[var(--text-primary)]">Olivia Bennett</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">olivia.b@graduate.utm.my</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Faculty</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Arts</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-pending">Pending</span>
+</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-2">
+<button class="text-green-600 hover:text-green-800 font-semibold">Approve</button>
+<button class="text-red-600 hover:text-red-800 font-semibold">Reject</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="false">
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-[var(--text-primary)]">Noah Thompson</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">noah.t@graduate.utm.my</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Student</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Science</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-approved">Approved</span>
+</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-2">
+<button class="text-red-600 hover:text-red-800 font-semibold">Reject</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="false">
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-[var(--text-primary)]">Ava Harper</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">ava.h@graduate.utm.my</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Faculty</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Business</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-rejected">Rejected</span>
+</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-2">
+<button class="text-green-600 hover:text-green-800 font-semibold">Approve</button>
+</td>
+</tr>
+<tr class="hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="false">
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-[var(--text-primary)]">Liam Foster</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">liam.f@graduate.utm.my</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Student</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm text-[var(--text-secondary)]">Medicine</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-pending">Pending</span>
+</td>
+<td class="px-4 py-3 whitespace-nowrap text-sm font-medium space-x-2">
+<button class="text-green-600 hover:text-green-800 font-semibold">Approve</button>
+<button class="text-red-600 hover:text-red-800 font-semibold">Reject</button>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="divide-y divide-[var(--border-color)] @[768px]/tablecontainer:hidden">
+<div class="p-4 hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="false">
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-sm font-medium text-[var(--text-primary)]">Ethan Carter</h3>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-pending">Pending</span>
+</div>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Email: ethan.c@graduate.utm.my</p>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Role: Student</p>
+<p class="text-xs text-[var(--text-secondary)] mb-2">Faculty: Engineering</p>
+<div class="flex gap-2 mt-2">
+<button class="flex-1 text-xs font-medium text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100 border border-green-200 rounded-md py-1.5 px-3">Approve</button>
+<button class="flex-1 text-xs font-medium text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 border border-red-200 rounded-md py-1.5 px-3">Reject</button>
+</div>
+</div>
+<div class="p-4 hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="true">
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-sm font-medium text-[var(--text-primary)]">Olivia Bennett</h3>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-pending">Pending</span>
+</div>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Email: olivia.b@graduate.utm.my</p>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Role: Faculty</p>
+<p class="text-xs text-[var(--text-secondary)] mb-2">Faculty: Arts</p>
+<div class="flex gap-2 mt-2">
+<button class="flex-1 text-xs font-medium text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100 border border-green-200 rounded-md py-1.5 px-3">Approve</button>
+<button class="flex-1 text-xs font-medium text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 border border-red-200 rounded-md py-1.5 px-3">Reject</button>
+</div>
+</div>
+<div class="p-4 hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="false">
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-sm font-medium text-[var(--text-primary)]">Noah Thompson</h3>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-approved">Approved</span>
+</div>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Email: noah.t@graduate.utm.my</p>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Role: Student</p>
+<p class="text-xs text-[var(--text-secondary)] mb-2">Faculty: Science</p>
+<div class="flex gap-2 mt-2">
+<button class="flex-1 text-xs font-medium text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 border border-red-200 rounded-md py-1.5 px-3">Reject</button>
+</div>
+</div>
+<div class="p-4 hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="false">
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-sm font-medium text-[var(--text-primary)]">Ava Harper</h3>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-rejected">Rejected</span>
+</div>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Email: ava.h@graduate.utm.my</p>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Role: Faculty</p>
+<p class="text-xs text-[var(--text-secondary)] mb-2">Faculty: Business</p>
+<div class="flex gap-2 mt-2">
+<button class="flex-1 text-xs font-medium text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100 border border-green-200 rounded-md py-1.5 px-3">Approve</button>
+</div>
+</div>
+<div class="p-4 hover:bg-gray-50 cursor-pointer data-[selected=true]:bg-blue-50 data-[selected=true]:border-l-4 data-[selected=true]:border-[var(--primary-color)]" data-selected="false">
+<div class="flex justify-between items-center mb-2">
+<h3 class="text-sm font-medium text-[var(--text-primary)]">Liam Foster</h3>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-pending">Pending</span>
+</div>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Email: liam.f@graduate.utm.my</p>
+<p class="text-xs text-[var(--text-secondary)] mb-1">Role: Student</p>
+<p class="text-xs text-[var(--text-secondary)] mb-2">Faculty: Medicine</p>
+<div class="flex gap-2 mt-2">
+<button class="flex-1 text-xs font-medium text-green-600 hover:text-green-800 bg-green-50 hover:bg-green-100 border border-green-200 rounded-md py-1.5 px-3">Approve</button>
+<button class="flex-1 text-xs font-medium text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 border border-red-200 rounded-md py-1.5 px-3">Reject</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="w-full lg:w-96 bg-white border border-[var(--border-color)] rounded-lg shadow-sm lg:sticky lg:top-5 lg:self-start overflow-y-auto max-h-[calc(100vh-80px)] @[1024px]/main:block hidden data-[state=open]:block data-[state=open]:fixed data-[state=open]:inset-0 data-[state=open]:z-50 data-[state=open]:bg-white data-[state=open]:overflow-y-auto" data-state="closed">
+<div class="p-4 sm:p-6 sticky top-0 bg-white border-b border-[var(--border-color)] z-10 flex justify-between items-center">
+<h2 class="text-[var(--text-primary)] text-xl font-semibold leading-tight">Registration Details</h2>
+<button aria-label="Close panel" class="lg:hidden text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
+</button>
+</div>
+<div class="p-4 sm:p-6 space-y-4">
+<div>
+<h3 class="text-sm font-medium text-[var(--text-secondary)] mb-1">Name</h3>
+<p class="text-base text-[var(--text-primary)]">Olivia Bennett</p>
+</div>
+<div>
+<h3 class="text-sm font-medium text-[var(--text-secondary)] mb-1">Email</h3>
+<p class="text-base text-[var(--text-primary)]">olivia.b@graduate.utm.my</p>
+</div>
+<div>
+<h3 class="text-sm font-medium text-[var(--text-secondary)] mb-1">Role</h3>
+<p class="text-base text-[var(--text-primary)]">Faculty</p>
+</div>
+<div>
+<h3 class="text-sm font-medium text-[var(--text-secondary)] mb-1">Faculty</h3>
+<p class="text-base text-[var(--text-primary)]">Arts</p>
+</div>
+<div>
+<h3 class="text-sm font-medium text-[var(--text-secondary)] mb-1">Status</h3>
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium status-pending">Pending</span>
+</div>
+<div>
+<h3 class="text-sm font-medium text-[var(--text-secondary)] mb-1">Registration Date</h3>
+<p class="text-base text-[var(--text-primary)]">2024-01-15</p>
+</div>
+</div>
+<div class="p-4 sm:p-6 border-t border-[var(--border-color)]">
+<h2 class="text-[var(--text-primary)] text-xl font-semibold leading-tight mb-4">Uploaded Documents</h2>
+<div class="grid grid-cols-2 gap-3 @container">
+<div class="w-full bg-center bg-no-repeat bg-cover aspect-video rounded-md border border-[var(--border-color)] hover:opacity-80 transition-opacity cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC04OixyCgoWQ8QTBLIEKyYN70No0ADMTubkcG17WUuwc5hHnpl0kKs1AO-14neO64_JKwgD5iF5E6JYya7bPPcyaUCIrrzbFm0VJn-RgHN62s_5aK2r_6l1Hgob44W-M32RX-kLPzo8WDLsk42xa8r1FWhit_rRbrAicKd1CtVETV3yvYHrD5tgimIXNfN5VDu3JxLzqd5idu0XjjENgt6SNwTQf3L4MFn3Sbgzc1IvitTebrsKxWgLHTAOJgFYKXKZ4-70vbVjQ");'></div>
+<div class="w-full bg-center bg-no-repeat bg-cover aspect-video rounded-md border border-[var(--border-color)] hover:opacity-80 transition-opacity cursor-pointer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhM3WXcX0gOGzaeekiias-RmEo65L3PGeu64S5aG1pKNZF8Jahg7nVxd1mbu2IFOiTj_PBYo4megzjjSc6h1V7uFSPujbDXC3OrTX4WCYJTbJT896YLL8xzA1mU-Htl04BQACUdStdqkwd0YptePkCU5UUvx419gybZHrPo50LDQoWduDbl-PjWKnTutHS7_BMnWk1hQmtQs4_W70AKB8AzD6gCUpr9gDN0Rm6LVBZhS4gwkPPfw0_Mc8sMRLbQ2ghWooDYi69Pg");'></div>
+</div>
+</div>
+<div class="p-4 sm:p-6 border-t border-[var(--border-color)]">
+<h2 class="text-[var(--text-primary)] text-xl font-semibold leading-tight mb-4">Audit Log</h2>
+<div class="space-y-6">
+<div class="flex items-start gap-3">
+<div class="flex flex-col items-center mt-1">
+<div class="bg-[var(--primary-color)] text-white rounded-full p-1.5">
+<svg fill="currentColor" height="16px" viewBox="0 0 256 256" width="16px" xmlns="http://www.w3.org/2000/svg">
+<path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Z"></path>
+</svg>
+</div>
+<div class="w-px bg-[var(--border-color)] h-10 my-1"></div>
+</div>
+<div>
+<p class="text-sm font-medium text-[var(--text-primary)]">Registration Submitted</p>
+<p class="text-xs text-[var(--text-secondary)]">Olivia Bennett - 2024-01-15 10:00 AM</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="flex flex-col items-center mt-1">
+<div class="bg-yellow-400 text-yellow-900 rounded-full p-1.5">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
+</div>
+</div>
+<div>
+<p class="text-sm font-medium text-[var(--text-primary)]">Pending Approval</p>
+<p class="text-xs text-[var(--text-secondary)]">Awaiting review by Admin Staff</p>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 sm:p-6 border-t border-[var(--border-color)] sticky bottom-0 bg-white z-10">
+<div class="flex flex-col sm:flex-row gap-3">
+<button class="flex-1 flex items-center justify-center rounded-lg h-10 px-4 bg-green-600 text-white text-sm font-semibold hover:bg-green-700 transition-colors">
+                  Approve
+                </button>
+<button class="flex-1 flex items-center justify-center rounded-lg h-10 px-4 bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors">
+                  Reject
+                </button>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</div>
+<script>
+    const tableRows = document.querySelectorAll('tbody tr, .@[768px]\\/tablecontainer\\:hidden > div');
+    const sidePanel = document.querySelector('aside');
+    const closePanelButton = sidePanel.querySelector('button[aria-label="Close panel"]');
+    function deselectAllRows() {
+        tableRows.forEach(r => r.dataset.selected = 'false');
+    }
+    tableRows.forEach(row => {
+        row.addEventListener('click', (event) => {
+            // Prevent buttons inside the row from triggering the row click
+            if (event.target.tagName === 'BUTTON' || event.target.closest('button')) {
+                return;
+            }
+            deselectAllRows();
+            row.dataset.selected = 'true';
+            sidePanel.dataset.state = 'open';
+        });
+    });
+    if (closePanelButton) {
+        closePanelButton.addEventListener('click', () => {
+            sidePanel.dataset.state = 'closed';
+            deselectAllRows();
+        });
+    }
+    // Example of how to handle approve/reject actions (you'd add server-side logic here)
+    document.querySelectorAll('button.text-green-600, button.bg-green-600').forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent row click when clicking action button
+            console.log('Approve clicked');
+            // Add your approval logic here
+            // Potentially update status in the table and side panel
+        });
+    });
+    document.querySelectorAll('button.text-red-600, button.bg-red-600').forEach(button => {
+        button.addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent row click when clicking action button
+            console.log('Reject clicked');
+            // Add your rejection logic here
+            // Potentially update status in the table and side panel
+        });
+    });
+</script>
+</body></html>

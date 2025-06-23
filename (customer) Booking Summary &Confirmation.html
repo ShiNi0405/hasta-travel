@@ -1,0 +1,509 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B600%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>HASTA TRAVEL Car Rental</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #ec5b2c;
+      --primary-color-hover: #d65128;
+      --text-primary: #131516;
+      --text-secondary: #6b7680;
+      --text-on-primary: #ffffff;
+      --border-color: #dee1e3;
+      --background-light: #f8f9fa;
+    }
+    body {
+      font-family: 'Inter', "Noto Sans", sans-serif;
+    }
+    .btn-primary {
+      @apply bg-[var(--primary-color)] text-[var(--text-on-primary)] hover:bg-[var(--primary-color-hover)] transition-colors;
+    }
+    .btn-secondary {
+      @apply bg-white text-[var(--text-primary)] border border-[var(--border-color)] hover:bg-[var(--background-light)] transition-colors;
+    }
+    .input-group .form-input, .form-select, .form-textarea {
+      @apply focus:ring-2 focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)];
+    }
+    .calendar-time-slot { @apply h-12 border-b border-l border-[var(--border-color)] flex items-center justify-center text-xs text-[var(--text-secondary)]; }
+    .calendar-available { @apply bg-green-50 hover:bg-green-100 cursor-pointer transition-colors; }
+    .calendar-booked { @apply bg-red-500 opacity-70 cursor-not-allowed; }.calendar-staff-blocked { @apply bg-yellow-400 opacity-70 cursor-not-allowed; }.calendar-past { @apply bg-gray-200 text-gray-400 cursor-not-allowed; }
+    .calendar-selected { @apply bg-blue-400 border-blue-600 ring-2 ring-blue-500; }
+    .time-slot-bar { @apply absolute inset-y-0 left-0 w-full h-full opacity-70; }
+    .time-slot-label { @apply relative z-10; }
+  </style>
+</head>
+<body>
+<div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] bg-white/90 px-6 py-4 backdrop-blur-md md:px-10">
+<div class="flex items-center gap-3 text-[var(--text-primary)]">
+<div class="size-8 text-[var(--primary-color)]">
+<svg class="size-full" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h1 class="text-[var(--primary-color)] text-2xl font-bold leading-tight tracking-[-0.015em]">HASTA TRAVEL</h1>
+</div>
+<nav class="hidden items-center gap-6 md:flex">
+<a class="text-[var(--text-primary)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors" href="#">Book a Car</a>
+<a class="text-[var(--text-secondary)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors" href="#">My Bookings</a>
+<a class="text-[var(--text-secondary)] text-sm font-medium leading-normal hover:text-[var(--primary-color)] transition-colors" href="#">Help</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="btn-secondary flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 text-sm font-semibold leading-normal tracking-[0.015em]">
+<span class="truncate">Log In</span>
+</button>
+<button class="md:hidden text-[var(--text-primary)]">
+<svg fill="currentColor" height="24" viewBox="0 0 256 256" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,88H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
+</svg>
+</button>
+</div>
+</header>
+<main class="flex flex-1 flex-col items-center py-8 md:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+<div class="layout-content-container flex w-full max-w-4xl flex-col gap-8 md:gap-12">
+<section class="bg-white border border-[var(--border-color)] rounded-xl p-6 shadow-lg">
+<h2 class="text-2xl font-semibold text-[var(--text-primary)] mb-6">Step 1: Your Information</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="matricNumber">Matric Number</label>
+<input class="form-input w-full rounded-md border-[var(--border-color)]" id="matricNumber" name="matricNumber" placeholder="e.g., A20EC0000" type="text" value="A20EC0123"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="icNumber">IC Number</label>
+<input class="form-input w-full rounded-md border-[var(--border-color)]" id="icNumber" name="icNumber" placeholder="e.g., 001234-01-5678" type="text" value="001234-01-5678"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="phoneNumber">Phone Number</label>
+<input class="form-input w-full rounded-md border-[var(--border-color)]" id="phoneNumber" name="phoneNumber" placeholder="e.g., 012-3456789" type="tel" value="012-3456789"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="faculty">Faculty</label>
+<select class="form-select w-full rounded-md border-[var(--border-color)]" id="faculty" name="faculty">
+<option>Faculty of Engineering</option>
+<option>Faculty of Science</option>
+<option>Faculty of Social Sciences &amp; Humanities</option>
+<option>Faculty of Built Environment &amp; Surveying</option>
+<option selected="">Faculty of Computing</option>
+</select>
+</div>
+<div class="md:col-span-2">
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="address">Address</label>
+<textarea class="form-textarea w-full rounded-md border-[var(--border-color)]" id="address" name="address" placeholder="Your full address" rows="3">Kolej Tun Dr Ismail, Universiti Teknologi Malaysia, 81310 Johor Bahru, Johor</textarea>
+</div>
+</div>
+</section>
+<section class="bg-white border border-[var(--border-color)] rounded-xl p-6 shadow-lg">
+<h2 class="text-2xl font-semibold text-[var(--text-primary)] mb-6">Step 2: Booking Details</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="carType">Select Car Type</label>
+<select class="form-select w-full rounded-md border-[var(--border-color)]" id="carType" name="carType">
+<option value="Axia">Axia</option>
+<option selected="" value="Bezza">Bezza</option>
+<option value="Myvi 2nd Gen">Myvi 2nd Gen</option>
+<option value="Saga">Saga</option>
+<option value="Motorbike">Motorbike</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="destination">Destination</label>
+<input class="form-input w-full rounded-md border-[var(--border-color)]" id="destination" name="destination" placeholder="e.g., Paradigm Mall JB" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="pickupDateTime">Pickup Date &amp; Time</label>
+<button class="btn-secondary w-full flex items-center justify-between px-3 py-2 rounded-md text-sm" id="openPickupCalendar" type="button">
+<span id="pickupDisplay">Select Pickup Time</span>
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+</button>
+<input id="pickupDateTime" name="pickupDateTime" type="hidden"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="pickupLocation">Pickup Location</label>
+<input class="form-input w-full rounded-md border-[var(--border-color)]" id="pickupLocation" name="pickupLocation" placeholder="e.g., KTDI Parking Lot" type="text" value="KTDI Parking Lot"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="returnDateTime">Return Date &amp; Time</label>
+<button class="btn-secondary w-full flex items-center justify-between px-3 py-2 rounded-md text-sm" id="openReturnCalendar" type="button">
+<span id="returnDisplay">Select Return Time</span>
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+</button>
+<input id="returnDateTime" name="returnDateTime" type="hidden"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1" for="returnLocation">Return Location</label>
+<input class="form-input w-full rounded-md border-[var(--border-color)]" id="returnLocation" name="returnLocation" placeholder="e.g., KTDI Parking Lot" type="text" value="KTDI Parking Lot"/>
+</div>
+<div class="md:col-span-2">
+<label class="block text-sm font-medium text-[var(--text-secondary)] mb-1">Rental Duration</label>
+<p class="text-lg font-semibold text-[var(--text-primary)]" id="rentalDuration">- hours - minutes</p>
+</div>
+</div>
+</section>
+<div class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-[100] hidden" id="calendarModal">
+<div class="bg-white p-6 rounded-lg shadow-xl w-full max-w-md mx-4 sm:max-w-xl md:max-w-2xl">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xl font-semibold text-[var(--text-primary)]">Select Time Slot - <span id="calendarCarType">Bezza</span></h3>
+<button class="text-[var(--text-secondary)] hover:text-[var(--text-primary)]" id="closeCalendarModal">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg>
+</button>
+</div>
+<div class="flex items-center justify-between mb-4">
+<button class="p-2 rounded hover:bg-gray-200 text-[var(--primary-color)] hover:text-[var(--primary-color-hover)]" id="prevDay">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polyline points="15 18 9 12 15 6"></polyline></svg>
+</button>
+<div class="text-lg font-medium text-[var(--text-primary)]" id="calendarHeaderDate">June 23, 2025</div>
+<button class="p-2 rounded hover:bg-gray-200 text-[var(--primary-color)] hover:text-[var(--primary-color-hover)]" id="nextDay">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</button>
+</div>
+<div class="mb-4 flex flex-wrap gap-x-4 gap-y-2 text-xs">
+<span class="flex items-center"><span class="w-3 h-3 bg-green-500 mr-1.5 rounded-sm"></span>Available</span>
+<span class="flex items-center"><span class="w-3 h-3 bg-red-500 mr-1.5 rounded-sm"></span>Booked</span>
+<span class="flex items-center"><span class="w-3 h-3 bg-yellow-400 mr-1.5 rounded-sm"></span>Staff Blocked</span>
+<span class="flex items-center"><span class="w-3 h-3 bg-gray-300 mr-1.5 rounded-sm"></span>Past</span>
+<span class="flex items-center"><span class="w-3 h-3 bg-blue-400 mr-1.5 rounded-sm"></span>Selected</span>
+</div>
+<div class="grid grid-cols-[auto_1fr] border-t border-r border-[var(--border-color)] max-h-80 overflow-y-auto" id="calendarGrid">
+</div>
+<div class="mt-6 flex justify-end">
+<button class="btn-secondary px-4 py-2 rounded-md text-sm font-medium mr-2" id="cancelTimeSelection">Cancel</button>
+<button class="btn-primary px-6 py-2 rounded-md text-sm font-semibold" id="confirmTimeSelection">Confirm Selection</button>
+</div>
+</div>
+</div>
+<section class="bg-white border border-[var(--border-color)] rounded-xl p-6 shadow-lg">
+<h2 class="text-2xl font-semibold text-[var(--text-primary)] mb-6">Step 3: Price Confirmation</h2>
+<div class="bg-gray-50 p-4 rounded-md border border-gray-200">
+<p class="text-sm text-[var(--text-secondary)]">Car Type: <span class="font-medium text-[var(--text-primary)]" id="confirmCarType">Bezza</span></p>
+<p class="text-sm text-[var(--text-secondary)]">Rental Duration: <span class="font-medium text-[var(--text-primary)]" id="confirmRentalDuration">- hours - minutes</span></p>
+<p class="text-2xl font-bold text-[var(--primary-color)] mt-2">Total Price: <span id="totalPrice">RM 0.00</span></p>
+<p class="text-xs text-[var(--text-secondary)] mt-2">
+                Pricing (per hour): Axia/Saga (RM5), Bezza/Myvi (RM7), Motorbike (RM3). <br/>
+                Discounts: 10% for &gt;5 hours, 20% for &gt;10 hours. Minimum 1 hour charge.
+              </p>
+</div>
+<button class="btn-primary w-full mt-6 py-3 rounded-md text-lg font-semibold" type="submit">Submit Booking</button>
+</section>
+</div>
+</main>
+<footer class="border-t border-[var(--border-color)] bg-[var(--background-light)] py-8 px-4 sm:px-6 lg:px-8">
+<div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<div class="size-7 text-[var(--primary-color)]">
+<svg class="size-full" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<h3 class="text-xl font-semibold text-[var(--primary-color)]">HASTA TRAVEL</h3>
+</div>
+<p class="text-sm text-[var(--text-secondary)] leading-relaxed">Your campus journey, simplified. Rent with HASTA for ease and reliability.</p>
+</div>
+<div>
+<h4 class="text-md font-semibold text-[var(--text-primary)] mb-4">Quick Links</h4>
+<ul class="space-y-2">
+<li><a class="text-sm text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors" href="#">Book a Car</a></li>
+<li><a class="text-sm text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors" href="#">Pricing</a></li>
+<li><a class="text-sm text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors" href="#">Help Center</a></li>
+<li><a class="text-sm text-[var(--text-secondary)] hover:text-[var(--primary-color)] transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-md font-semibold text-[var(--text-primary)] mb-4">Contact Us</h4>
+<ul class="space-y-2 text-sm text-[var(--text-secondary)]">
+<li>Email: support@hastatravel.my</li>
+<li>Phone: +60 10-123 4567</li>
+<li>
+<div class="flex space-x-3 mt-2">
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)]" href="#"><svg fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM177.09,51.13a60.06,60.06,0,0,0-22.05-14.15,64.1,64.1,0,0,0-54.08,0,60.06,60.06,0,0,0-22.05,14.15,60.76,60.76,0,0,0-14.16,22.05,64.1,64.1,0,0,0,0,54.08,60.76,60.76,0,0,0,14.16,22.05,60.06,60.06,0,0,0,22.05,14.15,64.1,64.1,0,0,0,54.08,0,60.06,60.06,0,0,0,22.05-14.15,60.76,60.76,0,0,0,14.16-22.05,64.1,64.1,0,0,0,0-54.08A60.76,60.76,0,0,0,177.09,51.13ZM201.6,148.2a44.54,44.54,0,0,1-8.45,15.74,44.78,44.78,0,0,1-15.73,8.45,48.53,48.53,0,0,1-49.42,0,44.78,44.78,0,0,1-15.73-8.45,44.54,44.54,0,0,1-8.45-15.74,48.53,48.53,0,0,1,0-49.42,44.54,44.54,0,0,1,8.45-15.73,44.78,44.78,0,0,1,15.73-8.45,48.53,48.53,0,0,1,49.42,0,44.78,44.78,0,0,1,15.73,8.45,44.54,44.54,0,0,1,8.45,15.73,48.53,48.53,0,0,1,0,49.42Z"></path></svg></a>
+<a class="text-[var(--text-secondary)] hover:text-[var(--primary-color)]" href="#"><svg fill="currentColor" height="20" viewBox="0 0 256 256" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M240,72a16,16,0,0,0-16-16H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V72Zm-16,0L128,127,32,72ZM32,184V82.69l92.38,57.73a8,8,0,0,0,7.24,0L224,82.69V184Z"></path></svg></a>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="mt-8 pt-8 border-t border-[var(--border-color)] text-center text-sm text-[var(--text-secondary)]">
+          © 2024 HASTA TRAVEL. All rights reserved.
+        </div>
+</footer>
+</div>
+</div>
+<script>
+    const openPickupCalendarBtn = document.getElementById('openPickupCalendar');
+    const openReturnCalendarBtn = document.getElementById('openReturnCalendar');
+    const calendarModal = document.getElementById('calendarModal');
+    const closeCalendarModalBtn = document.getElementById('closeCalendarModal');
+    const confirmTimeSelectionBtn = document.getElementById('confirmTimeSelection');
+    const cancelTimeSelectionBtn = document.getElementById('cancelTimeSelection');
+    const carTypeSelect = document.getElementById('carType');
+    const calendarCarType = document.getElementById('calendarCarType');
+    const calendarGrid = document.getElementById('calendarGrid');
+    const calendarHeaderDate = document.getElementById('calendarHeaderDate');
+    const prevDayBtn = document.getElementById('prevDay');
+    const nextDayBtn = document.getElementById('nextDay');
+    let currentCalendarTarget = null; // 'pickup' or 'return'
+    let currentDisplayedDate = new Date(2025, 5, 23); // June 23, 2025
+    let selectedStartTime = null;
+    let selectedEndTime = null;
+    let isSelecting = false;
+    // Dummy booking data for display purposes
+    const carBookings = {
+        "Bezza": {
+            "2025-06-23": [ {start: 0, end: 1, type: 'booked'}, {start: 8, end: 9, type: 'booked'}, {start: 16, end: 17, type: 'booked'} ],
+            "2025-06-24": [ {start: 10, end: 12, type: 'staff-blocked'} ]
+        },
+        "Axia": {
+             "2025-06-23": [ {start: 2, end: 4, type: 'booked'} ]
+        }
+        // Add more car types and dates as needed
+    };
+    function formatDate(date) {
+        return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    }
+    function formatDateISO(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+    function generateCalendarSlots() {
+        calendarGrid.innerHTML = '';
+        const currentCar = carTypeSelect.value;
+        const dateKey = formatDateISO(currentDisplayedDate);
+        const bookingsForDay = (carBookings[currentCar] && carBookings[currentCar][dateKey]) ? carBookings[currentCar][dateKey] : [];
+        const now = new Date();
+        const isToday = currentDisplayedDate.toDateString() === now.toDateString();
+        for (let hour = 0; hour < 24; hour++) {
+            const timeLabel = `${String(hour).padStart(2, '0')}:00`;
+            const timeSlotLabelDiv = document.createElement('div');
+            timeSlotLabelDiv.className = 'calendar-time-slot !border-l-0 time-slot-label';
+            timeSlotLabelDiv.textContent = timeLabel;
+            calendarGrid.appendChild(timeSlotLabelDiv);
+            const timeSlotDiv = document.createElement('div');
+            timeSlotDiv.className = 'calendar-time-slot relative';
+            timeSlotDiv.dataset.hour = hour;
+            let slotStatus = 'available';
+            let isPastHour = false;
+            if (isToday && hour < now.getHours()) {
+                slotStatus = 'past';
+                isPastHour = true;
+            } else if (currentDisplayedDate < now && !isToday) {
+                 slotStatus = 'past';
+                 isPastHour = true;
+            }
+            for (const booking of bookingsForDay) {
+                if (hour >= booking.start && hour < booking.end) {
+                    slotStatus = booking.type;
+                    break;
+                }
+            }
+            timeSlotDiv.classList.add(`calendar-${slotStatus}`);
+            if (slotStatus === 'booked' || slotStatus === 'staff-blocked') {
+                const bar = document.createElement('div');
+                bar.className = `time-slot-bar ${slotStatus === 'booked' ? 'bg-red-500' : 'bg-yellow-400'}`;
+                timeSlotDiv.appendChild(bar);
+            }
+            if (!isPastHour && slotStatus === 'available') {
+                 timeSlotDiv.addEventListener('mousedown', handleSlotMouseDown);
+                 timeSlotDiv.addEventListener('mouseover', handleSlotMouseOver);
+            }
+            calendarGrid.appendChild(timeSlotDiv);
+        }
+        // Add mouseup listener to the document to handle drag end
+        document.addEventListener('mouseup', handleSlotMouseUp);
+        updateSelectedSlotsUI();
+    }
+    function handleSlotMouseDown(event) {
+        const hour = parseInt(event.target.closest('.calendar-time-slot').dataset.hour);
+        if (event.target.closest('.calendar-time-slot').classList.contains('calendar-available')) {
+            isSelecting = true;
+            selectedStartTime = hour;
+            selectedEndTime = hour; // Start with a single hour selection
+            updateSelectedSlotsUI();
+        }
+    }
+    function handleSlotMouseOver(event) {
+        if (isSelecting) {
+            const hour = parseInt(event.target.closest('.calendar-time-slot').dataset.hour);
+             if (event.target.closest('.calendar-time-slot').classList.contains('calendar-available')) {
+                selectedEndTime = hour;
+                updateSelectedSlotsUI();
+            }
+        }
+    }
+    function handleSlotMouseUp() {
+        if (isSelecting) {
+            isSelecting = false;
+            // Ensure start time is before end time
+            if (selectedStartTime !== null && selectedEndTime !== null && selectedStartTime > selectedEndTime) {
+                [selectedStartTime, selectedEndTime] = [selectedEndTime, selectedStartTime];
+            }
+            updateSelectedSlotsUI(); // Final update
+        }
+    }
+    function updateSelectedSlotsUI() {
+        const slots = calendarGrid.querySelectorAll('.calendar-time-slot[data-hour]');
+        slots.forEach(slotEl => {
+            slotEl.classList.remove('calendar-selected');
+            const hour = parseInt(slotEl.dataset.hour);
+            if (selectedStartTime !== null && selectedEndTime !== null) {
+                const start = Math.min(selectedStartTime, selectedEndTime);
+                const end = Math.max(selectedStartTime, selectedEndTime);
+                if (hour >= start && hour <= end) {
+                     // Check if any part of the selection is not available
+                    let canSelect = true;
+                    for (let h = start; h <= end; h++) {
+                        const currentSlot = calendarGrid.querySelector(`.calendar-time-slot[data-hour="${h}"]`);
+                        if (!currentSlot || !currentSlot.classList.contains('calendar-available')) {
+                             // If it's not available and not already part of the current selection (i.e. being dragged over)
+                            if(!currentSlot.classList.contains('calendar-selected')){
+                                canSelect = false;
+                                break;
+                            }
+                        }
+                    }
+                    if(canSelect){
+                         slotEl.classList.add('calendar-selected');
+                    } else { // Reset if selection is invalid
+                        if(hour >= start && hour <= end) { // Only remove from the intended selection range
+                           slotEl.classList.remove('calendar-selected');
+                        }
+                        // If the invalid slot is where the drag started or ended, reset selection.
+                        if(hour === selectedStartTime || hour === selectedEndTime){
+                           selectedStartTime = null;
+                           selectedEndTime = null;
+                        }
+                    }
+                }
+            }
+        });
+    }
+    function openModal(target) {
+        currentCalendarTarget = target;
+        calendarCarType.textContent = carTypeSelect.value;
+        calendarHeaderDate.textContent = formatDate(currentDisplayedDate);
+        selectedStartTime = null; // Reset selection when modal opens
+        selectedEndTime = null;
+        generateCalendarSlots();
+        calendarModal.classList.remove('hidden');
+    }
+    function closeModal() {
+        calendarModal.classList.add('hidden');
+        currentCalendarTarget = null;
+         // Remove document mouseup listener when modal is closed
+        document.removeEventListener('mouseup', handleSlotMouseUp);
+    }
+    openPickupCalendarBtn.addEventListener('click', () => openModal('pickup'));
+    openReturnCalendarBtn.addEventListener('click', () => openModal('return'));
+    closeCalendarModalBtn.addEventListener('click', closeModal);
+    cancelTimeSelectionBtn.addEventListener('click', closeModal);
+    confirmTimeSelectionBtn.addEventListener('click', () => {
+        if (selectedStartTime === null || selectedEndTime === null) {
+            alert("Please select a time range.");
+            return;
+        }
+        // Ensure start is before end
+        const startHour = Math.min(selectedStartTime, selectedEndTime);
+        const endHour = Math.max(selectedStartTime, selectedEndTime) + 1; // End hour is exclusive in Date, so add 1
+        if (startHour === endHour) { // Min 1 hour booking
+             alert("Minimum booking duration is 1 hour.");
+             return;
+        }
+        // Check for overlap with booked/staff-blocked slots in the selected range
+        for (let h = startHour; h < endHour; h++) {
+            const slotToCheck = calendarGrid.querySelector(`.calendar-time-slot[data-hour="${h}"]`);
+            if (slotToCheck && (slotToCheck.classList.contains('calendar-booked') || slotToCheck.classList.contains('calendar-staff-blocked') || slotToCheck.classList.contains('calendar-past'))) {
+                alert("Your selection includes unavailable time slots. Please choose a different range.");
+                return;
+            }
+        }
+        const selectedDate = new Date(currentDisplayedDate);
+        selectedDate.setHours(startHour, 0, 0, 0);
+        const dateString = selectedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+        const timeString = selectedDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+        if (currentCalendarTarget === 'pickup') {
+            document.getElementById('pickupDateTime').value = selectedDate.toISOString();
+            document.getElementById('pickupDisplay').textContent = `${dateString}, ${timeString}`;
+        } else if (currentCalendarTarget === 'return') {
+            const returnSelectedDate = new Date(currentDisplayedDate);
+            returnSelectedDate.setHours(endHour, 0, 0, 0); // Use endHour for return
+            const returnDateString = returnSelectedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+            const returnTimeString = returnSelectedDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+            document.getElementById('returnDateTime').value = returnSelectedDate.toISOString();
+            document.getElementById('returnDisplay').textContent = `${returnDateString}, ${returnTimeString}`;
+        }
+        updatePriceAndDuration();
+        closeModal();
+    });
+    prevDayBtn.addEventListener('click', () => {
+        currentDisplayedDate.setDate(currentDisplayedDate.getDate() - 1);
+        calendarHeaderDate.textContent = formatDate(currentDisplayedDate);
+        selectedStartTime = null; selectedEndTime = null; // Reset selection on date change
+        generateCalendarSlots();
+    });
+    nextDayBtn.addEventListener('click', () => {
+        currentDisplayedDate.setDate(currentDisplayedDate.getDate() + 1);
+        calendarHeaderDate.textContent = formatDate(currentDisplayedDate);
+        selectedStartTime = null; selectedEndTime = null; // Reset selection on date change
+        generateCalendarSlots();
+    });
+    carTypeSelect.addEventListener('change', () => {
+         updatePriceAndDuration();
+         if (!calendarModal.classList.contains('hidden')) { // If modal is open, refresh calendar for new car type
+            calendarCarType.textContent = carTypeSelect.value;
+            selectedStartTime = null; selectedEndTime = null;
+            generateCalendarSlots();
+         }
+    });
+    function updatePriceAndDuration() {
+        const carType = document.getElementById('carType').value;
+        const pickupTimeString = document.getElementById('pickupDateTime').value;
+        const returnTimeString = document.getElementById('returnDateTime').value;
+        document.getElementById('confirmCarType').textContent = carTypeSelect.options[carTypeSelect.selectedIndex].text;
+        if (pickupTimeString && returnTimeString) {
+            const pickupDate = new Date(pickupTimeString);
+            const returnDate = new Date(returnTimeString);
+            let diffMillis = returnDate.getTime() - pickupDate.getTime();
+            if (diffMillis < 0) {
+                document.getElementById('rentalDuration').textContent = "Invalid date/time";
+                document.getElementById('confirmRentalDuration').textContent = "Invalid date/time";
+                document.getElementById('totalPrice').textContent = "RM 0.00";
+                return;
+            }
+            if (diffMillis > 0 && diffMillis < 3600000) { // Less than 1 hour but positive
+                diffMillis = 3600000; // Snap to 1 hour minimum
+            }
+            const diffHoursTotal = diffMillis / (1000 * 60 * 60);
+            const diffHours = Math.floor(diffHoursTotal);
+            const diffMinutes = Math.round((diffHoursTotal - diffHours) * 60);
+            document.getElementById('rentalDuration').textContent = `${diffHours} hours ${diffMinutes} minutes`;
+            document.getElementById('confirmRentalDuration').textContent = `${diffHours} hours ${diffMinutes} minutes`;
+            let pricePerHour;
+            switch (carType) {
+                case 'Axia': case 'Saga': pricePerHour = 5; break;
+                case 'Bezza': case 'Myvi 2nd Gen': pricePerHour = 7; break;
+                case 'Motorbike': pricePerHour = 3; break;
+                default: pricePerHour = 0;
+            }
+            let totalPrice = diffHoursTotal * pricePerHour;
+            if (diffHoursTotal > 10) {
+                totalPrice *= 0.8; // 20% discount
+            } else if (diffHoursTotal > 5) {
+                totalPrice *= 0.9; // 10% discount
+            }
+            document.getElementById('totalPrice').textContent = `RM ${totalPrice.toFixed(2)}`;
+        } else {
+            document.getElementById('rentalDuration').textContent = `- hours - minutes`;
+            document.getElementById('confirmRentalDuration').textContent = `- hours - minutes`;
+            document.getElementById('totalPrice').textContent = `RM 0.00`;
+        }
+    }
+    // Initial call
+    updatePriceAndDuration();
+</script>
+
+</body></html> 

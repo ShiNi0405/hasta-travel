@@ -1,0 +1,350 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Public+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #ec5b2c;
+        --secondary-color: #6c757d;
+        --success-color: #198754;
+        --danger-color: #dc3545;
+        --warning-color: #ffc107;
+        --info-color: #0dcaf0;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+      }
+      .nav-link-active {
+        color: var(--primary-color) !important;
+        font-weight: 700;
+        border-bottom: 2px solid var(--primary-color);
+      }
+      .table th {
+        @apply text-sm font-medium text-slate-700 py-3 px-4 text-left bg-slate-100;
+      }
+      .table td {
+        @apply text-sm text-slate-600 py-3 px-4 border-t border-slate-200;
+      }
+      .btn-primary {
+        @apply bg-[var(--primary-color)] text-white hover:bg-orange-600 focus:ring-orange-500;
+      }
+      .btn-danger {
+        @apply bg-[var(--danger-color)] text-white hover:bg-red-600 focus:ring-red-500;
+      }
+      .btn-outline-secondary {
+        @apply bg-transparent border border-slate-300 text-slate-700 hover:bg-slate-100 focus:ring-slate-200;
+      }
+      .icon-warning {
+        color: var(--warning-color);
+      }
+      .icon-danger {
+        color: var(--danger-color);
+      }
+      .icon-success {
+        color: var(--success-color);
+      }@media (max-width: 768px) {
+        .table thead {
+          display: none;
+        }
+        .table tbody, .table tr, .table td {
+          display: block;
+          width: 100%;
+        }
+        .table tr {
+          @apply mb-4 border rounded-lg shadow-sm bg-white;
+        }
+        .table td {
+          @apply text-right relative p-3 border-none;
+          padding-left: 50%;
+        }
+        .table td::before {
+          content: attr(data-label);
+          position: absolute;
+          left: 0;
+          width: 45%;
+          padding-left: 1rem;
+          font-weight: 600;
+          text-align: left;
+          white-space: nowrap;
+        }
+        .table td:last-child {
+         @apply text-center;
+         padding-left: 0;
+        }
+        .table td:last-child::before {
+         display:none;
+        }
+        .mobile-nav-toggle {
+          display: block;
+        }
+        .desktop-nav {
+          display: none;
+        }
+        .main-nav {
+         @apply absolute top-16 left-0 right-0 bg-white shadow-lg py-2 z-50;
+        }
+        .main-nav a {
+          @apply block px-6 py-3 text-slate-700 hover:bg-slate-50;
+        }
+      }
+      .mobile-nav-toggle {
+        display: none;
+      }
+      .modal {
+        @apply fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center z-50 p-4;
+        display: none;}
+      .modal-content {
+        @apply bg-white p-6 rounded-lg shadow-xl w-full max-w-md;
+      }
+    </style>
+</head>
+<body class="bg-slate-100" style='font-family: "Public Sans", "Noto Sans", sans-serif;'>
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="sticky top-0 z-40 bg-white shadow-sm">
+<div class="w-full flex items-center justify-between whitespace-nowrap px-4 sm:px-6 lg:px-8 py-3">
+  <div class="flex items-center gap-3 text-[var(--dark-color)]">
+  <img src="logo.jpeg" alt="Hasta Travel Logo" class="h-8 w-auto object-contain" />
+</div>
+<nav class="hidden md:flex items-center gap-6 desktop-nav main-nav">
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Home</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Book a Car</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">My Bookings</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Make Payment</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Sign Contract</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2 nav-link-active relative" href="#">
+                Outstanding Payments
+                <span class="absolute top-0 right-0 -mt-1 -mr-1 flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--danger-color)] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[var(--danger-color)]"></span>
+</span>
+</a>
+<a class="text-slate-600 hover:text-[var(--primary-color)] text-sm font-medium py-2" href="#">Feedback</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="relative p-2 rounded-full hover:bg-slate-100 text-slate-600">
+<span class="material-icons-outlined">notifications</span>
+<span class="absolute top-1 right-1 flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--danger-color)] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[var(--danger-color)]"></span>
+</span>
+</button>
+<button class="flex items-center gap-2 p-1 rounded-full hover:bg-slate-100">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAs1qZBjIN75m4lBbN292fwVBdefdxH4ai5zp3w_ZC6AMmhCYumUOpSEnraRUslpUz46tZdSviDro42eEi4k8DGTvPFtEMBlpgWfeE1qawQEyfKA7FA3bQGKrCIPH1BfBYWxSIB55EGQ1OQW6Bag9MLE53Gixm8309yflpmtUR3NZdR4x06B4Xh37w_nPPN73urxnQQDZLDbZqB7O0XMKBRvP79_6_g-hrm5GMHZSik8Mez_2U4fCKyvwh7gRGGGXc5_ynu40h72LBG");'></div>
+<span class="material-icons-outlined text-slate-600 hidden sm:inline">expand_more</span>
+</button>
+<button class="md:hidden p-2 rounded-md hover:bg-slate-100 text-slate-600 mobile-nav-toggle" id="mobileMenuButton">
+<span class="material-icons-outlined">menu</span>
+</button>
+</div>
+</div>
+<div class="hidden md:hidden bg-white shadow-lg py-2 z-50" id="mobileMenu">
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Home</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Book a Car</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">My Bookings</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Make Payment</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Sign Contract</a>
+<a class="block px-6 py-3 text-[var(--primary-color)] font-semibold" href="#">Outstanding Payments</a>
+<a class="block px-6 py-3 text-slate-700 hover:bg-slate-100 hover:text-[var(--primary-color)]" href="#">Feedback</a>
+</div>
+</header>
+<main class="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="space-y-4 mb-8">
+<div class="bg-orange-50 border-l-4 border-[var(--primary-color)] text-orange-700 p-4 rounded-md shadow" role="alert">
+<div class="flex">
+<div class="py-1"><span class="material-icons-outlined mr-2 text-[var(--primary-color)]">info</span></div>
+<div>
+<p class="font-bold">Outstanding Charges</p>
+<p class="text-sm">You have outstanding charges. Late payment may incur additional penalties. Please review the details below.</p>
+</div>
+</div>
+</div>
+<div class="bg-red-100 border-l-4 border-[var(--danger-color)] text-red-700 p-4 rounded-md shadow" role="alert">
+<div class="flex">
+<div class="py-1"><span class="material-icons-outlined mr-2 icon-danger">warning</span></div>
+<div>
+<p class="font-bold">Payment Overdue!</p>
+<p class="text-sm">Your payment is overdue. Please settle the amount immediately to avoid further charges and service disruption.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-lg shadow-lg">
+<h1 class="text-2xl sm:text-3xl font-bold text-slate-800 mb-6">Outstanding Payments</h1>
+<div class="overflow-x-auto @container">
+<table class="w-full table">
+<thead>
+<tr>
+<th>Type</th>
+<th class="text-right">Amount (RM)</th>
+<th>Due Date</th>
+<th class="text-center">Status</th>
+<th class="text-center">Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Type">Summons</td>
+<td class="text-right" data-label="Amount (RM)">150.00</td>
+<td data-label="Due Date">2024-07-15</td>
+<td class="text-center" data-label="Status">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+<span class="material-icons-outlined text-sm mr-1 icon-warning">error_outline</span>
+                        Unpaid
+                      </span>
+</td>
+<td class="text-center" data-label="Action">
+<button class="btn-primary text-xs font-semibold px-4 py-2 rounded-md shadow-sm pay-now-btn">Pay Now</button>
+</td>
+</tr>
+<tr>
+<td data-label="Type">Damage</td>
+<td class="text-right" data-label="Amount (RM)">300.00</td>
+<td data-label="Due Date">2024-07-20</td>
+<td class="text-center" data-label="Status">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+<span class="material-icons-outlined text-sm mr-1 icon-danger">warning_amber</span>
+                        Overdue
+                      </span>
+</td>
+<td class="text-center" data-label="Action">
+<button class="btn-primary text-xs font-semibold px-4 py-2 rounded-md shadow-sm pay-now-btn">Pay Now</button>
+</td>
+</tr>
+<tr>
+<td data-label="Type">Late Return</td>
+<td class="text-right" data-label="Amount (RM)">50.00</td>
+<td data-label="Due Date">2024-06-25</td>
+<td class="text-center" data-label="Status">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+<span class="material-icons-outlined text-sm mr-1 icon-success">check_circle_outline</span>
+                        Paid
+                      </span>
+</td>
+<td class="text-center" data-label="Action">
+<button class="text-xs font-semibold px-4 py-2 rounded-md text-slate-500 cursor-not-allowed" disabled="">Paid</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<footer class="bg-[var(--primary-color)] text-white py-12">
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+<div>
+<h3 class="text-lg font-semibold text-white mb-3">Hasta Travel</h3>
+<p class="text-sm text-orange-100">Your reliable partner for car rentals. Easy booking, transparent pricing, and excellent service.</p>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-white mb-3">Quick Links</h3>
+<ul class="space-y-2 text-sm">
+<li><a class="text-orange-100 hover:text-white" href="#">About Us</a></li>
+<li><a class="text-orange-100 hover:text-white" href="#">Support Center</a></li>
+<li><a class="text-orange-100 hover:text-white" href="#">Terms of Service</a></li>
+<li><a class="text-orange-100 hover:text-white" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-white mb-3">Contact Us</h3>
+<ul class="space-y-2 text-sm text-orange-100">
+<li><span class="material-icons-outlined text-sm mr-1 align-middle">email</span> support@Hastatravel.example</li>
+<li><span class="material-icons-outlined text-sm mr-1 align-middle">phone</span> +1 (555) 123-4567</li>
+<li><span class="material-icons-outlined text-sm mr-1 align-middle">location_on</span> 123 Auto Drive, Car City, CA 90210</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-orange-400 pt-8 text-center text-sm text-orange-100">
+<p>© 2024 Hasta Travel. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</div>
+</div>
+<div class="modal" id="paymentModal">
+<div class="modal-content">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-xl font-semibold text-slate-800">Confirm Payment</h2>
+<button class="text-slate-500 hover:text-slate-700" id="closeModalButton">
+<span class="material-icons-outlined">close</span>
+</button>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-slate-700" for="paymentType">Type</label>
+<input class="mt-1 block w-full px-3 py-2 bg-slate-100 border border-slate-300 rounded-md shadow-sm focus:outline-none sm:text-sm" id="paymentType" name="paymentType" readonly="" type="text" value="Summons"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700" for="paymentAmount">Amount (RM)</label>
+<input class="mt-1 block w-full px-3 py-2 bg-slate-100 border border-slate-300 rounded-md shadow-sm focus:outline-none sm:text-sm" id="paymentAmount" name="paymentAmount" readonly="" type="text" value="150.00"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-700" for="paymentMethod">Payment Method</label>
+<select class="mt-1 block w-full px-3 py-2 border border-slate-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] sm:text-sm" id="paymentMethod" name="paymentMethod">
+<option>Credit/Debit Card</option>
+<option>Online Banking</option>
+<option>E-wallet</option>
+</select>
+</div>
+</div>
+<div class="mt-8 flex justify-end space-x-3">
+<button class="btn-outline-secondary px-4 py-2 rounded-md text-sm font-medium" id="cancelPaymentButton">Cancel</button>
+<button class="btn-primary px-4 py-2 rounded-md text-sm font-medium" id="confirmPaymentButton">Pay Now</button>
+</div>
+</div>
+</div>
+<script>
+      // Modal toggle
+      const paymentModal = document.getElementById('paymentModal');
+      const closeModalButton = document.getElementById('closeModalButton');
+      const cancelPaymentButton = document.getElementById('cancelPaymentButton');
+      const payNowButtons = document.querySelectorAll('.pay-now-btn');
+      const confirmPaymentButton = document.getElementById('confirmPaymentButton');
+      payNowButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Populate modal with data from the row if needed
+          const row = button.closest('tr');
+          if (row) {
+            const type = row.cells[0].textContent;
+            const amount = row.cells[1].textContent;
+            document.getElementById('paymentType').value = type;
+            document.getElementById('paymentAmount').value = amount;
+          }
+          paymentModal.style.display = 'flex';
+        });
+      });
+      const closePaymentModal = () => {
+        paymentModal.style.display = 'none';
+      }
+      closeModalButton.addEventListener('click', closePaymentModal);
+      cancelPaymentButton.addEventListener('click', closePaymentModal);
+      confirmPaymentButton.addEventListener('click', () => {
+        // Add payment processing logic here
+        alert('Payment Successful! A receipt will be sent to your email/SMS.');
+        closePaymentModal();
+        // Optionally remove item from list or update status
+      });
+      // Close modal if backdrop is clicked
+      paymentModal.addEventListener('click', (event) => {
+        if (event.target === paymentModal) {
+          closePaymentModal();
+        }
+      });
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById('mobileMenuButton');
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        if (mobileMenu.classList.contains('hidden')) {
+            mobileMenuButton.innerHTML = '<span class="material-icons-outlined">menu</span>';
+        } else {
+            mobileMenuButton.innerHTML = '<span class="material-icons-outlined">close</span>';
+        }
+      });
+    </script>
+</body></html>

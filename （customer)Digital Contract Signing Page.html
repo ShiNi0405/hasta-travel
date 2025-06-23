@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HASTA TRAVEL - Rental Agreement</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #ec5b2c;
+      --secondary-color: #f1f2f4;
+      --text-primary: #1f2937;
+      --text-secondary: #6b7280;
+      --border-color: #e5e7eb;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .checkbox-custom:checked {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+    }.contract-scroll::-webkit-scrollbar {
+      width: 8px;
+    }
+    .contract-scroll::-webkit-scrollbar-track {
+      background: var(--secondary-color);
+      border-radius: 10px;
+    }
+    .contract-scroll::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 10px;
+    }
+    .contract-scroll::-webkit-scrollbar-thumb:hover {
+      background: #d45025;}
+  </style>
+</head>
+<body class="bg-gray-50 text-[var(--text-primary)]">
+<div class="relative flex min-h-screen flex-col">
+<header class="sticky top-0 z-50 bg-white shadow-sm">
+<div class="container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
+<div class="flex items-center gap-2">
+<svg aria-hidden="true" class="h-8 w-8 text-[var(--primary-color)]" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M3.53 2.47a.75.75 0 0 0-1.06 1.06L4.94 6H3a.75.75 0 0 0 0 1.5h2.25V9a.75.75 0 0 0 1.5 0V7.5H9a.75.75 0 0 0 0-1.5H6.75V3.53L3.53 2.47ZM15 3a.75.75 0 0 0 0 1.5h1.06l-2.273 2.273A4.503 4.503 0 0 0 12.75 6H9.5a.75.75 0 0 0 0 1.5h2.525c.188 0 .376.01.562.031C11.212 8.04 10.5 9.19 10.5 10.5c0 .846.277 1.62.74 2.25H5.31l-.393.785A3.752 3.752 0 0 1 4.5 13.5a2.99 2.99 0 0 1-.563-5.937A.75.75 0 1 S0 0 0 S0 0 1.5 0.75 0 1 0 0 0 0 0 0 0 0 .05-.041 1.005-2.466.074 2.747.75.75 0 0 0 1.5 9H3a.75.75 0 0 0 0 1.5h.862c-.07.236-.112.482-.112.733a3.75 3.75 0 0 0 6.688 2.074.75.75 0 0 0 1.058-.23l7.09-8.388a.75.75 0 0 0-.242-1.14L15.001 3Zm-2.66 4.715a3.003 3.003 0 0 1 1.003-.165h.907l-3.69 4.353A3.731 3.731 0 0 0 9.75 10.5c0-.398.064-.78.182-1.136A4.479 4.479 0 0 0 12.34 7.715ZM18.688 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm2.812.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm0 2.812a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm-2.812.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" fill-rule="evenodd"></path>
+</svg>
+<h1 class="text-2xl font-bold text-[var(--primary-color)]">HASTA TRAVEL</h1>
+</div>
+<div class="hidden sm:flex items-center gap-4">
+<span class="text-sm text-[var(--text-secondary)]">Booking ID: <strong class="text-[var(--text-primary)]">#HTR456789</strong></span>
+</div>
+</div>
+</header>
+<main class="flex-1 container mx-auto py-8 px-4 sm:px-6 lg:px-8">
+<div class="w-full max-w-3xl mx-auto space-y-6">
+<div class="text-center">
+<h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-[var(--text-primary)]">Rental Agreement</h2>
+<p class="mt-2 text-base text-[var(--text-secondary)]">
+            Your booking has been approved! Please review the terms and conditions below and sign to finalize your rental.
+          </p>
+</div>
+<div class="bg-white shadow-lg rounded-xl overflow-hidden">
+<div class="p-6 md:p-8">
+<h3 class="text-xl font-semibold mb-4 flex items-center gap-2 text-[var(--text-primary)]">
+<span class="text-2xl">📜</span> Scrollable Legal Agreement
+            </h3>
+<div class="contract-scroll max-h-80 overflow-y-auto p-4 bg-gray-50 rounded-lg border border-[var(--border-color)] text-sm text-[var(--text-secondary)] space-y-4">
+<p class="font-bold text-base text-[var(--text-primary)]">Rental Terms &amp; Conditions</p>
+<p>Welcome to HASTA TRAVEL. This Rental Agreement ("Agreement") is entered into between HASTA TRAVEL ("Company") and the renter ("Customer").</p>
+<div class="space-y-2">
+<h4 class="font-semibold text-[var(--text-primary)]">1. Vehicle Condition &amp; Return</h4>
+<ul class="list-disc list-inside space-y-1 pl-4">
+<li>The Customer acknowledges receiving the vehicle in good working condition.</li>
+<li>The vehicle must be returned on the agreed date and time to the specified HASTA TRAVEL location. Late returns may incur additional charges.</li>
+<li>The vehicle must be returned in the same condition as received, normal wear and tear excepted.</li>
+</ul>
+</div>
+<div class="space-y-2">
+<h4 class="font-semibold text-[var(--text-primary)]">2. Authorized Drivers</h4>
+<ul class="list-disc list-inside space-y-1 pl-4">
+<li>Only the Customer and other individuals listed on the Rental Agreement at the time of rental are authorized to drive the vehicle.</li>
+<li>All drivers must possess a valid driver's license and meet HASTA TRAVEL's minimum age requirements.</li>
+<li><strong class="text-red-600">Renter only: No third-party drivers are permitted unless explicitly added to this agreement.</strong></li>
+</ul>
+</div>
+<div class="space-y-2">
+<h4 class="font-semibold text-[var(--text-primary)]">3. Prohibited Uses</h4>
+<ul class="list-disc list-inside space-y-1 pl-4">
+<li>The vehicle shall not be used for any illegal purpose, racing, or off-road activities.</li>
+<li>Operating the vehicle under the influence of alcohol or drugs is strictly prohibited.</li>
+<li><strong class="text-red-600">Providing fake or fraudulent documents will result in immediate termination of the rental and blacklisting from future services.</strong></li>
+</ul>
+</div>
+<div class="space-y-2">
+<h4 class="font-semibold text-[var(--text-primary)]">4. Liability &amp; Insurance</h4>
+<ul class="list-disc list-inside space-y-1 pl-4">
+<li><strong class="text-red-600">Customer is liable for any traffic violations, parking tickets, tolls, or other summons incurred during the rental period.</strong></li>
+<li>The Customer is responsible for all loss or damage to the vehicle, up to its full value, regardless of fault, unless covered by insurance options selected at the time of rental.</li>
+<li>Insurance policy coverage summary: Basic liability coverage is included. Additional coverage options (e.g., Collision Damage Waiver) are available and detailed in a separate addendum if selected.</li>
+</ul>
+</div>
+<div class="space-y-2">
+<h4 class="font-semibold text-[var(--text-primary)]">5. Charges &amp; Payment</h4>
+<ul class="list-disc list-inside space-y-1 pl-4">
+<li>All rental charges are to be paid in full at the commencement or termination of the rental as agreed.</li>
+<li>Additional charges may apply for fuel, mileage exceeding limits, late returns, or damage.</li>
+</ul>
+</div>
+<p class="pt-4 text-xs">
+                This contract (Booking ID: <span class="font-semibold text-[var(--text-primary)]">#HTR456789</span>) is dynamically loaded based on your approved booking. By signing this agreement, you acknowledge that you have read, understood, and agree to be bound by all terms and conditions set forth herein. This agreement constitutes the entire understanding between the Customer and HASTA TRAVEL.
+              </p>
+</div>
+</div>
+<div class="border-t border-[var(--border-color)] p-6 md:p-8 space-y-6">
+<label class="flex items-start gap-x-3 cursor-pointer">
+<input class="checkbox-custom mt-0.5 h-5 w-5 appearance-none rounded border-2 border-[var(--border-color)] text-[var(--primary-color)] focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-1 focus:outline-none shrink-0" id="agreementCheckbox" type="checkbox"/>
+<span class="text-sm font-medium text-[var(--text-primary)]">I have read and agree to all terms and conditions outlined in this Rental Agreement.</span>
+</label>
+<div>
+<label class="block text-sm font-semibold text-[var(--text-primary)] mb-2" for="signaturePad">✍️ Signature Pad</label>
+<canvas class="w-full h-48 bg-gray-100 border border-[var(--border-color)] rounded-lg cursor-crosshair touch-none" id="signaturePad"></canvas>
+<p class="mt-1 text-xs text-[var(--text-secondary)] italic">Please draw your signature above. Use your mouse or finger.</p>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
+<button class="w-full sm:w-auto order-2 sm:order-1 flex items-center justify-center rounded-md h-11 px-6 bg-gray-200 text-[var(--text-primary)] text-sm font-semibold hover:bg-gray-300 transition-colors" id="clearSignatureButton" type="button">
+                Clear Signature
+              </button>
+<button class="w-full sm:w-auto order-1 sm:order-2 flex items-center justify-center rounded-md h-11 px-6 bg-[var(--primary-color)] text-white text-sm font-semibold hover:bg-opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed" disabled="" id="submitButton" type="submit">
+                Sign &amp; Submit Agreement
+              </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="py-6 text-center text-sm text-[var(--text-secondary)]">
+      © <span id="currentYear"></span> HASTA TRAVEL. All rights reserved.
+    </footer>
+<div class="fixed bottom-5 right-5 hidden items-center gap-3 rounded-lg bg-green-600 py-3 px-5 text-white shadow-xl transition-all duration-300 transform translate-y-12 opacity-0" id="toastNotification">
+<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path clip-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" fill-rule="evenodd"></path></svg>
+<p class="text-sm font-medium">Signature submitted at <span id="submissionTime"></span></p>
+</div>
+</div>
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    const agreementCheckbox = document.getElementById('agreementCheckbox');
+    const signaturePadCanvas = document.getElementById('signaturePad');
+    const clearSignatureButton = document.getElementById('clearSignatureButton');
+    const submitButton = document.getElementById('submitButton');
+    const toastNotification = document.getElementById('toastNotification');
+    const submissionTimeEl = document.getElementById('submissionTime');
+    // Basic Signature Pad Logic (very simplified for demonstration)
+    // For a real application, use a robust signature pad library like Signature Pad.js
+    let isDrawing = false;
+    let signatureIsEmpty = true;
+    const ctx = signaturePadCanvas.getContext('2d');
+    ctx.strokeStyle = '#000000';
+    ctx.lineWidth = 2;
+    function getMousePos(canvas, evt) {
+        const rect = canvas.getBoundingClientRect();
+        if (evt.touches && evt.touches.length > 0) {
+            return {
+                x: evt.touches[0].clientX - rect.left,
+                y: evt.touches[0].clientY - rect.top
+            };
+        }
+        return {
+            x: evt.clientX - rect.left,
+            y: evt.clientY - rect.top
+        };
+    }
+    function startDrawing(e) {
+      isDrawing = true;
+      signatureIsEmpty = false;
+      const pos = getMousePos(signaturePadCanvas, e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+      e.preventDefault(); // Prevent scrolling on touch
+      checkSubmitButtonState();
+    }
+    function draw(e) {
+      if (!isDrawing) return;
+      const pos = getMousePos(signaturePadCanvas, e);
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+      e.preventDefault(); // Prevent scrolling on touch
+    }
+    function stopDrawing() {
+      isDrawing = false;
+      ctx.closePath();
+    }
+    signaturePadCanvas.addEventListener('mousedown', startDrawing);
+    signaturePadCanvas.addEventListener('mousemove', draw);
+    signaturePadCanvas.addEventListener('mouseup', stopDrawing);
+    signaturePadCanvas.addEventListener('mouseleave', stopDrawing);
+    signaturePadCanvas.addEventListener('touchstart', startDrawing);
+    signaturePadCanvas.addEventListener('touchmove', draw);
+    signaturePadCanvas.addEventListener('touchend', stopDrawing);
+    function clearSignature() {
+      ctx.clearRect(0, 0, signaturePadCanvas.width, signaturePadCanvas.height);
+      signatureIsEmpty = true;
+      checkSubmitButtonState();
+    }
+    clearSignatureButton.addEventListener('click', clearSignature);
+    function checkSubmitButtonState() {
+      if (agreementCheckbox.checked && !signatureIsEmpty) {
+        submitButton.disabled = false;
+      } else {
+        submitButton.disabled = true;
+      }
+    }
+    agreementCheckbox.addEventListener('change', checkSubmitButtonState);
+    submitButton.addEventListener('click', (event) => {
+      event.preventDefault(); 
+      if (submitButton.disabled) return;
+      // In a real app, you would get the signature data:
+      // const signatureDataUrl = signaturePadCanvas.toDataURL(); 
+      // console.log("Signature Data:", signatureDataUrl); // Send this to backend
+      // console.log("Booking ID:", "HTR456789"); // Send this to backend
+      // console.log("Timestamp:", new Date().toISOString()); // Send this to backend
+      const now = new Date();
+      const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const date = now.toLocaleDateString([], { month: 'long', day: 'numeric' });
+      submissionTimeEl.textContent = `${time} | ${date}`;
+      toastNotification.classList.remove('hidden', 'translate-y-12', 'opacity-0');
+      toastNotification.classList.add('flex');
+      // Disable form elements after submission
+      agreementCheckbox.disabled = true;
+      submitButton.textContent = 'Submitted Successfully';
+      submitButton.classList.add('bg-green-500', 'hover:bg-green-500');
+      submitButton.classList.remove('bg-[var(--primary-color)]');
+      clearSignatureButton.disabled = true;
+      signaturePadCanvas.style.pointerEvents = 'none';
+      signaturePadCanvas.style.cursor = 'default';
+      setTimeout(() => {
+        toastNotification.classList.add('translate-y-12', 'opacity-0');
+        setTimeout(() => toastNotification.classList.add('hidden'), 300);
+      }, 5000); 
+    });
+    // Initial check
+    checkSubmitButtonState();
+  </script>
+
+</body></html>

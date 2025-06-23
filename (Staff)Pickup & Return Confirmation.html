@@ -1,0 +1,275 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Space+Grotesk%3Awght%40400%3B500%3B700" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #e86d30;
+        --secondary-color: #fcf9f8;
+        --text-primary: #1b120e;
+        --text-secondary: #97674e;
+        --border-color: #f3ebe7;
+        --checkbox-tick-svg: url('data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27rgb(252,249,248)%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath d=%27M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z%27/%3e%3c/svg%3e');
+        --card-bg-color: #fffaf7;
+        --inspected-color: #ec5b2c;
+      }
+      .toast {
+        animation: toast-in 0.5s ease-out, toast-out 0.5s ease-in 2.5s forwards;
+      }
+      @keyframes toast-in {
+        from { transform: translateY(100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+      @keyframes toast-out {
+        from { transform: translateY(0); opacity: 1; }
+        to { transform: translateY(100%); opacity: 0; }
+      }
+      .animated-checkbox:checked {
+        animation: bounce 0.3s ease-in-out;
+      }
+      .animated-radio:checked {
+        animation: bounce 0.3s ease-in-out;
+      }
+      .btn-animate {
+        transition: transform 0.1s ease-in-out;
+      }
+      .btn-animate:active {
+        transform: scale(0.95);
+      }
+      .img-preview-animate {
+         animation: bounce-img 0.5s ease-in-out;
+      }
+      @keyframes bounce {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+      }
+       @keyframes bounce-img {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+      }
+      .progress-bar > div {
+        transition: width 0.5s ease-in-out;
+      }
+      .tab-active {
+        border-bottom-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+    </style>
+</head>
+<body class="bg-[var(--secondary-color)] font-['Space_Grotesk',_'Noto_Sans',_sans-serif] text-[var(--text-primary)]">
+<div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-[var(--border-color)] bg-[var(--secondary-color)]/80 backdrop-blur-md px-6 md:px-10 py-3">
+<div class="flex items-center gap-4">
+<div class="size-6 text-[var(--primary-color)]">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">DriveGo</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end items-center gap-6">
+<nav class="flex items-center gap-6">
+<a class="text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">Bookings</a>
+<a class="text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">Vehicles</a>
+<a class="text-sm font-medium hover:text-[var(--primary-color)] transition-colors" href="#">Customers</a>
+</nav>
+<button aria-label="Notifications" class="btn-animate flex items-center justify-center rounded-full h-10 w-10 bg-[var(--border-color)] hover:bg-stone-200 text-[var(--text-primary)]">
+<span class="material-icons text-xl">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-[var(--border-color)]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBnOedBWyBXccgycQhDJyjHJ6fXePDG3_wXWT7BJzd42LVs4fCfjei6wpwamvWOysmhsuIvUw0JFRReaEJmYYVs848DzDuKrLwTia5Nrq1VERBBHL55eq4gJcZ5iW_XE8wchiqRdfuxJ6RGE7WibKiUfY9lNHGm4fSXhOPCSs2yNOfW9wqNBbSKmTk_SC_-o0uI2lGI3pDpO_Kt5kc6jhSj_cCAYEaBU1X0KzoslX8zi7lRe4xW_VQVqRuLFvFmnuD3JJG_XRLSqbn6");'></div>
+</div>
+<button aria-label="Menu" class="md:hidden btn-animate flex items-center justify-center rounded-full h-10 w-10 bg-[var(--border-color)] hover:bg-stone-200 text-[var(--text-primary)]">
+<span class="material-icons text-2xl">menu</span>
+</button>
+</header>
+<main class="px-4 sm:px-6 md:px-10 lg:px-20 xl:px-40 py-8 flex flex-1 justify-center">
+<div class="layout-content-container flex flex-col w-full max-w-4xl gap-6">
+<div class="p-6 bg-[var(--card-bg-color)] rounded-xl shadow-lg @container">
+<div class="md:hidden sticky top-[60px] bg-[var(--secondary-color)]/80 backdrop-blur-md z-40 -mx-4 -mt-6 sm:-mx-6 mb-4 p-4 shadow">
+<h1 class="text-2xl font-bold leading-tight">Booking Confirmation</h1>
+<p class="text-[var(--text-secondary)] text-sm">ID: 789456 - Amelia Harper</p>
+</div>
+<div class="hidden md:block mb-6">
+<h1 class="text-4xl font-extrabold leading-tight">Booking Confirmation</h1>
+</div>
+<div class="flex flex-col @[500px]:flex-row items-start justify-between gap-6 rounded-xl">
+<div class="flex flex-col gap-2 @[500px]:flex-[2_2_0px] w-full p-4">
+<h3 class="text-xl font-bold mb-1">Booking Overview</h3>
+<div class="space-y-1 text-sm text-[var(--text-secondary)]">
+<p><strong class="text-[var(--text-primary)]">Booking ID:</strong> 789456</p>
+<p><strong class="text-[var(--text-primary)]">Customer:</strong> Amelia Harper</p>
+<p><strong class="text-[var(--text-primary)]">Vehicle:</strong> Sedan XLE</p>
+<p><strong class="text-[var(--text-primary)]">Rental Dates:</strong> 2024-03-15 to 2024-03-20</p>
+<p><strong class="text-[var(--text-primary)]">Inspection Type:</strong> Pre-Rental</p>
+</div>
+<div class="mt-6">
+<p class="text-base font-semibold mb-2">Rental Progress</p>
+<div class="w-full bg-gray-200 rounded-full h-3.5 progress-bar relative">
+<div class="bg-gray-400 h-3.5 rounded-l-full absolute left-0" style="width: 25%;"></div>
+<div class="bg-orange-400 h-3.5 absolute left-[25%]" style="width: 25%;"></div>
+<div class="bg-[var(--inspected-color)] h-3.5 absolute left-[50%]" style="width: 25%;"></div>
+<div class="bg-gray-300 h-3.5 rounded-r-full absolute left-[75%]" style="width: 25%;"></div>
+</div>
+<div class="flex justify-between text-xs text-[var(--text-secondary)] mt-2">
+<span class="flex items-center gap-1">🚗 Booked</span>
+<span class="flex items-center gap-1">✅ Picked Up</span>
+<span class="font-semibold text-[var(--inspected-color)] flex items-center gap-1">🔍 Inspected</span>
+<span class="flex items-center gap-1">🏁 Returned</span>
+</div>
+</div>
+</div>
+<div class="w-full @[500px]:flex-1 @[500px]:max-w-xs aspect-video bg-center bg-no-repeat bg-cover rounded-lg shadow-md p-4" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDPzxi0uDb3nvyCrtf_JjBQUzlbClx45_gzHUrJqrAfG9TAp6XN2cOt5Cd8MvxOP_10B_YF2bmxinXSoSi3y-Ja45wsswOeEkIHvvu3238jftdL6pbFZubVsWmqz_bZhwjTia4cexT58-Nv2V8WtXXRws_IResjHqYLBb8N_E6du8YnEOfec367x0-h32qw-AKTFvK12v3WXL7yT_IgqniqDaUVT5KUVaotp6E7Oc2Qz0Q3cZn4XUhpIFC9xs0VecnF_XP2euvntLd7");'></div>
+</div>
+</div>
+<div class="md:hidden">
+<div class="flex border-b border-[var(--border-color)]">
+<button class="tab-active flex-1 py-3 text-sm font-medium text-center border-b-2 border-transparent hover:bg-gray-50">Checklist</button>
+<button class="flex-1 py-3 text-sm font-medium text-center border-b-2 border-transparent text-[var(--text-secondary)] hover:bg-gray-50">Photos</button>
+<button class="flex-1 py-3 text-sm font-medium text-center border-b-2 border-transparent text-[var(--text-secondary)] hover:bg-gray-50">Notes</button>
+</div>
+</div>
+<div class="p-6 bg-[var(--card-bg-color)] rounded-xl shadow-lg">
+<h2 class="text-2xl font-bold mb-6">Vehicle Condition Checklist</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+<label class="flex items-center gap-x-3 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-[var(--border-color)]">
+<input class="animated-checkbox h-5 w-5 rounded border-[var(--border-color)] border-2 bg-transparent text-[var(--primary-color)] checked:bg-[var(--primary-color)] checked:border-[var(--primary-color)] checked:bg-[image:var(--checkbox-tick-svg)] focus:ring-2 focus:ring-[var(--primary-color)]/50 focus:ring-offset-0 focus:border-[var(--border-color)] focus:outline-none transition-all" id="tyres_good" type="checkbox"/>
+<span class="text-base font-normal">Tyres are good</span>
+</label>
+<label class="flex items-center gap-x-3 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-[var(--border-color)]">
+<input class="animated-checkbox h-5 w-5 rounded border-[var(--border-color)] border-2 bg-transparent text-[var(--primary-color)] checked:bg-[var(--primary-color)] checked:border-[var(--primary-color)] checked:bg-[image:var(--checkbox-tick-svg)] focus:ring-2 focus:ring-[var(--primary-color)]/50 focus:ring-offset-0 focus:border-[var(--border-color)] focus:outline-none transition-all" id="lights_working" type="checkbox"/>
+<span class="text-base font-normal">Lights are working</span>
+</label>
+<div class="sm:col-span-2">
+<p class="text-base font-medium mb-2">Fuel Level:</p>
+<div class="flex flex-col sm:flex-row gap-4">
+<label class="flex items-center gap-x-2 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-[var(--border-color)]">
+<input class="animated-radio h-5 w-5 rounded-full border-[var(--border-color)] border-2 bg-transparent text-[var(--primary-color)] checked:bg-[var(--primary-color)] checked:border-[var(--primary-color)] focus:ring-2 focus:ring-[var(--primary-color)]/50 focus:ring-offset-0 focus:border-[var(--border-color)] focus:outline-none transition-all" id="fuel_full" name="fuel_level" type="radio"/>
+<span class="text-base font-normal">Full</span>
+</label>
+<label class="flex items-center gap-x-2 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-[var(--border-color)]">
+<input class="animated-radio h-5 w-5 rounded-full border-[var(--border-color)] border-2 bg-transparent text-[var(--primary-color)] checked:bg-[var(--primary-color)] checked:border-[var(--primary-color)] focus:ring-2 focus:ring-[var(--primary-color)]/50 focus:ring-offset-0 focus:border-[var(--border-color)] focus:outline-none transition-all" id="fuel_half" name="fuel_level" type="radio"/>
+<span class="text-base font-normal">Half</span>
+</label>
+<label class="flex items-center gap-x-2 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-[var(--border-color)]">
+<input class="animated-radio h-5 w-5 rounded-full border-[var(--border-color)] border-2 bg-transparent text-[var(--primary-color)] checked:bg-[var(--primary-color)] checked:border-[var(--primary-color)] focus:ring-2 focus:ring-[var(--primary-color)]/50 focus:ring-offset-0 focus:border-[var(--border-color)] focus:outline-none transition-all" id="fuel_low" name="fuel_level" type="radio"/>
+<span class="text-base font-normal">Low</span>
+</label>
+</div>
+</div>
+<label class="flex items-center gap-x-3 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-[var(--border-color)]">
+<input class="animated-checkbox h-5 w-5 rounded border-[var(--border-color)] border-2 bg-transparent text-[var(--primary-color)] checked:bg-[var(--primary-color)] checked:border-[var(--primary-color)] checked:bg-[image:var(--checkbox-tick-svg)] focus:ring-2 focus:ring-[var(--primary-color)]/50 focus:ring-offset-0 focus:border-[var(--border-color)] focus:outline-none transition-all" id="interior_clean" type="checkbox"/>
+<span class="text-base font-normal">Interior is clean</span>
+</label>
+<label class="flex items-center gap-x-3 py-2 px-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-[var(--border-color)]">
+<input class="animated-checkbox h-5 w-5 rounded border-[var(--border-color)] border-2 bg-transparent text-[var(--primary-color)] checked:bg-[var(--primary-color)] checked:border-[var(--primary-color)] checked:bg-[image:var(--checkbox-tick-svg)] focus:ring-2 focus:ring-[var(--primary-color)]/50 focus:ring-offset-0 focus:border-[var(--border-color)] focus:outline-none transition-all" id="body_damage_free" type="checkbox"/>
+<span class="text-base font-normal">Body is damage-free</span>
+</label>
+</div>
+</div>
+<div class="p-6 bg-[var(--card-bg-color)] rounded-xl shadow-lg">
+<h2 class="text-2xl font-bold mb-6">Upload Photos</h2>
+<div class="flex flex-col items-center justify-center gap-4 rounded-xl border-2 border-dashed border-[var(--border-color)] px-6 py-10 text-center">
+<span class="material-icons text-5xl text-[var(--text-secondary)]">cloud_upload</span>
+<p class="text-lg font-medium">Drag and drop photos here</p>
+<p class="text-sm text-[var(--text-secondary)]">Or click to browse (Before/After rental images)</p>
+<button class="btn-animate mt-2 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-[var(--border-color)] text-[var(--text-primary)] text-sm font-bold hover:bg-stone-200 transition-colors">
+                  Browse Files
+                </button>
+</div>
+<div class="mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4" id="photo-previews">
+<div class="relative group img-preview-animate">
+<img alt="Vehicle Preview" class="rounded-lg aspect-square object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYT3fW6g2sX1m7P0d5iJv2u5u3xKq5rVq_n_zYqL8xP0bJqWvQoX8sM7dNfWpTjRkYmFwS-ZlUoXl_cRzXfAeVhGqTpVjNlQzL_bXwPjSgHqYjRkZmNiXwB-tAaSdViXjKzLcVrPqWsYoXjA"/>
+<button class="absolute top-1 right-1 bg-black/50 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity btn-animate">
+<span class="material-icons text-base">close</span>
+</button>
+<p class="absolute bottom-1 left-1 bg-black/50 text-white text-xs px-1.5 py-0.5 rounded">📷 Before Rental</p>
+</div>
+<div class="relative group img-preview-animate">
+<img alt="Vehicle Preview" class="rounded-lg aspect-square object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqyX5n7z3f_R0jBqWpS-xK0r_tZqLmPjVwN_zXqL1yR_sJvQkXoP8sM7dNfWpTjRkYmFwS-ZlUoXl_cRzXfAeVhGqTpVjNlQzL_bXwPjSgHqYjRkZmNiXwB-tAaSdViXjKzLcVrPqWsYoXjA"/>
+<button class="absolute top-1 right-1 bg-black/50 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity btn-animate">
+<span class="material-icons text-base">close</span>
+</button>
+<p class="absolute bottom-1 left-1 bg-black/50 text-white text-xs px-1.5 py-0.5 rounded">📷 After Rental</p>
+</div>
+</div>
+</div>
+<div class="p-6 bg-[var(--card-bg-color)] rounded-xl shadow-lg">
+<h2 class="text-2xl font-bold mb-4">Notes or Damage Report</h2>
+<div class="relative">
+<textarea class="form-input w-full min-h-36 resize-y rounded-xl text-[var(--text-primary)] focus:outline-0 focus:ring-2 focus:ring-[var(--primary-color)]/50 border border-[var(--border-color)] bg-[var(--secondary-color)] focus:border-[var(--primary-color)] placeholder:text-[var(--text-secondary)] p-4 text-base" maxlength="300" placeholder="📝 Write a short note if you spot any issues..."></textarea>
+<p class="absolute bottom-3 right-3 text-xs text-[var(--text-secondary)]">0 / 300</p>
+</div>
+</div>
+<div class="hidden md:flex p-6 bg-[var(--card-bg-color)] rounded-xl shadow-lg flex-col sm:flex-row items-center justify-between gap-4">
+<h2 class="text-2xl font-bold">Actions</h2>
+<div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+<button class="btn-animate flex-1 sm:flex-initial items-center justify-center rounded-full h-12 px-6 bg-gray-300 text-gray-500 text-sm font-bold hover:bg-gray-400 transition-colors">
+                  Confirm Pickup
+                </button>
+<button class="btn-animate flex-1 sm:flex-initial items-center justify-center rounded-full h-12 px-6 bg-[var(--primary-color)] text-white text-sm font-bold hover:bg-orange-700 transition-colors">
+                  Confirm Return
+                </button>
+<button class="btn-animate flex-1 sm:flex-initial items-center justify-center rounded-full h-12 px-6 bg-gray-300 text-gray-500 text-sm font-bold hover:bg-gray-400 transition-colors">
+                  Deposit Deduction
+                </button>
+</div>
+</div>
+</div>
+</main>
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-sm p-4 border-t border-[var(--border-color)] flex flex-col gap-3 z-40">
+<button class="btn-animate flex-1 items-center justify-center rounded-full h-12 px-4 bg-gray-300 text-gray-500 text-sm font-bold hover:bg-gray-400 transition-colors">
+              Confirm Pickup
+        </button>
+<button class="btn-animate flex-1 items-center justify-center rounded-full h-12 px-4 bg-[var(--primary-color)] text-white text-sm font-bold hover:bg-orange-700 transition-colors">
+              Confirm Return
+        </button>
+<button class="btn-animate flex-1 items-center justify-center rounded-full h-12 px-4 bg-gray-300 text-gray-500 text-sm font-bold hover:bg-gray-400 transition-colors">
+              Deposit Deduction
+        </button>
+</div>
+<div class="toast fixed bottom-20 right-4 md:bottom-6 md:right-6 bg-gray-800 text-white px-6 py-3 rounded-lg shadow-xl hidden items-center gap-3" id="toast-notification">
+<span class="material-icons text-green-400">check_circle</span>
+<span>Action Confirmed!</span>
+</div>
+</div>
+</div>
+<script>
+      // Simple script to toggle toast, in a real app this would be triggered by actual events
+      // const confirmButtons = document.querySelectorAll('.btn-animate'); // More specific selector needed
+      // const toast = document.getElementById('toast-notification');
+      // confirmButtons.forEach(btn => {
+      //   btn.addEventListener('click', () => {
+      //     toast.classList.remove('hidden');
+      //     toast.classList.add('flex'); // Or block, depending on layout
+      //     setTimeout(() => {
+      //       toast.classList.add('hidden');
+      //       toast.classList.remove('flex');
+      //     }, 3000);
+      //   });
+      // });
+      // Mobile Tab handling example
+      // const tabs = document.querySelectorAll('.md\\:hidden .flex-1[role="tab"]'); // Example selector
+      // tabs.forEach(tab => {
+      //    tab.addEventListener('click', () => {
+      //        tabs.forEach(t => t.classList.remove('tab-active'));
+      //        tab.classList.add('tab-active');
+      //        // Logic to show/hide tab content would go here
+      //    });
+      // });
+      // Character counter for notes
+      const noteTextarea = document.querySelector('textarea[maxlength="300"]');
+      const charCounter = document.querySelector('textarea[maxlength="300"] + p');
+      if (noteTextarea && charCounter) {
+        noteTextarea.addEventListener('input', () => {
+          const currentLength = noteTextarea.value.length;
+          charCounter.textContent = `${currentLength} / 300`;
+        });
+      }
+    </script>
+</body></html>
